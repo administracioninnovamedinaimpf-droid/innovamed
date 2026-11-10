@@ -1,0 +1,247 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Informe Ecográfico Ginecológico&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            line-height: 1.3;
+            margin: 0;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        /* Membrete Superior con 3 imágenes */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .header-table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .logo-slot {
+            width: 25%;
+            height: 60px;
+            border: 1px dashed #bbb;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 11px;
+            color: #666;
+            background-color: #f9f9f9;
+        }
+        .header-center {
+            width: 50%;
+            text-align: center;
+        }
+        .header-center h3 {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .header-center h2 {
+            margin: 4px 0;
+            font-size: 15px;
+            color: #333;
+        }
+        .header-center p {
+            margin: 1px 0;
+            font-size: 11px;
+            color: #555;
+        }
+        
+        /* Título del Formulario */
+        .title-box {
+            text-align: center;
+            background-color: #0056b3;
+            color: #fff;
+            padding: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Datos del Paciente */
+        .patient-info {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        .patient-info td {
+            padding: 6px 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #ddd;
+        }
+        .patient-info td span {
+            border-bottom: 1px dotted #333;
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        /* Secciones del Informe */
+        .section-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #0056b3;
+        }
+        .content-block {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+        .checkbox-group {
+            margin: 4px 0;
+        }
+        .line-input {
+            border-bottom: 1px dotted #000;
+            display: inline-block;
+            min-width: 200px;
+            height: 15px;
+        }
+        .large-box {
+            border: 1px solid #999;
+            min-height: 70px;
+            padding: 8px;
+            margin-top: 5px;
+            background-color: #fafafa;
+        }
+
+        /* Firma y Pie */
+        .footer-section {
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .footer-section td {
+            text-align: center;
+            vertical-align: bottom;
+            height: 60px;
+        }
+        .signature-line {
+            width: 250px;
+            border-top: 1px solid #000;
+            margin: 0 auto;
+            padding-top: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;!-- Membrete Superior con 3 imágenes --&gt;
+    &lt;table class=&quot;header-table&quot;&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 22%;&quot;&gt;
+                &lt;div class=&quot;logo-slot&quot;&gt;[Imagen 1&lt;br&gt;Membrete]&lt;/div&gt;
+                &lt;!-- Reemplaza el div anterior por: &lt;img src=&quot;url_imagen_1.png&quot; alt=&quot;Logo 1&quot; style=&quot;max-height: 55px;&quot;&gt; --&gt;
+            &lt;/td&gt;
+            &lt;td class=&quot;header-center&quot;&gt;
+                &lt;h3&gt;SUCRE | GRAN MISIÓN VENEZUELA MUJER&lt;/h3&gt;
+                &lt;h2&gt;CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA&lt;/h2&gt;
+                &lt;p&gt;(INAIMPF)&lt;/p&gt;
+            &lt;/td&gt;
+            &lt;td style=&quot;width: 22%;&quot;&gt;
+                &lt;div class=&quot;logo-slot&quot;&gt;[Imagen 3&lt;br&gt;Membrete]&lt;/div&gt;
+                &lt;!-- Reemplaza el div anterior por: &lt;img src=&quot;url_imagen_3.png&quot; alt=&quot;Logo 3&quot; style=&quot;max-height: 55px;&quot;&gt; --&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;3&quot; style=&quot;padding-top: 8px;&quot;&gt;
+                &lt;div class=&quot;logo-slot&quot; style=&quot;width: 150px; margin: 0 auto; height: 40px;&quot;&gt;[Imagen 2]&lt;/div&gt;
+                &lt;!-- Opcional si usas las 3 imágenes arriba o distribuidas --&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;div class=&quot;title-box&quot;&gt;INFORME ECOGRÁFICO GINECOLÓGICO&lt;/div&gt;
+
+    &lt;!-- Datos de la Paciente con Fecha Latina (DD/MM/AAAA) --&gt;
+    &lt;table class=&quot;patient-info&quot;&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;width: 50%;&quot;&gt;&lt;strong&gt;PACIENTE:&lt;/strong&gt; &lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;/td&gt;
+            &lt;td style=&quot;width: 50%;&quot;&gt;&lt;strong&gt;FECHA:&lt;/strong&gt; DD/MM/AAAA &lt;em&gt;(Latina)&lt;/em&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;strong&gt;CÉDULA:&lt;/strong&gt; &lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;strong&gt;EDAD:&lt;/strong&gt; &lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;p style=&quot;font-style: italic; font-weight: bold; margin-bottom: 12px;&quot;&gt;El estudio ultrasonográfico evidencia:&lt;/p&gt;
+
+    &lt;!-- 1. Vejiga --&gt;
+    &lt;div class=&quot;section-title&quot;&gt;1. Vejiga&lt;/div&gt;
+    &lt;div class=&quot;content-block&quot;&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Contenido:&lt;/strong&gt; En repleción (&amp;nbsp;&amp;nbsp;) Insuficientemente llena (&amp;nbsp;&amp;nbsp;) Vacía (&amp;nbsp;&amp;nbsp;)&lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Paredes:&lt;/strong&gt; Finas (&amp;nbsp;&amp;nbsp;) Engrosada (&amp;nbsp;&amp;nbsp;)&lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Litiasis:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;) &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+            &lt;strong&gt;Pólipos:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;) &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+            &lt;strong&gt;Divertículos:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;)
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Tumores:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;) &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+            &lt;strong&gt;Infiltración:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;)
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Otros:&lt;/strong&gt; &lt;span class=&quot;line-input&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 2. Útero --&gt;
+    &lt;div class=&quot;section-title&quot;&gt;2. Útero&lt;/div&gt;
+    &lt;div class=&quot;content-block&quot;&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Posición:&lt;/strong&gt; Central (&amp;nbsp;&amp;nbsp;) Retroversión (&amp;nbsp;&amp;nbsp;) Anteroversión (&amp;nbsp;&amp;nbsp;) 
+            Lateralizado a la derecha (&amp;nbsp;&amp;nbsp;) Lateralizado a la izquierda (&amp;nbsp;&amp;nbsp;)
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Aspecto:&lt;/strong&gt; Homogéneo (&amp;nbsp;&amp;nbsp;) Heterogéneo (&amp;nbsp;&amp;nbsp;) &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp; 
+            &lt;strong&gt;Dimensiones:&lt;/strong&gt; &lt;span class=&quot;line-input&quot; style=&quot;width: 150px;&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Tamaño:&lt;/strong&gt; Normal (&amp;nbsp;&amp;nbsp;) Pequeño (&amp;nbsp;&amp;nbsp;) Grande (&amp;nbsp;&amp;nbsp;)&lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Endometrio:&lt;/strong&gt; Engrosado (&amp;nbsp;&amp;nbsp;) Trilaminar (&amp;nbsp;&amp;nbsp;) Lineal (&amp;nbsp;&amp;nbsp;)
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;
+            &lt;strong&gt;Anexos:&lt;/strong&gt; No visible (&amp;nbsp;&amp;nbsp;) Normales (&amp;nbsp;&amp;nbsp;) Con actividad folicular normal (&amp;nbsp;&amp;nbsp;) 
+            Con Proceso inflamatorio (&amp;nbsp;&amp;nbsp;) Con proceso tumoral (&amp;nbsp;&amp;nbsp;)
+        &lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Líquido en FSD:&lt;/strong&gt; Si (&amp;nbsp;&amp;nbsp;) No (&amp;nbsp;&amp;nbsp;)&lt;/div&gt;
+        &lt;div class=&quot;checkbox-group&quot;&gt;&lt;strong&gt;Otros:&lt;/strong&gt; &lt;span class=&quot;line-input&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Conclusiones --&gt;
+    &lt;div class=&quot;section-title&quot;&gt;Conclusiones:&lt;/div&gt;
+    &lt;div class=&quot;large-box&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- Firma y Sello --&gt;
+    &lt;table class=&quot;footer-section&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;div class=&quot;signature-line&quot;&gt;
+                    Nombre del médico que realiza el estudio:&lt;br&gt;&lt;br&gt;
+                    Firma y Sello
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
