@@ -225,7 +225,8 @@ tbody tr { break-inside: avoid; }
       <label for="hasta">FECHA HASTA</label>
       <input type="date" id="hasta">
     </div>
-
+    
+    <div id="googleBtn"></div>
     <button onclick="prepararConsulta()">Consultar consolidado</button>
     <button onclick="window.print()">Imprimir / PDF</button>
   </div>
@@ -337,28 +338,155 @@ tbody tr { break-inside: avoid; }
 
 </div>
 
+
 <script>
+const GOOGLE_CLIENT_ID = "53673886985-s8pl3jvo95m3b097m3es1urbt0sv8vvv.apps.googleusercontent.com";
+const WORKER_URL = "https://innovamed-consolidado-api.administracion-innovamed-inaimpf.workers.dev/";
+
+let idToken = "";
+
+const estado = document.getElementById("estado");
+const cuerpo = document.getElementById("cuerpoTabla");
+
+function cargarGoogle() {
+  const script = document.createElement("script");
+  script.src = "https://accounts.google.com/gsi/client";
+  script.async = true;
+  script.defer = true;
+
+  script.onload = () => {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: respuestaGoogle
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("googleBtn"),
+      {
+        theme: "outline",
+        size: "large",
+        text: "signin_with",
+        locale: "es"
+      }
+    );
+  };
+
+  script.onerror = () => {
+    estado.textContent = "No se pudo cargar el inicio de sesión de Google.";
+  };
+
+  document.head.appendChild(script);
+}
+
+function respuestaGoogle(respuesta) {
+  idToken = respuesta.credential;
+
+  estado.textContent =
+    "Sesión de Google iniciada. Ya puedes consultar el consolidado.";
+}
+
 function prepararConsulta() {
-  const desde = document.getElementById('desde').value;
-  const hasta = document.getElementById('hasta').value;
-  const estado = document.getElementById('estado');
+  const desde = document.getElementById("desde").value;
+  const hasta = document.getElementById("hasta").value;
+
+  if (!idToken) {
+    estado.textContent = "Primero debes iniciar sesión con Google.";
+    return;
+  }
 
   if (!desde || !hasta) {
-    estado.textContent = 'Debe seleccionar ambas fechas.';
+    estado.textContent = "Debe seleccionar ambas fechas.";
     return;
   }
 
   if (desde > hasta) {
     estado.textContent =
-      'La fecha inicial no puede ser posterior a la fecha final.';
+      "La fecha inicial no puede ser posterior a la final.";
     return;
   }
 
-  estado.textContent =
-    'Período seleccionado: ' + desde + ' al ' + hasta +
-    '. La conexión segura con los registros se habilitará en la siguiente etapa.';
+  estado.textContent = "Consultando registros. Por favor espera...";
+
+  fetch(WORKER_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      idToken: idToken,
+      fechaInicio: desde,
+      fechaFin: hasta
+    })
+  })
+  .then(async respuesta => {
+    const resultado = await respuesta.json();
+
+    if (!respuesta.ok || !resultado.ok) {
+      throw new Error("No fue posible consultar los registros.");
+    }
+
+    return resultado.data;
+  })
+  .then(datos => {
+    mostrarRegistros(datos.registros || []);
+
+    estado.textContent =
+      "Consulta exitosa: " + datos.total +
+      " registros encontrados, desde " +
+      datos.fechaInicio + " hasta " + datos.fechaFin + ".";
+  })
+  .catch(error => {
+    console.error(error);
+    estado.textContent =
+      "Error de conexión o autorización. Verifica tu acceso e inténtalo nuevamente.";
+  });
 }
+
+function mostrarRegistros(registros) {
+  cuerpo.innerHTML = "";
+
+  if (!registros.length) {
+    const fila = document.createElement("tr");
+    const celda = document.createElement("td");
+
+    celda.colSpan = 31;
+    celda.textContent = "No hay registros para el período seleccionado.";
+    celda.style.padding = "20px";
+
+    fila.appendChild(celda);
+    cuerpo.appendChild(fila);
+    return;
+  }
+
+  registros.forEach(registro => {
+    const fila = document.createElement("tr");
+    const campos = Object.keys(registro);
+
+    campos.forEach((campo, indice) => {
+      const celda = document.createElement("td");
+
+      if (indice === 1 && campo === "ENTREGADO") {
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.className = "entregado";
+        check.style.width = "14px";
+        check.style.height = "14px";
+        check.style.padding = "0";
+        celda.appendChild(check);
+      } else {
+        celda.textContent = registro[campo] ?? "";
+      }
+
+      fila.appendChild(celda);
+    });
+
+    cuerpo.appendChild(fila);
+  });
+}
+
+cargarGoogle();
 </script>
+
 
 </body>
 </html>
