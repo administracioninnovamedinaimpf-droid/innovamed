@@ -116,9 +116,7 @@ tbody tr:nth-child(even) { background: #f2f6f9; }
 
 tbody tr { break-inside: avoid; }
 
-.check {
-  font-size: 12px;
-}
+.check { font-size: 12px; }
 
 .membrete {
   width: 100%;
@@ -160,24 +158,27 @@ tbody tr { break-inside: avoid; }
   margin: 8px 0;
 }
 
-
-
-@media print {
- 
-@page {
-  size: 13in 8.5in;
-  margin: 9mm 6mm 20mm 6mm;
-
-  @bottom-center {
-     content: "REPÚBLICA BOLIVARIANA DE VENEZUELA · ALCALDÍA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA";
-    font-family: Arial, sans-serif;
-    font-size: 7px;
-    color: #526575;
-    border-top: 1px solid #aab9c5;
-    padding-top: 3px;
-  }
+/* Filas del formato vacío */
+.fila-vacia td {
+  height: 32px;
+  background: white !important;
 }
 
+@media print {
+
+  @page {
+    size: 13in 8.5in;
+    margin: 9mm 6mm 20mm 6mm;
+
+    @bottom-center {
+      content: "REPÚBLICA BOLIVARIANA DE VENEZUELA · ALCALDÍA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA";
+      font-family: Arial, sans-serif;
+      font-size: 7px;
+      color: #526575;
+      border-top: 1px solid #aab9c5;
+      padding-top: 3px;
+    }
+  }
 
   html, body {
     width: 100%;
@@ -243,8 +244,13 @@ tbody tr { break-inside: avoid; }
     object-fit: contain !important;
   }
 
-}
+  /* Formato en blanco: filas amplias y sin sombreado */
+  body.formato-vacio #tablaConsolidado tbody tr.fila-vacia td {
+    height: 32px !important;
+    background: white !important;
+  }
 
+}
 </style>
 </head>
 
@@ -252,6 +258,7 @@ tbody tr { break-inside: avoid; }
 <div class="panel">
 
   <div class="controles">
+
     <div class="campo">
       <label for="desde">FECHA DESDE</label>
       <input type="date" id="desde">
@@ -261,10 +268,21 @@ tbody tr { break-inside: avoid; }
       <label for="hasta">FECHA HASTA</label>
       <input type="date" id="hasta">
     </div>
-    
+
     <div id="googleBtn"></div>
-    <button onclick="prepararConsulta()">Consultar consolidado</button>
-    <button onclick="window.print()">Imprimir / PDF</button>
+
+    <button onclick="prepararConsulta()">
+      Consultar consolidado
+    </button>
+
+    <button onclick="window.print()">
+      Imprimir / PDF
+    </button>
+
+    <button onclick="imprimirFormatoVacio()">
+      Formato en blanco (15 filas)
+    </button>
+
   </div>
 
   <div id="estado">
@@ -272,86 +290,91 @@ tbody tr { break-inside: avoid; }
   </div>
 
   <div class="documento">
+
     <table id="tablaConsolidado">
 
-     
-<thead>
-  <tr>
-    <td colspan="30">
-      <table class="membrete">
+      <thead>
+
         <tr>
-          <td class="logo-celda">
-            <img class="logo"
-              src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
-              alt="Logotipo izquierdo">
-          </td>
+          <td colspan="30">
 
-          <td class="institucion">
-  <span class="nombre">
-    CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA AYALA
-  </span>
-</td>
+            <table class="membrete">
+              <tr>
 
-          <td class="logo-celda">
-            <img class="logo"
-              src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
-              alt="Logotipo central">
-          </td>
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
+                    alt="Logotipo izquierdo">
+                </td>
 
-          <td class="logo-celda">
-            <img class="logo"
-              src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
-              alt="Logotipo derecho">
+                <td class="institucion">
+                  <span class="nombre">
+                    CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA AYALA
+                  </span>
+                </td>
+
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
+                    alt="Logotipo central">
+                </td>
+
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
+                    alt="Logotipo derecho">
+                </td>
+
+              </tr>
+            </table>
+
+            <div class="titulo">
+              ATENCIÓN MÉDICA
+            </div>
+
           </td>
         </tr>
-      </table>
 
-      <div class="titulo">
-        ATENCIÓN MÉDICA
-      </div>
-    </td>
-  </tr>
+        <tr class="grupo">
+          <th colspan="18">INFORMACIÓN DEL PACIENTE</th>
+          <th colspan="9">ESTUDIOS Y ATENCIONES REALIZADAS</th>
+          <th colspan="3">COLOCACIÓN DE IMPLANTES</th>
+        </tr>
 
-  <tr class="grupo">
-    <th colspan="18">INFORMACIÓN DEL PACIENTE</th>
-    <th colspan="9">ESTUDIOS Y ATENCIONES REALIZADAS</th>
-    <th colspan="3">COLOCACIÓN DE IMPLANTES</th>
-  </tr>
+        <tr class="columnas">
+          <th>N°</th>
+          <th>ENTREGADO</th>
+          <th>FECHA</th>
+          <th>PARROQUIA</th>
+          <th>COMUNA</th>
+          <th>CONSEJO COMUNAL</th>
+          <th>UBCH</th>
+          <th>NOMBRES</th>
+          <th>APELLIDOS</th>
+          <th>CÉDULA</th>
+          <th>TELÉFONO</th>
+          <th>GÉNERO</th>
+          <th>EDAD</th>
+          <th>EMBARAZADA</th>
+          <th>TIEMPO DE GESTACIÓN</th>
+          <th>DISCAPACIDAD</th>
+          <th>TIPO DE DISCAPACIDAD</th>
+          <th>PATOLOGÍAS</th>
+          <th>CITOLOGÍAS</th>
+          <th>ECOGRAFÍAS GENERAL</th>
+          <th>ECOGRAFÍA GINECOLÓGICA</th>
+          <th>ECOGRAFÍA OBSTÉTRICA</th>
+          <th>LABORATORIOS</th>
+          <th>TOMOGRAFÍAS</th>
+          <th>RESONANCIAS</th>
+          <th>ATENCIÓN GINECOLÓGICA</th>
+          <th>ATENCIÓN OBSTÉTRICA</th>
+          <th>COLOCACIÓN DE IMPLANTES</th>
+          <th>INTRA DÉRMICO</th>
+          <th>INTRA UTERINO</th>
+        </tr>
 
-  <tr class="columnas">
-    <th>N°</th>
-    <th>ENTREGADO</th>
-    <th>FECHA</th>
-    <th>PARROQUIA</th>
-    <th>COMUNA</th>
-    <th>CONSEJO COMUNAL</th>
-    <th>UBCH</th>
-    <th>NOMBRES</th>
-    <th>APELLIDOS</th>
-    <th>CÉDULA</th>
-    <th>TELÉFONO</th>
-    <th>GÉNERO</th>
-    <th>EDAD</th>
-    <th>EMBARAZADA</th>
-    <th>TIEMPO DE GESTACIÓN</th>
-    <th>DISCAPACIDAD</th>
-    <th>TIPO DE DISCAPACIDAD</th>
-    <th>PATOLOGÍAS</th>
-    <th>CITOLOGÍAS</th>
-    <th>ECOGRAFÍAS GENERAL</th>
-    <th>ECOGRAFÍA GINECOLÓGICA</th>
-    <th>ECOGRAFÍA OBSTÉTRICA</th>
-    <th>LABORATORIOS</th>
-    <th>TOMOGRAFÍAS</th>
-    <th>RESONANCIAS</th>
-    <th>ATENCIÓN GINECOLÓGICA</th>
-    <th>ATENCIÓN OBSTÉTRICA</th>
-    <th>COLOCACIÓN DE IMPLANTES</th>
-    <th>INTRA DÉRMICO</th>
-    <th>INTRA UTERINO</th>
-  </tr>
-</thead>
-
+      </thead>
 
       <tbody id="cuerpoTabla">
         <tr>
@@ -362,23 +385,24 @@ tbody tr { break-inside: avoid; }
       </tbody>
 
     </table>
+
   </div>
 
-
 </div>
-
 
 <script>
 const GOOGLE_CLIENT_ID = "53673886985-s8pl3jvo95m3b097m3es1urbt0sv8vvv.apps.googleusercontent.com";
 const WORKER_URL = "https://innovamed-consolidado-api.administracion-innovamed-inaimpf.workers.dev/";
 
 let idToken = "";
+let contenidoOriginal = null;
 
 const estado = document.getElementById("estado");
 const cuerpo = document.getElementById("cuerpoTabla");
 
 function cargarGoogle() {
   const script = document.createElement("script");
+
   script.src = "https://accounts.google.com/gsi/client";
   script.async = true;
   script.defer = true;
@@ -401,7 +425,8 @@ function cargarGoogle() {
   };
 
   script.onerror = () => {
-    estado.textContent = "No se pudo cargar el inicio de sesión de Google.";
+    estado.textContent =
+      "No se pudo cargar el inicio de sesión de Google.";
   };
 
   document.head.appendChild(script);
@@ -419,12 +444,14 @@ function prepararConsulta() {
   const hasta = document.getElementById("hasta").value;
 
   if (!idToken) {
-    estado.textContent = "Primero debes iniciar sesión con Google.";
+    estado.textContent =
+      "Primero debes iniciar sesión con Google.";
     return;
   }
 
   if (!desde || !hasta) {
-    estado.textContent = "Debe seleccionar ambas fechas.";
+    estado.textContent =
+      "Debe seleccionar ambas fechas.";
     return;
   }
 
@@ -434,7 +461,8 @@ function prepararConsulta() {
     return;
   }
 
-  estado.textContent = "Consultando registros. Por favor espera...";
+  estado.textContent =
+    "Consultando registros. Por favor espera...";
 
   fetch(WORKER_URL, {
     method: "POST",
@@ -451,7 +479,9 @@ function prepararConsulta() {
     const resultado = await respuesta.json();
 
     if (!respuesta.ok || !resultado.ok) {
-      throw new Error("No fue posible consultar los registros.");
+      throw new Error(
+        "No fue posible consultar los registros."
+      );
     }
 
     return resultado.data;
@@ -462,10 +492,12 @@ function prepararConsulta() {
     estado.textContent =
       "Consulta exitosa: " + datos.total +
       " registros encontrados, desde " +
-      datos.fechaInicio + " hasta " + datos.fechaFin + ".";
+      datos.fechaInicio + " hasta " +
+      datos.fechaFin + ".";
   })
   .catch(error => {
     console.error(error);
+
     estado.textContent =
       "Error de conexión o autorización. Verifica tu acceso e inténtalo nuevamente.";
   });
@@ -479,7 +511,8 @@ function mostrarRegistros(registros) {
     const celda = document.createElement("td");
 
     celda.colSpan = 30;
-    celda.textContent = "No hay registros para el período seleccionado.";
+    celda.textContent =
+      "No hay registros para el período seleccionado.";
     celda.style.padding = "20px";
 
     fila.appendChild(celda);
@@ -489,19 +522,22 @@ function mostrarRegistros(registros) {
 
   registros.forEach(registro => {
     const fila = document.createElement("tr");
-    const campos = Object.keys(registro).filter(campo => campo !== "NOTA");
-  
+
+    const campos = Object.keys(registro)
+      .filter(campo => campo !== "NOTA");
 
     campos.forEach((campo, indice) => {
       const celda = document.createElement("td");
 
       if (indice === 1 && campo === "ENTREGADO") {
         const check = document.createElement("input");
+
         check.type = "checkbox";
         check.className = "entregado";
         check.style.width = "14px";
         check.style.height = "14px";
         check.style.padding = "0";
+
         celda.appendChild(check);
       } else {
         celda.textContent = registro[campo] ?? "";
@@ -514,9 +550,60 @@ function mostrarRegistros(registros) {
   });
 }
 
+/* GENERAR E IMPRIMIR FORMATO EN BLANCO */
+
+function imprimirFormatoVacio() {
+
+  if (contenidoOriginal !== null) {
+    return;
+  }
+
+  // Guardar temporalmente los registros actuales
+  contenidoOriginal = cuerpo.innerHTML;
+
+  // Limpiar el cuerpo de la tabla
+  cuerpo.innerHTML = "";
+
+  // Crear 15 filas con 30 celdas vacías cada una
+  for (let i = 0; i < 15; i++) {
+
+    const fila = document.createElement("tr");
+    fila.className = "fila-vacia";
+
+    for (let j = 0; j < 30; j++) {
+      const celda = document.createElement("td");
+      celda.innerHTML = "&nbsp;";
+      fila.appendChild(celda);
+    }
+
+    cuerpo.appendChild(fila);
+  }
+
+  // Activar estilos específicos del formato vacío
+  document.body.classList.add("formato-vacio");
+
+  // Restaurar los registros al terminar la impresión
+  window.addEventListener("afterprint", restaurarConsolidado, {
+    once: true
+  });
+
+  window.print();
+}
+
+function restaurarConsolidado() {
+
+  if (contenidoOriginal === null) {
+    return;
+  }
+
+  cuerpo.innerHTML = contenidoOriginal;
+  contenidoOriginal = null;
+
+  document.body.classList.remove("formato-vacio");
+}
+
 cargarGoogle();
 </script>
-
 
 </body>
 </html>
