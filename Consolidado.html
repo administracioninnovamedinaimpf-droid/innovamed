@@ -161,17 +161,23 @@ tbody tr { break-inside: avoid; }
 }
 
 
-.pie {
-  display: none !important;
-}
-
-
 
 @media print {
-  @page {
-    size: 13in 8.5in;
-    margin: 9mm 6mm 20mm 6mm;
+ 
+@page {
+  size: 13in 8.5in;
+  margin: 9mm 6mm 20mm 6mm;
+
+  @bottom-center {
+    content: "CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA · CONSOLIDADO INSTITUCIONAL";
+    font-family: Arial, sans-serif;
+    font-size: 7px;
+    color: #526575;
+    border-top: 1px solid #aab9c5;
+    padding-top: 3px;
   }
+}
+
 
   html, body {
     width: 100%;
@@ -237,23 +243,6 @@ tbody tr { break-inside: avoid; }
     object-fit: contain !important;
   }
 
-  .pie {
-  display: block !important;
-  position: fixed !important;
-  bottom: -13mm !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  font-size: 7px !important;
-  line-height: 1.2 !important;
-  color: #526575 !important;
-  background: white !important;
-  border-top: 1px solid #aab9c5 !important;
-  padding-top: 3px !important;
-  z-index: 9999 !important;
-}
 }
 
 </style>
@@ -378,10 +367,6 @@ tbody tr { break-inside: avoid; }
     </table>
   </div>
 
-  <div class="pie">
-    CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
-    · CONSOLIDADO INSTITUCIONAL
-  </div>
 
 </div>
 
