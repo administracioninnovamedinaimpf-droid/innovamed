@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consolidado Institucional - Innovamed</title>
+
+<style>
+:root {
+  --azul: #174d75;
+  --azul2: #276b96;
+  --claro: #e8f0f6;
+  --borde: #aab9c5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: #edf1f4;
+  font-family: Arial, sans-serif;
+  color: #172b3a;
+}
+
+.panel {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px;
+  background: white;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px #00000012;
+}
+
+.controles {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--azul);
+}
+
+input {
+  padding: 9px;
+  border: 1px solid #b8c6d0;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--azul);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { background: var(--azul2); }
+
+#estado {
+  font-size: 12px;
+  margin-bottom: 14px;
+  color: #536575;
+}
+
+.documento {
+  background: white;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th, td {
+  border: 1px solid var(--borde);
+  padding: 4px 3px;
+  font-size: 8px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+thead { display: table-header-group; }
+
+.grupo th {
+  background: var(--azul);
+  color: white;
+  font-size: 9px;
+  padding: 6px 2px;
+}
+
+.columnas th {
+  background: var(--claro);
+  color: #173d59;
+  font-size: 7px;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) { background: #f2f6f9; }
+
+tbody tr { break-inside: avoid; }
+
+.check {
+  font-size: 12px;
+}
+
+.membrete {
+  width: 100%;
+  border: 0;
+  margin-bottom: 8px;
+}
+
+.membrete td {
+  border: 0;
+  vertical-align: middle;
+}
+
+.logo {
+  width: 75px;
+  height: 65px;
+  object-fit: contain;
+}
+
+.logo-celda { width: 14%; }
+
+.institucion {
+  text-align: center;
+  color: #172f46;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.institucion .nombre {
+  font-size: 13px;
+  color: var(--azul);
+}
+
+.titulo {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--azul);
+  margin: 8px 0;
+}
+
+.pie {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: legal landscape;
+    margin: 9mm 6mm 13mm 6mm;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    background: white;
+  }
+
+  .panel {
+    max-width: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .controles, #estado {
+    display: none !important;
+  }
+
+  .documento { overflow: visible; }
+
+  table { width: 100%; }
+
+  thead { display: table-header-group; }
+
+  tfoot { display: table-footer-group; }
+
+  tr { break-inside: avoid; }
+
+  .pie {
+    display: block;
+    position: fixed;
+    bottom: -9mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8px;
+    color: #526575;
+    border-top: 1px solid #aab9c5;
+    padding-top: 3px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="panel">
+
+  <div class="controles">
+    <div class="campo">
+      <label for="desde">FECHA DESDE</label>
+      <input type="date" id="desde">
+    </div>
+
+    <div class="campo">
+      <label for="hasta">FECHA HASTA</label>
+      <input type="date" id="hasta">
+    </div>
+
+    <button onclick="prepararConsulta()">Consultar consolidado</button>
+    <button onclick="window.print()">Imprimir / PDF</button>
+  </div>
+
+  <div id="estado">
+    Seleccione un período para preparar la consulta.
+  </div>
+
+  <div class="documento">
+    <table id="tablaConsolidado">
+
+      <thead>
+        <tr>
+          <td colspan="31">
+            <table class="membrete">
+              <tr>
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://drive.google.com/uc?export=view&id=1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
+                    alt="Logotipo izquierdo">
+                </td>
+
+                <td class="institucion">
+                  REPUBLICA BOLIVARIANA DE VENEZUELA<br>
+                  ALCALDIA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA<br>
+                  <span class="nombre">
+                    CENTRO DE ATENCION INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
+                  </span><br>
+                  SECRETARIA DE SALUD
+                </td>
+
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://drive.google.com/uc?export=view&id=1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
+                    alt="Logotipo central">
+                </td>
+
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://drive.google.com/uc?export=view&id=1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
+                    alt="Logotipo derecho">
+                </td>
+              </tr>
+            </table>
+
+            <div class="titulo">
+              CONSOLIDADO DE ATENCIÓN MÉDICA
+            </div>
+          </td>
+        </tr>
+
+        <tr class="grupo">
+          <th colspan="17">INFORMACIÓN DEL PACIENTE</th>
+          <th colspan="11">ESTUDIOS Y ATENCIONES REALIZADAS</th>
+          <th colspan="2">COLOCACIÓN DE IMPLANTES</th>
+          <th colspan="1">OBSERVACIONES</th>
+        </tr>
+
+        <tr class="columnas">
+          <th>N°</th>
+          <th>ENTREGADO</th>
+          <th>FECHA</th>
+          <th>PARROQUIA</th>
+          <th>COMUNA</th>
+          <th>CONSEJO COMUNAL</th>
+          <th>UBCH</th>
+          <th>NOMBRES</th>
+          <th>APELLIDOS</th>
+          <th>CÉDULA</th>
+          <th>TELÉFONO</th>
+          <th>GÉNERO</th>
+          <th>EDAD</th>
+          <th>EMBARAZADA</th>
+          <th>TIEMPO DE GESTACIÓN</th>
+          <th>DISCAPACIDAD</th>
+          <th>TIPO DE DISCAPACIDAD</th>
+          <th>PATOLOGÍAS</th>
+          <th>CITOLOGÍAS</th>
+          <th>ECOGRAFÍAS GENERAL</th>
+          <th>ECOGRAFÍA GINECOLÓGICA</th>
+          <th>ECOGRAFÍA OBSTÉTRICA</th>
+          <th>LABORATORIOS</th>
+          <th>TOMOGRAFÍAS</th>
+          <th>RESONANCIAS</th>
+          <th>ATENCIÓN GINECOLÓGICA</th>
+          <th>ATENCIÓN OBSTÉTRICA</th>
+          <th>COLOCACIÓN DE IMPLANTES</th>
+          <th>INTRA DÉRMICO</th>
+          <th>INTRA UTERINO</th>
+          <th>NOTA</th>
+        </tr>
+      </thead>
+
+      <tbody id="cuerpoTabla">
+        <tr>
+          <td colspan="31" style="padding:20px">
+            La información aparecerá aquí al conectar la consulta.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="pie">
+    CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
+    · CONSOLIDADO INSTITUCIONAL
+  </div>
+
+</div>
+
+<script>
+function prepararConsulta() {
+  const desde = document.getElementById('desde').value;
+  const hasta = document.getElementById('hasta').value;
+  const estado = document.getElementById('estado');
+
+  if (!desde || !hasta) {
+    estado.textContent = 'Debe seleccionar ambas fechas.';
+    return;
+  }
+
+  if (desde > hasta) {
+    estado.textContent =
+      'La fecha inicial no puede ser posterior a la fecha final.';
+    return;
+  }
+
+  estado.textContent =
+    'Período seleccionado: ' + desde + ' al ' + hasta +
+    '. La conexión segura con los registros se habilitará en la siguiente etapa.';
+}
+</script>
+
+</body>
+</html>
