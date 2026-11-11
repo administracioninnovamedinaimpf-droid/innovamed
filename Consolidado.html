@@ -236,20 +236,22 @@ tbody tr { break-inside: avoid; }
   }
 
   .pie {
-    display: block !important;
-    position: fixed !important;
-    bottom: -13mm !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    text-align: center !important;
-    font-size: 7px !important;
-    color: #526575 !important;
-    background: white !important;
-    border-top: 1px solid #aab9c5 !important;
-    padding-top: 3px !important;
-    z-index: 9999 !important;
-  }
+  display: block !important;
+  position: fixed !important;
+  bottom: -13mm !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  font-size: 7px !important;
+  line-height: 1.2 !important;
+  color: #526575 !important;
+  background: white !important;
+  border-top: 1px solid #aab9c5 !important;
+  padding-top: 3px !important;
+  z-index: 9999 !important;
+}
 }
 
 </style>
@@ -281,91 +283,91 @@ tbody tr { break-inside: avoid; }
   <div class="documento">
     <table id="tablaConsolidado">
 
-      <thead>
+     
+<thead>
+  <tr>
+    <td colspan="30">
+      <table class="membrete">
         <tr>
-          <td colspan="31">
-            <table class="membrete">
-              <tr>
-                <td class="logo-celda">
-                  <img class="logo"
-                    src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
-                    alt="Logotipo izquierdo">
-                </td>
+          <td class="logo-celda">
+            <img class="logo"
+              src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
+              alt="Logotipo izquierdo">
+          </td>
 
-                <td class="institucion">
-                  REPUBLICA BOLIVARIANA DE VENEZUELA<br>
-                  ALCALDIA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA<br>
-                  <span class="nombre">
-                    CENTRO DE ATENCION INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
-                  </span><br>
-                  SECRETARIA DE SALUD
-                </td>
+          <td class="institucion">
+            REPUBLICA BOLIVARIANA DE VENEZUELA<br>
+            ALCALDIA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA<br>
+            <span class="nombre">
+              CENTRO DE ATENCION INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
+            </span><br>
+            SECRETARIA DE SALUD
+          </td>
 
-                <td class="logo-celda">
-                  <img class="logo"
-                    src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
-                    alt="Logotipo central">
-                </td>
+          <td class="logo-celda">
+            <img class="logo"
+              src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
+              alt="Logotipo central">
+          </td>
 
-                <td class="logo-celda">
-                  <img class="logo"
-                    src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
-                    alt="Logotipo derecho">
-                </td>
-              </tr>
-            </table>
-
-            <div class="titulo">
-              CONSOLIDADO DE ATENCIÓN MÉDICA
-            </div>
+          <td class="logo-celda">
+            <img class="logo"
+              src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
+              alt="Logotipo derecho">
           </td>
         </tr>
+      </table>
 
-        <tr class="grupo">
-          <th colspan="17">INFORMACIÓN DEL PACIENTE</th>
-          <th colspan="11">ESTUDIOS Y ATENCIONES REALIZADAS</th>
-          <th colspan="2">COLOCACIÓN DE IMPLANTES</th>
-          <th colspan="1">OBSERVACIONES</th>
-        </tr>
+      <div class="titulo">
+        CONSOLIDADO DE ATENCIÓN MÉDICA
+      </div>
+    </td>
+  </tr>
 
-        <tr class="columnas">
-          <th>N°</th>
-          <th>ENTREGADO</th>
-          <th>FECHA</th>
-          <th>PARROQUIA</th>
-          <th>COMUNA</th>
-          <th>CONSEJO COMUNAL</th>
-          <th>UBCH</th>
-          <th>NOMBRES</th>
-          <th>APELLIDOS</th>
-          <th>CÉDULA</th>
-          <th>TELÉFONO</th>
-          <th>GÉNERO</th>
-          <th>EDAD</th>
-          <th>EMBARAZADA</th>
-          <th>TIEMPO DE GESTACIÓN</th>
-          <th>DISCAPACIDAD</th>
-          <th>TIPO DE DISCAPACIDAD</th>
-          <th>PATOLOGÍAS</th>
-          <th>CITOLOGÍAS</th>
-          <th>ECOGRAFÍAS GENERAL</th>
-          <th>ECOGRAFÍA GINECOLÓGICA</th>
-          <th>ECOGRAFÍA OBSTÉTRICA</th>
-          <th>LABORATORIOS</th>
-          <th>TOMOGRAFÍAS</th>
-          <th>RESONANCIAS</th>
-          <th>ATENCIÓN GINECOLÓGICA</th>
-          <th>ATENCIÓN OBSTÉTRICA</th>
-          <th>COLOCACIÓN DE IMPLANTES</th>
-          <th>INTRA DÉRMICO</th>
-          <th>INTRA UTERINO</th>
-          <th>NOTA</th>
-        </tr>
-      </thead>
+  <tr class="grupo">
+    <th colspan="18">INFORMACIÓN DEL PACIENTE</th>
+    <th colspan="9">ESTUDIOS Y ATENCIONES REALIZADAS</th>
+    <th colspan="3">COLOCACIÓN DE IMPLANTES</th>
+  </tr>
+
+  <tr class="columnas">
+    <th>N°</th>
+    <th>ENTREGADO</th>
+    <th>FECHA</th>
+    <th>PARROQUIA</th>
+    <th>COMUNA</th>
+    <th>CONSEJO COMUNAL</th>
+    <th>UBCH</th>
+    <th>NOMBRES</th>
+    <th>APELLIDOS</th>
+    <th>CÉDULA</th>
+    <th>TELÉFONO</th>
+    <th>GÉNERO</th>
+    <th>EDAD</th>
+    <th>EMBARAZADA</th>
+    <th>TIEMPO DE GESTACIÓN</th>
+    <th>DISCAPACIDAD</th>
+    <th>TIPO DE DISCAPACIDAD</th>
+    <th>PATOLOGÍAS</th>
+    <th>CITOLOGÍAS</th>
+    <th>ECOGRAFÍAS GENERAL</th>
+    <th>ECOGRAFÍA GINECOLÓGICA</th>
+    <th>ECOGRAFÍA OBSTÉTRICA</th>
+    <th>LABORATORIOS</th>
+    <th>TOMOGRAFÍAS</th>
+    <th>RESONANCIAS</th>
+    <th>ATENCIÓN GINECOLÓGICA</th>
+    <th>ATENCIÓN OBSTÉTRICA</th>
+    <th>COLOCACIÓN DE IMPLANTES</th>
+    <th>INTRA DÉRMICO</th>
+    <th>INTRA UTERINO</th>
+  </tr>
+</thead>
+
 
       <tbody id="cuerpoTabla">
         <tr>
-          <td colspan="31" style="padding:20px">
+          <td colspan="30" style="padding:20px">
             La información aparecerá aquí al conectar la consulta.
           </td>
         </tr>
@@ -492,7 +494,7 @@ function mostrarRegistros(registros) {
     const fila = document.createElement("tr");
     const celda = document.createElement("td");
 
-    celda.colSpan = 31;
+    celda.colSpan = 30;
     celda.textContent = "No hay registros para el período seleccionado.";
     celda.style.padding = "20px";
 
@@ -503,7 +505,8 @@ function mostrarRegistros(registros) {
 
   registros.forEach(registro => {
     const fila = document.createElement("tr");
-    const campos = Object.keys(registro);
+    const campos = Object.keys(registro).filter(campo => campo !== "NOTA");
+  
 
     campos.forEach((campo, indice) => {
       const celda = document.createElement("td");
