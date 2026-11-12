@@ -1,264 +1,661 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe Ecográfico Ginecológico</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            line-height: 1.3;
-            margin: 0;
-            padding: 15px;
-            background-color: #fff;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-        }
-        /* Membrete Superior con 3 imágenes */
-        .header-table {
-            width: 100%;
-            border-collapse: collapse;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        .header-table td {
-            vertical-align: middle;
-            text-align: center;
-        }
-        .logo-img {
-            max-height: 60px;
-            max-width: 120px;
-            object-fit: contain;
-        }
-        .header-center {
-            width: 50%;
-            text-align: center;
-        }
-        .header-center h3 {
-            margin: 2px 0;
-            font-size: 13px;
-            color: #0056b3;
-            font-weight: bold;
-        }
-        .header-center h2 {
-            margin: 4px 0;
-            font-size: 15px;
-            color: #333;
-        }
-        .header-center p {
-            margin: 1px 0;
-            font-size: 11px;
-            color: #555;
-        }
-        
-        /* Título del Formulario */
-        .title-box {
-            text-align: center;
-            background-color: #0056b3;
-            color: #fff;
-            padding: 6px;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Ecográfico Ginecológico</title>
 
-        /* Datos del Paciente */
-        .patient-info {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-        .patient-info td {
-            padding: 6px 8px;
-            font-size: 13px;
-            border-bottom: 1px solid #ddd;
-        }
-        .patient-info td span {
-            border-bottom: 1px dotted #333;
-            display: inline-block;
-            min-width: 150px;
-        }
+<style>
+:root{
+  --azul:#174d70;
+  --azul2:#123b57;
+  --linea:#687782;
+  --texto:#202830;
+}
 
-        /* Secciones del Informe */
-        .section-title {
-            font-weight: bold;
-            font-size: 13px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            color: #0056b3;
-        }
-        .content-block {
-            margin-bottom: 10px;
-            padding-left: 5px;
-        }
-        .checkbox-group {
-            margin: 4px 0;
-        }
-        .line-input {
-            border-bottom: 1px dotted #000;
-            display: inline-block;
-            min-width: 200px;
-            height: 15px;
-        }
-        .large-box {
-            border: 1px solid #999;
-            min-height: 70px;
-            padding: 8px;
-            margin-top: 5px;
-            background-color: #fafafa;
-        }
+*{box-sizing:border-box}
 
-        /* Firma y Pie */
-        .footer-section {
-            margin-top: 30px;
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .footer-section td {
-            text-align: center;
-            vertical-align: bottom;
-            height: 60px;
-        }
-        .signature-line {
-            width: 280px;
-            border-top: 1px solid #000;
-            margin: 0 auto;
-            padding-top: 5px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-    </style>
+body{
+  margin:0;
+  padding:20px;
+  background:#edf1f4;
+  color:var(--texto);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+.page{
+  width:8.5in;
+  min-height:11in;
+  margin:auto;
+  padding:.48in .58in .55in;
+  background:white;
+  box-shadow:0 2px 14px rgba(20,45,60,.14);
+}
+
+.membrete{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  margin-bottom:7px;
+}
+
+.membrete td{
+  border:0;
+  padding:0;
+  vertical-align:middle;
+}
+
+.logo-celda{
+  width:16%;
+  text-align:center;
+}
+
+.logo{
+  width:75px;
+  height:65px;
+  object-fit:contain;
+  display:block;
+  margin:auto;
+}
+
+.institucion{
+  width:54%;
+  text-align:center;
+  color:#172f46;
+  font-size:10px;
+  line-height:1.35;
+  font-weight:bold;
+  padding:0 5px!important;
+}
+
+.institucion .nombre{
+  display:block;
+  font-size:12px;
+  color:var(--azul);
+  line-height:1.25;
+}
+
+.regla{
+  border-top:2px solid #526575;
+  margin:4px 0 10px;
+}
+
+.titulo{
+  text-align:center;
+  font-size:13px;
+  font-weight:bold;
+  margin:0 0 12px;
+}
+
+.datos{
+  display:grid;
+  grid-template-columns:1.65fr .72fr 1fr;
+  gap:9px 13px;
+  margin-bottom:12px;
+  font-size:10.5px;
+}
+
+.dato{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  min-width:0;
+}
+
+.dato strong{white-space:nowrap}
+
+.valor{
+  flex:1;
+  min-width:15px;
+  min-height:16px;
+  border-bottom:1px solid var(--linea);
+  padding:0 2px 1px;
+  overflow-wrap:anywhere;
+}
+
+.intro{
+  font-size:10.5px;
+  margin:8px 0;
+}
+
+.seccion{
+  margin-bottom:9px;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+.seccion-titulo{
+  color:var(--azul2);
+  font-size:11px;
+  font-weight:bold;
+  text-transform:uppercase;
+  margin:9px 0 5px;
+  padding-bottom:3px;
+  border-bottom:1px solid #9aabb7;
+}
+
+.item{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:2px 5px;
+  margin:5px 0;
+  font-size:10px;
+  line-height:1.4;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+.item-label{font-weight:bold}
+
+.opciones{
+  display:inline;
+  line-height:1.5;
+}
+
+.opcion{
+  white-space:nowrap;
+  margin-right:5px;
+}
+
+.marca{
+  display:inline-block;
+  min-width:13px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.linea-explicacion{
+  flex:1 1 100%;
+  min-height:18px;
+  border-bottom:1px solid var(--linea);
+  padding:1px 2px 2px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  line-height:1.4;
+}
+
+.linea-simple{
+  flex:1 1 150px;
+  min-height:18px;
+  border-bottom:1px solid var(--linea);
+  padding:0 2px 2px;
+  overflow-wrap:anywhere;
+}
+
+.etiqueta-conclusion{
+  font-weight:bold;
+  font-size:10.5px;
+  margin:12px 0 4px;
+}
+
+.conclusiones{
+  min-height:95px;
+  border-bottom:1px solid var(--linea);
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 19px,
+    var(--linea) 19px,
+    var(--linea) 20px
+  );
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-size:10.5px;
+  line-height:20px;
+  padding:0 2px;
+}
+
+.medico{
+  display:flex;
+  align-items:baseline;
+  gap:5px;
+  margin-top:18px;
+  font-size:10px;
+}
+
+.medico .linea{
+  flex:1;
+  min-height:18px;
+  border-bottom:1px solid var(--linea);
+}
+
+.firma{
+  width:190px;
+  margin:25px 0 0 auto;
+  padding-top:27px;
+  border-top:1px solid #333;
+  text-align:center;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.botones{
+  display:flex;
+  justify-content:center;
+  margin:18px auto 25px;
+}
+
+button{
+  border:0;
+  border-radius:5px;
+  padding:11px 20px;
+  background:var(--azul);
+  color:white;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@media print{
+  body{
+    background:white!important;
+    margin:0!important;
+    padding:0!important;
+  }
+
+  .page{
+    width:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    box-shadow:none!important;
+  }
+
+  .botones{display:none!important}
+
+  .seccion,.item,.medico,.firma{
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+
+  @page{
+    size:letter portrait;
+    margin:12mm 14mm 17mm 14mm;
+
+    @bottom-center{
+      content:"REPÚBLICA BOLIVARIANA DE VENEZUELA · ALCALDÍA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA";
+      font-family:Arial,sans-serif;
+      font-size:7px;
+      color:#526575;
+      border-top:1px solid #aab9c5;
+      padding-top:3px;
+    }
+  }
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <!-- Membrete Superior con las 3 imágenes integradas -->
-    <table class="header-table">
-        <tr>
-            <td style="width: 25%;">
-                <img src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb=w500" alt="Logo 1" class="logo-img">
-            </td>
-            <td class="header-center">
-                <h3>SUCRE | GRAN MISIÓN VENEZUELA MUJER</h3>
-                <h2>CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</h2>
-                <p>(INAIMPF)</p>
-            </td>
-            <td style="width: 25%;">
-                <img src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ=w500" alt="Logo 3" class="logo-img">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="padding-top: 8px; text-align: center;">
-                <img src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL=w500" alt="Logo Central" class="logo-img" style="max-height: 45px;">
-            </td>
-        </tr>
-    </table>
+<div class="page" id="informe-content">
 
-    <div class="title-box">INFORME ECOGRÁFICO GINECOLÓGICO</div>
+<table style="width:100%;border-collapse:collapse">
+<thead>
+<tr>
+<td>
 
-    <!-- Datos de la Paciente -->
-    <table class="patient-info">
-        <tr>
-            <td style="width: 50%;"><strong>PACIENTE:</strong> <span id="val-paciente">&nbsp;</span></td>
-            <td style="width: 50%;"><strong>FECHA:</strong> <span id="val-fecha">DD/MM/AAAA</span></td>
-        </tr>
-        <tr>
-            <td><strong>CÉDULA:</strong> <span id="val-cedula">&nbsp;</span></td>
-            <td><strong>EDAD:</strong> <span id="val-edad">&nbsp;</span></td>
-        </tr>
-    </table>
+<table class="membrete">
+<tr>
 
-    <p style="font-style: italic; font-weight: bold; margin-bottom: 12px;">El estudio ultrasonográfico evidencia:</p>
+<td class="logo-celda">
+<img class="logo"
+src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
+alt="Logo izquierdo">
+</td>
 
-    <!-- 1. Vejiga -->
-    <div class="section-title">1. Vejiga</div>
-    <div class="content-block">
-        <div class="checkbox-group"><strong>Contenido:</strong> <span id="val-vejigacontenido"></span></div>
-        <div class="checkbox-group"><strong>Paredes:</strong> <span id="val-vejigaparedes"></span> <span id="val-vejigaparedesexp"></span></div>
-        <div class="checkbox-group"><strong>Litiasis:</strong> <span id="val-vejigalitiasis"></span> | <strong>Pólipos:</strong> <span id="val-vejigapolipos"></span> | <strong>Divertículos:</strong> <span id="val-vejigadiverticulos"></span></div>
-        <div class="checkbox-group"><strong>Tumores:</strong> <span id="val-vejigatumores"></span> | <strong>Infiltración:</strong> <span id="val-vejigainfiltracion"></span></div>
-        <div class="checkbox-group"><strong>Otros:</strong> <span id="val-vejigaotros"></span></div>
-    </div>
+<td class="institucion">
+<span class="nombre">
+CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA AYALA
+</span>
+</td>
 
-    <!-- 2. Útero -->
-    <div class="section-title">2. Útero</div>
-    <div class="content-block">
-        <div class="checkbox-group"><strong>Posición:</strong> <span id="val-uteroposicion"></span></div>
-        <div class="checkbox-group"><strong>Aspecto:</strong> <span id="val-uteroaspecto"></span> | <strong>Dimensiones:</strong> <span id="val-uterodimensiones"></span></div>
-        <div class="checkbox-group"><strong>Tamaño:</strong> <span id="val-uterotamano"></span></div>
-        <div class="checkbox-group"><strong>Endometrio:</strong> <span id="val-endometrio"></span></div>
-        <div class="checkbox-group"><strong>Anexos:</strong> <span id="val-anexos"></span></div>
-        <div class="checkbox-group"><strong>Líquido en FSD:</strong> <span id="val-liquidoenfsd"></span></div>
-        <div class="checkbox-group"><strong>Otros:</strong> <span id="val-uterootros"></span></div>
-    </div>
+<td class="logo-celda">
+<img class="logo"
+src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
+alt="Logo central">
+</td>
 
-    <!-- Conclusiones -->
-    <div class="section-title">Conclusiones:</div>
-    <div class="large-box" id="val-conclusiones"></div>
+<td class="logo-celda">
+<img class="logo"
+src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
+alt="Logo derecho">
+</td>
 
-    <!-- Firma y Sello -->
-    <table class="footer-section">
-        <tr>
-            <td>
-                <div class="signature-line">
-                    <span id="val-medico">Nombre del médico que realiza el estudio</span><br><br>
-                    Firma y Sello
-                </div>
-            </td>
-        </tr>
-    </table>
+</tr>
+</table>
+
+<div class="regla"></div>
+
+<h1 class="titulo">INFORME ECOGRÁFICO GINECOLÓGICO</h1>
+
+<div class="datos">
+
+<div class="dato">
+<strong>PACIENTE:</strong>
+<span class="valor" id="Paciente"></span>
+</div>
+
+<div class="dato">
+<strong>EDAD:</strong>
+<span class="valor" id="Edad"></span>
+</div>
+
+<div class="dato">
+<strong>CÉDULA:</strong>
+<span class="valor" id="Cedula"></span>
+</div>
+
+<div class="dato">
+<strong>FECHA:</strong>
+<span class="valor" id="Fecha"></span>
+</div>
+
+<div class="dato" style="grid-column:span 2">
+<strong>CENTRO:</strong>
+<span class="valor" id="CentroDeSalud"></span>
+</div>
+
+</div>
+
+<p class="intro">El estudio ultrasonográfico evidencia:</p>
+
+</td>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>
+
+<!-- VEJIGA -->
+
+<div class="seccion">
+
+<div class="seccion-titulo">1. VEJIGA</div>
+
+<div class="item">
+<strong class="item-label">Contenido:</strong>
+<span class="opciones" id="VejigaContenido"></span>
+</div>
+
+<div class="item">
+<strong class="item-label">Paredes:</strong>
+<span class="opciones" id="VejigaParedes"></span>
+<div class="linea-explicacion" id="VejigaParedesExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Litiasis:</strong>
+<span class="opciones" id="VejigaLitiasis"></span>
+<div class="linea-explicacion" id="VejigaLitiasisExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Pólipos:</strong>
+<span class="opciones" id="VejigaPolipos"></span>
+<div class="linea-explicacion" id="VejigaPoliposExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Divertículos:</strong>
+<span class="opciones" id="VejigaDiverticulos"></span>
+<div class="linea-explicacion" id="VejigaDiverticulosExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Tumores:</strong>
+<span class="opciones" id="VejigaTumores"></span>
+<div class="linea-explicacion" id="VejigaTumoresExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Infiltración:</strong>
+<span class="opciones" id="VejigaInfiltracion"></span>
+<div class="linea-explicacion" id="VejigaInfiltracionExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Otros:</strong>
+<div class="linea-simple" id="VejigaOtros"></div>
+</div>
+
+</div>
+
+<!-- UTERO -->
+
+<div class="seccion">
+
+<div class="seccion-titulo">2. ÚTERO</div>
+
+<div class="item">
+<strong class="item-label">Posición:</strong>
+<span class="opciones" id="UteroPosicion"></span>
+<div class="linea-explicacion" id="UteroPosicionExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Aspecto:</strong>
+<span class="opciones" id="UteroAspecto"></span>
+<div class="linea-explicacion" id="UteroAspectoExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Dimensiones:</strong>
+<span class="opciones" id="UteroDimensiones"></span>
+<div class="linea-explicacion" id="UteroDimensionesExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Tamaño:</strong>
+<span class="opciones" id="UteroTamano"></span>
+<div class="linea-explicacion" id="UteroTamanoExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Endometrio:</strong>
+<span class="opciones" id="Endometrio"></span>
+<div class="linea-explicacion" id="EndometrioExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Anexos:</strong>
+<span class="opciones" id="Anexos"></span>
+<div class="linea-explicacion" id="AnexosExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Líquido en FSD:</strong>
+<span class="opciones" id="LiquidoEnFSD"></span>
+<div class="linea-explicacion" id="LiquidoEnFSDExplicacion"></div>
+</div>
+
+<div class="item">
+<strong class="item-label">Otros:</strong>
+<div class="linea-simple" id="UteroOtros"></div>
+</div>
+
+</div>
+
+<!-- CONCLUSIONES -->
+
+<div class="etiqueta-conclusion">CONCLUSIONES:</div>
+
+<div class="conclusiones" id="Conclusiones"></div>
+
+<div class="medico">
+<strong>Nombre del médico que realiza el estudio:</strong>
+<span class="linea" id="Medico"></span>
+</div>
+
+<div class="firma">FIRMA Y SELLO</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="botones">
+<button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
 </div>
 
 <script>
-    // Captura automática de parámetros enviados desde AppSheet por URL
-    const params = new URLSearchParams(window.location.search);
+(function(){
 
-    function setText(id, paramName) {
-        const val = params.get(paramName);
-        const el = document.getElementById(id);
-        if (el && val) {
-            el.innerText = decodeURIComponent(val);
-        }
-    }
+"use strict";
 
-    // Mapeo de datos del paciente
-    setText('val-paciente', 'Paciente');
-    setText('val-fecha', 'Fecha');
-    setText('val-cedula', 'Cedula');
-    setText('val-edad', 'Edad');
+const q=new URLSearchParams(window.location.search);
 
-    // Mapeo de Vejiga
-    setText('val-vejigacontenido', 'Vejiga Contenido');
-    setText('val-vejigaparedes', 'Vejiga Paredes');
-    setText('val-vejigaparedesexp', 'Vejiga Paredes Explicacion');
-    setText('val-vejigalitiasis', 'Vejiga Litiasis');
-    setText('val-vejigapolipos', 'Vejiga Polipos');
-    setText('val-vejigadiverticulos', 'Vejiga Diverticulos');
-    setText('val-vejigatumores', 'Vejiga Tumores');
-    setText('val-vejigainfiltracion', 'Vejiga Infiltracion');
-    setText('val-vejigaotros', 'Vejiga Otros');
+function V(k){
+return (q.get(k)||"").trim();
+}
 
-    // Mapeo de Útero y Anexos
-    setText('val-uteroposicion', 'Utero Posicion');
-    setText('val-uteroaspecto', 'Utero Aspecto');
-    setText('val-uterodimensiones', 'Utero Dimensiones');
-    setText('val-uterotamano', 'Utero Tamano');
-    setText('val-endometrio', 'Endometrio');
-    setText('val-anexos', 'Anexos');
-    setText('val-liquidoenfsd', 'Liquido en FSD');
-    setText('val-uterootros', 'Utero Otros');
+function norm(s){
+return String(s||"")
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.toLowerCase().trim();
+}
 
-    // Conclusiones y Médico
-    setText('val-conclusiones', 'Conclusiones');
-    setText('val-medico', 'Medico');
+function texto(id,key){
+document.getElementById(id).textContent=V(key||id);
+}
+
+function linea(id,key){
+document.getElementById(id).textContent=V(key||id);
+}
+
+function opciones(id,key,lista){
+const el=document.getElementById(id);
+const elegido=norm(V(key||id));
+el.replaceChildren();
+
+lista.forEach(function(op){
+const s=document.createElement("span");
+s.className="opcion";
+
+const marca=norm(op)===elegido&&elegido?"X":"";
+
+s.textContent=op+" ("+marca+")";
+el.appendChild(s);
+});
+}
+
+function seleccionLibre(id,key){
+const elegido=V(key||id);
+document.getElementById(id).textContent=
+elegido?elegido+" (X)":"( )";
+}
+
+function fecha(f){
+if(!f)return "";
+const m=f.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+return m?m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1]:f;
+}
+
+// IDENTIFICACIÓN
+
+texto("Paciente");
+texto("Edad");
+texto("Cedula");
+texto("CentroDeSalud");
+document.getElementById("Fecha").textContent=fecha(V("Fecha"));
+
+// CAMPOS SIMPLES
+
+[
+"VejigaOtros",
+"UteroOtros",
+"Conclusiones",
+"Medico"
+].forEach(function(id){linea(id);});
+
+// VEJIGA
+
+opciones("VejigaContenido","VejigaContenido",[
+"En repleción",
+"Insuficientemente llena",
+"Vacía"
+]);
+
+opciones("VejigaParedes","VejigaParedes",[
+"Finas",
+"Engrosadas"
+]);
+
+[
+"VejigaLitiasis",
+"VejigaPolipos",
+"VejigaDiverticulos",
+"VejigaTumores",
+"VejigaInfiltracion",
+"LiquidoEnFSD"
+].forEach(function(id){
+opciones(id,id,["Sí","No"]);
+});
+
+// ÚTERO
+
+opciones("UteroPosicion","UteroPosicion",[
+"Central",
+"Retroversión",
+"Anteversión",
+"Lateralizado a la derecha",
+"Lateralizado a la izquierda"
+]);
+
+opciones("UteroAspecto","UteroAspecto",[
+"Homogéneo",
+"Heterogéneo"
+]);
+
+seleccionLibre("UteroDimensiones");
+
+opciones("UteroTamano","UteroTamano",[
+"Normal",
+"Pequeño",
+"Grande"
+]);
+
+opciones("Endometrio","Endometrio",[
+"Engrosado",
+"Trilaminar",
+"Lineal"
+]);
+
+opciones("Anexos","Anexos",[
+"No visible",
+"Normales",
+"Con actividad folicular normal",
+"Con proceso inflamatorio",
+"Con proceso tumoral"
+]);
+
+// EXPLICACIONES: LA LÍNEA SIEMPRE SE CONSERVA.
+// Si hay texto, se escribe sobre ella.
+
+[
+"VejigaParedesExplicacion",
+"VejigaLitiasisExplicacion",
+"VejigaPoliposExplicacion",
+"VejigaDiverticulosExplicacion",
+"VejigaTumoresExplicacion",
+"VejigaInfiltracionExplicacion",
+"UteroPosicionExplicacion",
+"UteroAspectoExplicacion",
+"UteroDimensionesExplicacion",
+"UteroTamanoExplicacion",
+"EndometrioExplicacion",
+"AnexosExplicacion",
+"LiquidoEnFSDExplicacion"
+].forEach(function(id){
+document.getElementById(id).textContent=V(id);
+});
+
+})();
 </script>
 
 </body>
