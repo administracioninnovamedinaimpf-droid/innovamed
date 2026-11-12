@@ -4,658 +4,765 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Informe Ecográfico Ginecológico</title>
+<title>Consolidado Institucional - Innovamed</title>
 
 <style>
-:root{
-  --azul:#174d70;
-  --azul2:#123b57;
-  --linea:#687782;
-  --texto:#202830;
+:root {
+  --azul: #174d75;
+  --azul2: #276b96;
+  --claro: #e8f0f6;
+  --borde: #aab9c5;
 }
 
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  padding:20px;
-  background:#edf1f4;
-  color:var(--texto);
-  font-family:Arial,Helvetica,sans-serif;
+body {
+  margin: 0;
+  padding: 20px;
+  background: #edf1f4;
+  font-family: Arial, sans-serif;
+  color: #172b3a;
 }
 
-.page{
-  width:8.5in;
-  min-height:11in;
-  margin:auto;
-  padding:.48in .58in .55in;
-  background:white;
-  box-shadow:0 2px 14px rgba(20,45,60,.14);
+.panel {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px;
+  background: white;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px #00000012;
 }
 
-.membrete{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
-  margin-bottom:7px;
+.controles {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.membrete td{
-  border:0;
-  padding:0;
-  vertical-align:middle;
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.logo-celda{
-  width:16%;
-  text-align:center;
+label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--azul);
 }
 
-.logo{
-  width:75px;
-  height:65px;
-  object-fit:contain;
-  display:block;
-  margin:auto;
+input {
+  padding: 9px;
+  border: 1px solid #b8c6d0;
+  border-radius: 5px;
 }
 
-.institucion{
-  width:54%;
-  text-align:center;
-  color:#172f46;
-  font-size:10px;
-  line-height:1.35;
-  font-weight:bold;
-  padding:0 5px!important;
+button {
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--azul);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.institucion .nombre{
-  display:block;
-  font-size:12px;
-  color:var(--azul);
-  line-height:1.25;
+button:hover { background: var(--azul2); }
+button:disabled {
+  background: #9aaab5;
+  cursor: not-allowed;
+  opacity: .75;
+}
+#btnConfirmar {
+  background: #276b58;
+}
+#btnConfirmar:hover:not(:disabled) {
+  background: #1e5748;
+}
+.resumen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+.metrica {
+  min-width: 135px;
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #f7fafc;
+}
+.metrica strong {
+  display: block;
+  color: var(--azul);
+  font-size: 20px;
+  line-height: 1.2;
+}
+.metrica span {
+  display: block;
+  margin-top: 3px;
+  color: #536575;
+  font-size: 11px;
+  font-weight: bold;
+}
+#estado {
+  font-size: 12px;
+  margin-bottom: 14px;
+  color: #536575;
 }
 
-.regla{
-  border-top:2px solid #526575;
-  margin:4px 0 10px;
+.documento {
+  background: white;
+  overflow-x: auto;
 }
 
-.titulo{
-  text-align:center;
-  font-size:13px;
-  font-weight:bold;
-  margin:0 0 12px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-.datos{
-  display:grid;
-  grid-template-columns:1.65fr .72fr 1fr;
-  gap:9px 13px;
-  margin-bottom:12px;
-  font-size:10.5px;
+th, td {
+  border: 1px solid var(--borde);
+  padding: 4px 3px;
+  font-size: 8px;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
-.dato{
-  display:flex;
-  align-items:baseline;
-  gap:4px;
-  min-width:0;
+thead { display: table-header-group; }
+
+.grupo th {
+  background: var(--azul);
+  color: white;
+  font-size: 9px;
+  padding: 6px 2px;
 }
 
-.dato strong{white-space:nowrap}
-
-.valor{
-  flex:1;
-  min-width:15px;
-  min-height:16px;
-  border-bottom:1px solid var(--linea);
-  padding:0 2px 1px;
-  overflow-wrap:anywhere;
+.columnas th {
+  background: var(--claro);
+  color: #173d59;
+  font-size: 7px;
+  font-weight: bold;
 }
 
-.intro{
-  font-size:10.5px;
-  margin:8px 0;
+tbody tr:nth-child(even) { background: #f2f6f9; }
+
+tbody tr { break-inside: avoid; }
+
+.check { font-size: 12px; }
+
+.membrete {
+  width: 100%;
+  border: 0;
+  margin-bottom: 8px;
 }
 
-.seccion{
-  margin-bottom:9px;
-  break-inside:avoid;
-  page-break-inside:avoid;
+.membrete td {
+  border: 0;
+  vertical-align: middle;
 }
 
-.seccion-titulo{
-  color:var(--azul2);
-  font-size:11px;
-  font-weight:bold;
-  text-transform:uppercase;
-  margin:9px 0 5px;
-  padding-bottom:3px;
-  border-bottom:1px solid #9aabb7;
+.logo {
+  width: 75px;
+  height: 65px;
+  object-fit: contain;
 }
 
-.item{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:baseline;
-  gap:2px 5px;
-  margin:5px 0;
-  font-size:10px;
-  line-height:1.4;
-  break-inside:avoid;
-  page-break-inside:avoid;
+.logo-celda { width: 14%; }
+
+.institucion {
+  text-align: center;
+  color: #172f46;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: bold;
 }
 
-.item-label{font-weight:bold}
-
-.opciones{
-  display:inline;
-  line-height:1.5;
+.institucion .nombre {
+  font-size: 13px;
+  color: var(--azul);
 }
 
-.opcion{
-  white-space:nowrap;
-  margin-right:5px;
+.titulo {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--azul);
+  margin: 8px 0;
 }
 
-.marca{
-  display:inline-block;
-  min-width:13px;
-  text-align:center;
-  font-weight:bold;
+/* Filas del formato vacío */
+.fila-vacia td {
+  height: 32px;
+  background: white !important;
 }
 
-.linea-explicacion{
-  flex:1 1 100%;
-  min-height:18px;
-  border-bottom:1px solid var(--linea);
-  padding:1px 2px 2px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  line-height:1.4;
-}
+@media print {
 
-.linea-simple{
-  flex:1 1 150px;
-  min-height:18px;
-  border-bottom:1px solid var(--linea);
-  padding:0 2px 2px;
-  overflow-wrap:anywhere;
-}
+  @page {
+    size: 13in 8.5in;
+    margin: 9mm 6mm 20mm 6mm;
 
-.etiqueta-conclusion{
-  font-weight:bold;
-  font-size:10.5px;
-  margin:12px 0 4px;
-}
-
-.conclusiones{
-  min-height:95px;
-  border-bottom:1px solid var(--linea);
-  background:repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 19px,
-    var(--linea) 19px,
-    var(--linea) 20px
-  );
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  font-size:10.5px;
-  line-height:20px;
-  padding:0 2px;
-}
-
-.medico{
-  display:flex;
-  align-items:baseline;
-  gap:5px;
-  margin-top:18px;
-  font-size:10px;
-}
-
-.medico .linea{
-  flex:1;
-  min-height:18px;
-  border-bottom:1px solid var(--linea);
-}
-
-.firma{
-  width:190px;
-  margin:25px 0 0 auto;
-  padding-top:27px;
-  border-top:1px solid #333;
-  text-align:center;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.botones{
-  display:flex;
-  justify-content:center;
-  margin:18px auto 25px;
-}
-
-button{
-  border:0;
-  border-radius:5px;
-  padding:11px 20px;
-  background:var(--azul);
-  color:white;
-  font-size:13px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-@media print{
-  body{
-    background:white!important;
-    margin:0!important;
-    padding:0!important;
-  }
-
-  .page{
-    width:auto!important;
-    min-height:0!important;
-    margin:0!important;
-    padding:0!important;
-    box-shadow:none!important;
-  }
-
-  .botones{display:none!important}
-
-  .seccion,.item,.medico,.firma{
-    break-inside:avoid!important;
-    page-break-inside:avoid!important;
-  }
-
-  @page{
-    size:letter portrait;
-    margin:12mm 14mm 17mm 14mm;
-
-    @bottom-center{
-      content:"REPÚBLICA BOLIVARIANA DE VENEZUELA · ALCALDÍA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA";
-      font-family:Arial,sans-serif;
-      font-size:7px;
-      color:#526575;
-      border-top:1px solid #aab9c5;
-      padding-top:3px;
+    @bottom-center {
+      content: "REPÚBLICA BOLIVARIANA DE VENEZUELA · ALCALDÍA DEL MUNICIPIO SUCRE DEL ESTADO BOLIVARIANO DE MIRANDA";
+      font-family: Arial, sans-serif;
+      font-size: 7px;
+      color: #526575;
+      border-top: 1px solid #aab9c5;
+      padding-top: 3px;
     }
   }
+
+  html, body {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .panel {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .controles,
+  #estado,
+  .resumen {
+    display: none !important;
+  }
+
+  .documento {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #tablaConsolidado {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  #tablaConsolidado thead {
+    display: table-header-group !important;
+  }
+
+  #tablaConsolidado tfoot {
+    display: table-footer-group !important;
+  }
+
+  #tablaConsolidado tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  #tablaConsolidado th,
+  #tablaConsolidado td {
+    font-size: 6.5px !important;
+    padding: 3px 2px !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    vertical-align: middle;
+  }
+
+  .membrete {
+    width: 100% !important;
+    margin-bottom: 5px !important;
+  }
+
+  .logo {
+    object-fit: contain !important;
+  }
+
+  /* Formato en blanco: filas amplias y sin sombreado */
+  body.formato-vacio #tablaConsolidado tbody tr.fila-vacia td {
+    height: 32px !important;
+    background: white !important;
+  }
+
 }
 </style>
 </head>
 
 <body>
+<div class="panel">
 
-<div class="page" id="informe-content">
+  <div class="controles">
 
-<table style="width:100%;border-collapse:collapse">
-<thead>
-<tr>
-<td>
+    <div class="campo">
+      <label for="desde">FECHA DESDE</label>
+      <input type="date" id="desde">
+    </div>
 
-<table class="membrete">
-<tr>
+    <div class="campo">
+      <label for="hasta">FECHA HASTA</label>
+      <input type="date" id="hasta">
+    </div>
 
-<td class="logo-celda">
-<img class="logo"
-src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
-alt="Logo izquierdo">
-</td>
+    <div id="googleBtn"></div>
 
-<td class="institucion">
-<span class="nombre">
-CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA AYALA
-</span>
-</td>
+    <button onclick="prepararConsulta()">
+      Consultar consolidado
+    </button>
 
-<td class="logo-celda">
-<img class="logo"
-src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
-alt="Logo central">
-</td>
+    <button id="btnConfirmar" onclick="confirmarEntrega()" disabled>
+      Confirmar entrega de pendientes
+    </button>
 
-<td class="logo-celda">
-<img class="logo"
-src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
-alt="Logo derecho">
-</td>
+    <button onclick="window.print()">
+      Imprimir / PDF
+    </button>
 
-</tr>
-</table>
+    <button onclick="imprimirFormatoVacio()">
+      Formato en blanco (15 filas)
+    </button>
 
-<div class="regla"></div>
+  </div>
 
-<h1 class="titulo">INFORME ECOGRÁFICO GINECOLÓGICO</h1>
+  <div id="estado">
+    Seleccione un período para preparar la consulta.
+  </div>
 
-<div class="datos">
+  <div id="resumen" class="resumen" hidden>
+    <div class="metrica"><strong id="totalRegistros">0</strong><span>TOTAL DE REGISTROS</span></div>
+    <div class="metrica"><strong id="totalPendientes">0</strong><span>PENDIENTES</span></div>
+    <div class="metrica"><strong id="totalEntregados">0</strong><span>ENTREGADOS</span></div>
+  </div>
 
-<div class="dato">
-<strong>PACIENTE:</strong>
-<span class="valor" id="Paciente"></span>
-</div>
+  <div class="documento">
 
-<div class="dato">
-<strong>EDAD:</strong>
-<span class="valor" id="Edad"></span>
-</div>
+    <table id="tablaConsolidado">
 
-<div class="dato">
-<strong>CÉDULA:</strong>
-<span class="valor" id="Cedula"></span>
-</div>
+      <thead>
 
-<div class="dato">
-<strong>FECHA:</strong>
-<span class="valor" id="Fecha"></span>
-</div>
+        <tr>
+          <td colspan="30">
 
-<div class="dato" style="grid-column:span 2">
-<strong>CENTRO:</strong>
-<span class="valor" id="CentroDeSalud"></span>
-</div>
+            <table class="membrete">
+              <tr>
 
-</div>
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb"
+                    alt="Logotipo izquierdo">
+                </td>
 
-<p class="intro">El estudio ultrasonográfico evidencia:</p>
+                <td class="institucion">
+                  <span class="nombre">
+                    CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA AYALA
+                  </span>
+                </td>
 
-</td>
-</tr>
-</thead>
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ"
+                    alt="Logotipo central">
+                </td>
 
-<tbody>
-<tr>
-<td>
+                <td class="logo-celda">
+                  <img class="logo"
+                    src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL"
+                    alt="Logotipo derecho">
+                </td>
 
-<!-- VEJIGA -->
+              </tr>
+            </table>
 
-<div class="seccion">
+            <div class="titulo">
+              ATENCIÓN MÉDICA
+            </div>
 
-<div class="seccion-titulo">1. VEJIGA</div>
+          </td>
+        </tr>
 
-<div class="item">
-<strong class="item-label">Contenido:</strong>
-<span class="opciones" id="VejigaContenido"></span>
-</div>
+        <tr class="grupo">
+          <th colspan="18">INFORMACIÓN DEL PACIENTE</th>
+          <th colspan="9">ESTUDIOS Y ATENCIONES REALIZADAS</th>
+          <th colspan="3">COLOCACIÓN DE IMPLANTES</th>
+        </tr>
 
-<div class="item">
-<strong class="item-label">Paredes:</strong>
-<span class="opciones" id="VejigaParedes"></span>
-<div class="linea-explicacion" id="VejigaParedesExplicacion"></div>
-</div>
+        <tr class="columnas">
+          <th>N°</th>
+          <th>ENTREGADO</th>
+          <th>FECHA</th>
+          <th>PARROQUIA</th>
+          <th>COMUNA</th>
+          <th>CONSEJO COMUNAL</th>
+          <th>UBCH</th>
+          <th>NOMBRES</th>
+          <th>APELLIDOS</th>
+          <th>CÉDULA</th>
+          <th>TELÉFONO</th>
+          <th>GÉNERO</th>
+          <th>EDAD</th>
+          <th>EMBARAZADA</th>
+          <th>TIEMPO DE GESTACIÓN</th>
+          <th>DISCAPACIDAD</th>
+          <th>TIPO DE DISCAPACIDAD</th>
+          <th>PATOLOGÍAS</th>
+          <th>CITOLOGÍAS</th>
+          <th>ECOGRAFÍAS GENERAL</th>
+          <th>ECOGRAFÍA GINECOLÓGICA</th>
+          <th>ECOGRAFÍA OBSTÉTRICA</th>
+          <th>LABORATORIOS</th>
+          <th>TOMOGRAFÍAS</th>
+          <th>RESONANCIAS</th>
+          <th>ATENCIÓN GINECOLÓGICA</th>
+          <th>ATENCIÓN OBSTÉTRICA</th>
+          <th>COLOCACIÓN DE IMPLANTES</th>
+          <th>INTRA DÉRMICO</th>
+          <th>INTRA UTERINO</th>
+        </tr>
 
-<div class="item">
-<strong class="item-label">Litiasis:</strong>
-<span class="opciones" id="VejigaLitiasis"></span>
-<div class="linea-explicacion" id="VejigaLitiasisExplicacion"></div>
-</div>
+      </thead>
 
-<div class="item">
-<strong class="item-label">Pólipos:</strong>
-<span class="opciones" id="VejigaPolipos"></span>
-<div class="linea-explicacion" id="VejigaPoliposExplicacion"></div>
-</div>
+      <tbody id="cuerpoTabla">
+        <tr>
+          <td colspan="30" style="padding:20px">
+            La información aparecerá aquí al conectar la consulta.
+          </td>
+        </tr>
+      </tbody>
 
-<div class="item">
-<strong class="item-label">Divertículos:</strong>
-<span class="opciones" id="VejigaDiverticulos"></span>
-<div class="linea-explicacion" id="VejigaDiverticulosExplicacion"></div>
-</div>
+    </table>
 
-<div class="item">
-<strong class="item-label">Tumores:</strong>
-<span class="opciones" id="VejigaTumores"></span>
-<div class="linea-explicacion" id="VejigaTumoresExplicacion"></div>
-</div>
+  </div>
 
-<div class="item">
-<strong class="item-label">Infiltración:</strong>
-<span class="opciones" id="VejigaInfiltracion"></span>
-<div class="linea-explicacion" id="VejigaInfiltracionExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Otros:</strong>
-<div class="linea-simple" id="VejigaOtros"></div>
-</div>
-
-</div>
-
-<!-- UTERO -->
-
-<div class="seccion">
-
-<div class="seccion-titulo">2. ÚTERO</div>
-
-<div class="item">
-<strong class="item-label">Posición:</strong>
-<span class="opciones" id="UteroPosicion"></span>
-<div class="linea-explicacion" id="UteroPosicionExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Aspecto:</strong>
-<span class="opciones" id="UteroAspecto"></span>
-<div class="linea-explicacion" id="UteroAspectoExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Dimensiones:</strong>
-<span class="opciones" id="UteroDimensiones"></span>
-<div class="linea-explicacion" id="UteroDimensionesExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Tamaño:</strong>
-<span class="opciones" id="UteroTamano"></span>
-<div class="linea-explicacion" id="UteroTamanoExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Endometrio:</strong>
-<span class="opciones" id="Endometrio"></span>
-<div class="linea-explicacion" id="EndometrioExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Anexos:</strong>
-<span class="opciones" id="Anexos"></span>
-<div class="linea-explicacion" id="AnexosExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Líquido en FSD:</strong>
-<span class="opciones" id="LiquidoEnFSD"></span>
-<div class="linea-explicacion" id="LiquidoEnFSDExplicacion"></div>
-</div>
-
-<div class="item">
-<strong class="item-label">Otros:</strong>
-<div class="linea-simple" id="UteroOtros"></div>
-</div>
-
-</div>
-
-<!-- CONCLUSIONES -->
-
-<div class="etiqueta-conclusion">CONCLUSIONES:</div>
-
-<div class="conclusiones" id="Conclusiones"></div>
-
-<div class="medico">
-<strong>Nombre del médico que realiza el estudio:</strong>
-<span class="linea" id="Medico"></span>
-</div>
-
-<div class="firma">FIRMA Y SELLO</div>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-
-<div class="botones">
-<button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
 </div>
 
 <script>
-(function(){
+const GOOGLE_CLIENT_ID = "53673886985-s8pl3jvo95m3b097m3es1urbt0sv8vvv.apps.googleusercontent.com";
+const WORKER_URL = "https://innovamed-consolidado-api.administracion-innovamed-inaimpf.workers.dev/";
 
-"use strict";
+let idToken = "";
+let contenidoOriginal = null;
+let registrosActuales = [];
+let fechasConsulta = { desde: "", hasta: "" };
 
-const q=new URLSearchParams(window.location.search);
+const estado = document.getElementById("estado");
+const cuerpo = document.getElementById("cuerpoTabla");
+const botonConfirmar = document.getElementById("btnConfirmar");
+const resumen = document.getElementById("resumen");
 
-function V(k){
-return (q.get(k)||"").trim();
+const CAMPOS_VISIBLES = [
+  "N°",
+  "ENTREGADO",
+  "FECHA",
+  "PARROQUIA",
+  "COMUNA",
+  "CONSEJO COMUNAL",
+  "UBCH",
+  "NOMBRES",
+  "APELLIDOS",
+  "CEDULA",
+  "TELEFONO",
+  "GENERO",
+  "EDAD",
+  "EMBARAZADA",
+  "TIEMPO DE GESTACIÓN",
+  "DISCAPACIDAD",
+  "TIPO DE DISCAPACIDAD",
+  "PATOLOGIAS",
+  "CITOLOGIAS",
+  "ECOGRAFIAS GENERAL",
+  "ECOGRAFIA GINECOLOGICO",
+  "ECOGRAFIA OBSTETRICA",
+  "LABORATORIOS",
+  "TOMOGRAFIAS",
+  "RESONANCIAS",
+  "ATENCION GINECOLOGICA",
+  "ATENCION OBSTETRICA",
+  "COLOCACION DE IMPLANTES",
+  "INTRA DERMICO",
+  "INTRA UTERINO"
+];
+
+function cargarGoogle() {
+  const script = document.createElement("script");
+  script.src = "https://accounts.google.com/gsi/client";
+  script.async = true;
+  script.defer = true;
+
+  script.onload = () => {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: respuestaGoogle
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("googleBtn"),
+      {
+        theme: "outline",
+        size: "large",
+        text: "signin_with",
+        locale: "es"
+      }
+    );
+  };
+
+  script.onerror = () => {
+    estado.textContent = "No se pudo cargar el inicio de sesión de Google.";
+  };
+
+  document.head.appendChild(script);
 }
 
-function norm(s){
-return String(s||"")
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"")
-.toLowerCase().trim();
+function respuestaGoogle(respuesta) {
+  idToken = respuesta.credential;
+  estado.textContent = "Sesión de Google iniciada. Ya puedes consultar el consolidado.";
 }
 
-function texto(id,key){
-document.getElementById(id).textContent=V(key||id);
+function prepararConsulta() {
+  const desde = document.getElementById("desde").value;
+  const hasta = document.getElementById("hasta").value;
+
+  if (!idToken) {
+    estado.textContent = "Primero debes iniciar sesión con Google.";
+    return;
+  }
+  if (!desde || !hasta) {
+    estado.textContent = "Debe seleccionar ambas fechas.";
+    return;
+  }
+  if (desde > hasta) {
+    estado.textContent = "La fecha inicial no puede ser posterior a la final.";
+    return;
+  }
+
+  fechasConsulta = { desde, hasta };
+  consultarConsolidado();
 }
 
-function linea(id,key){
-document.getElementById(id).textContent=V(key||id);
+async function consultarConsolidado() {
+  botonConfirmar.disabled = true;
+  estado.textContent = "Consultando registros. Por favor espera...";
+
+  try {
+    const respuesta = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idToken: idToken,
+        action: "consultar",
+        fechaInicio: fechasConsulta.desde,
+        fechaFin: fechasConsulta.hasta
+      })
+    });
+
+    const resultado = await respuesta.json();
+    if (!respuesta.ok || !resultado.ok) {
+      throw new Error(resultado.error || "No fue posible consultar los registros.");
+    }
+
+    const datos = resultado.data || {};
+    registrosActuales = datos.registros || [];
+    mostrarRegistros(registrosActuales);
+    mostrarResumen(datos);
+
+    botonConfirmar.disabled = Number(datos.pendientes || 0) === 0;
+
+    estado.textContent =
+      "Consulta exitosa: " + (datos.total || 0) +
+      " registros encontrados, desde " + datos.fechaInicio +
+      " hasta " + datos.fechaFin + ".";
+    return true;
+  } catch (error) {
+    console.error(error);
+    registrosActuales = [];
+    mostrarRegistros([]);
+    resumen.hidden = true;
+    botonConfirmar.disabled = true;
+    estado.textContent =
+      error.message || "Error de conexión o autorización. Verifica tu acceso e inténtalo nuevamente.";
+    return false;
+  }
 }
 
-function opciones(id,key,lista){
-const el=document.getElementById(id);
-const elegido=norm(V(key||id));
-el.replaceChildren();
-
-lista.forEach(function(op){
-const s=document.createElement("span");
-s.className="opcion";
-
-const marca=norm(op)===elegido&&elegido?"X":"";
-
-s.textContent=op+" ("+marca+")";
-el.appendChild(s);
-});
+function mostrarResumen(datos) {
+  document.getElementById("totalRegistros").textContent = datos.total || 0;
+  document.getElementById("totalPendientes").textContent = datos.pendientes || 0;
+  document.getElementById("totalEntregados").textContent = datos.entregados || 0;
+  resumen.hidden = false;
 }
 
-function seleccionLibre(id,key){
-const elegido=V(key||id);
-document.getElementById(id).textContent=
-elegido?elegido+" (X)":"( )";
+function estaEntregado(valor) {
+  return valor === true || String(valor).trim().toUpperCase() === "TRUE";
 }
 
-function fecha(f){
-if(!f)return "";
-const m=f.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-return m?m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1]:f;
+function mostrarRegistros(registros) {
+  cuerpo.innerHTML = "";
+
+  if (!registros.length) {
+    const fila = document.createElement("tr");
+    const celda = document.createElement("td");
+    celda.colSpan = 30;
+    celda.textContent = "No hay registros para el período seleccionado.";
+    celda.style.padding = "20px";
+    fila.appendChild(celda);
+    cuerpo.appendChild(fila);
+    return;
+  }
+
+  registros.forEach(registro => {
+    const fila = document.createElement("tr");
+
+    CAMPOS_VISIBLES.forEach((campo, indice) => {
+      const celda = document.createElement("td");
+
+      if (indice === 1) {
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.className = "entregado";
+        check.checked = estaEntregado(registro.ENTREGADO);
+        check.disabled = true;
+        check.style.width = "14px";
+        check.style.height = "14px";
+        check.style.padding = "0";
+        celda.appendChild(check);
+      } else {
+        celda.textContent = registro[campo] ?? "";
+      }
+
+      fila.appendChild(celda);
+    });
+
+    cuerpo.appendChild(fila);
+  });
 }
 
-// IDENTIFICACIÓN
+async function confirmarEntrega() {
+  if (!idToken) {
+    estado.textContent = "La sesión de Google no está activa. Inicia sesión nuevamente.";
+    return;
+  }
 
-texto("Paciente");
-texto("Edad");
-texto("Cedula");
-texto("CentroDeSalud");
-document.getElementById("Fecha").textContent=fecha(V("Fecha"));
+  const pendientes = registrosActuales.filter(registro => !estaEntregado(registro.ENTREGADO));
+  const identificadores = pendientes
+    .map(registro => String(registro.ConsolidadoId ?? "").trim());
 
-// CAMPOS SIMPLES
+  if (!identificadores.length) {
+    estado.textContent = "No hay registros pendientes de entrega en este período.";
+    botonConfirmar.disabled = true;
+    return;
+  }
 
-[
-"VejigaOtros",
-"UteroOtros",
-"Conclusiones",
-"Medico"
-].forEach(function(id){linea(id);});
+  if (identificadores.some(id => !id)) {
+    estado.textContent =
+      "No se puede confirmar: uno o más registros no tienen ConsolidadoId. No se modificó la hoja.";
+    return;
+  }
 
-// VEJIGA
+  const confirmar = window.confirm(
+    "¿Confirmas la entrega de " + identificadores.length +
+    " registros pendientes del período " + fechasConsulta.desde +
+    " al " + fechasConsulta.hasta + "?\n\n" +
+    "Esta acción marcará como ENTREGADO únicamente esos registros en Google Sheets."
+  );
 
-opciones("VejigaContenido","VejigaContenido",[
-"En repleción",
-"Insuficientemente llena",
-"Vacía"
-]);
+  if (!confirmar) return;
 
-opciones("VejigaParedes","VejigaParedes",[
-"Finas",
-"Engrosadas"
-]);
+  botonConfirmar.disabled = true;
+  estado.textContent = "Registrando la entrega. Por favor espera...";
 
-[
-"VejigaLitiasis",
-"VejigaPolipos",
-"VejigaDiverticulos",
-"VejigaTumores",
-"VejigaInfiltracion",
-"LiquidoEnFSD"
-].forEach(function(id){
-opciones(id,id,["Sí","No"]);
-});
+  try {
+    const respuesta = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idToken: idToken,
+        action: "confirmar_entrega",
+        fechaInicio: fechasConsulta.desde,
+        fechaFin: fechasConsulta.hasta,
+        identificadores: identificadores
+      })
+    });
 
-// ÚTERO
+    const resultado = await respuesta.json();
+    if (!respuesta.ok || !resultado.ok) {
+      throw new Error(resultado.error || "No fue posible confirmar la entrega.");
+    }
 
-opciones("UteroPosicion","UteroPosicion",[
-"Central",
-"Retroversión",
-"Anteversión",
-"Lateralizado a la derecha",
-"Lateralizado a la izquierda"
-]);
+    const entrega = resultado.data || {};
+    const actualizados = Number(entrega.actualizados || 0);
+    const yaEntregados = Number(entrega.yaEntregados || 0);
 
-opciones("UteroAspecto","UteroAspecto",[
-"Homogéneo",
-"Heterogéneo"
-]);
+    // Volver a consultar para comprobar el estado real guardado en la hoja.
+    const consultaCorrecta = await consultarConsolidado();
 
-seleccionLibre("UteroDimensiones");
+    if (consultaCorrecta) {
+      estado.textContent =
+        "Entrega procesada. Registros actualizados: " + actualizados +
+        ". Ya estaban entregados: " + yaEntregados +
+        ". Se actualizó la consulta para verificar los estados.";
+    }
+  } catch (error) {
+    console.error(error);
+    estado.textContent =
+      error.message || "Ocurrió un error al confirmar la entrega. Consulta nuevamente antes de repetir la acción.";
+    botonConfirmar.disabled = false;
+  }
+}
 
-opciones("UteroTamano","UteroTamano",[
-"Normal",
-"Pequeño",
-"Grande"
-]);
+/* GENERAR E IMPRIMIR FORMATO EN BLANCO */
 
-opciones("Endometrio","Endometrio",[
-"Engrosado",
-"Trilaminar",
-"Lineal"
-]);
+function imprimirFormatoVacio() {
 
-opciones("Anexos","Anexos",[
-"No visible",
-"Normales",
-"Con actividad folicular normal",
-"Con proceso inflamatorio",
-"Con proceso tumoral"
-]);
+  if (contenidoOriginal !== null) {
+    return;
+  }
 
-// EXPLICACIONES: LA LÍNEA SIEMPRE SE CONSERVA.
-// Si hay texto, se escribe sobre ella.
+  // Guardar temporalmente los registros actuales
+  contenidoOriginal = cuerpo.innerHTML;
 
-[
-"VejigaParedesExplicacion",
-"VejigaLitiasisExplicacion",
-"VejigaPoliposExplicacion",
-"VejigaDiverticulosExplicacion",
-"VejigaTumoresExplicacion",
-"VejigaInfiltracionExplicacion",
-"UteroPosicionExplicacion",
-"UteroAspectoExplicacion",
-"UteroDimensionesExplicacion",
-"UteroTamanoExplicacion",
-"EndometrioExplicacion",
-"AnexosExplicacion",
-"LiquidoEnFSDExplicacion"
-].forEach(function(id){
-document.getElementById(id).textContent=V(id);
-});
+  // Limpiar el cuerpo de la tabla
+  cuerpo.innerHTML = "";
 
-})();
+  // Crear 15 filas con 30 celdas vacías cada una
+  for (let i = 0; i < 15; i++) {
+
+    const fila = document.createElement("tr");
+    fila.className = "fila-vacia";
+
+    for (let j = 0; j < 30; j++) {
+      const celda = document.createElement("td");
+      celda.innerHTML = "&nbsp;";
+      fila.appendChild(celda);
+    }
+
+    cuerpo.appendChild(fila);
+  }
+
+  // Activar estilos específicos del formato vacío
+  document.body.classList.add("formato-vacio");
+
+  // Restaurar los registros al terminar la impresión
+  window.addEventListener("afterprint", restaurarConsolidado, {
+    once: true
+  });
+
+  window.print();
+}
+
+function restaurarConsolidado() {
+
+  if (contenidoOriginal === null) {
+    return;
+  }
+
+  cuerpo.innerHTML = contenidoOriginal;
+  contenidoOriginal = null;
+
+  document.body.classList.remove("formato-vacio");
+}
+
+cargarGoogle();
 </script>
 
 </body>
