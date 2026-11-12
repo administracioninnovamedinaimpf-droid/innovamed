@@ -565,15 +565,18 @@ function norm(s){
 }
 
 function texto(id,key){
-  document.getElementById(id).textContent=V(key||id);
+  const el=document.getElementById(id);
+  if(el) el.textContent=V(key||id);
 }
 
 function linea(id,key){
-  document.getElementById(id).textContent=V(key||id);
+  const el=document.getElementById(id);
+  if(el) el.textContent=V(key||id);
 }
 
 function opciones(id,key,lista){
   const el=document.getElementById(id);
+  if(!el) return;
   const elegido=norm(V(key||id));
   el.replaceChildren();
 
@@ -590,8 +593,8 @@ function opciones(id,key,lista){
 
 function seleccionLibre(id,key){
   const elegido=V(key||id);
-  document.getElementById(id).textContent=
-    elegido?elegido+" (X)":"( )";
+  const el=document.getElementById(id);
+  if(el) el.textContent=elegido?elegido+" (X)":"( )";
 }
 
 function fecha(f){
@@ -607,7 +610,6 @@ function fecha(f){
 texto("Paciente");
 texto("Edad");
 texto("Cedula");
-
 
 document.getElementById("Fecha").textContent=fecha(V("Fecha"));
 
@@ -700,7 +702,8 @@ opciones("Anexos","Anexos",[
   "AnexosExplicacion",
   "LiquidoEnFSDExplicacion"
 ].forEach(function(id){
-  document.getElementById(id).textContent=V(id);
+  const el=document.getElementById(id);
+  if(el) el.textContent=V(id);
 });
 
 })();
