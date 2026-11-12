@@ -70,7 +70,43 @@ button {
 }
 
 button:hover { background: var(--azul2); }
-
+button:disabled {
+  background: #9aaab5;
+  cursor: not-allowed;
+  opacity: .75;
+}
+#btnConfirmar {
+  background: #276b58;
+}
+#btnConfirmar:hover:not(:disabled) {
+  background: #1e5748;
+}
+.resumen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+.metrica {
+  min-width: 135px;
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #f7fafc;
+}
+.metrica strong {
+  display: block;
+  color: var(--azul);
+  font-size: 20px;
+  line-height: 1.2;
+}
+.metrica span {
+  display: block;
+  margin-top: 3px;
+  color: #536575;
+  font-size: 11px;
+  font-weight: bold;
+}
 #estado {
   font-size: 12px;
   margin-bottom: 14px;
@@ -196,7 +232,8 @@ tbody tr { break-inside: avoid; }
   }
 
   .controles,
-  #estado {
+  #estado,
+  .resumen {
     display: none !important;
   }
 
@@ -275,6 +312,10 @@ tbody tr { break-inside: avoid; }
       Consultar consolidado
     </button>
 
+    <button id="btnConfirmar" onclick="confirmarEntrega()" disabled>
+      Confirmar entrega de pendientes
+    </button>
+
     <button onclick="window.print()">
       Imprimir / PDF
     </button>
@@ -287,6 +328,12 @@ tbody tr { break-inside: avoid; }
 
   <div id="estado">
     Seleccione un período para preparar la consulta.
+  </div>
+
+  <div id="resumen" class="resumen" hidden>
+    <div class="metrica"><strong id="totalRegistros">0</strong><span>TOTAL DE REGISTROS</span></div>
+    <div class="metrica"><strong id="totalPendientes">0</strong><span>PENDIENTES</span></div>
+    <div class="metrica"><strong id="totalEntregados">0</strong><span>ENTREGADOS</span></div>
   </div>
 
   <div class="documento">
@@ -396,13 +443,49 @@ const WORKER_URL = "https://innovamed-consolidado-api.administracion-innovamed-i
 
 let idToken = "";
 let contenidoOriginal = null;
+let registrosActuales = [];
+let fechasConsulta = { desde: "", hasta: "" };
 
 const estado = document.getElementById("estado");
 const cuerpo = document.getElementById("cuerpoTabla");
+const botonConfirmar = document.getElementById("btnConfirmar");
+const resumen = document.getElementById("resumen");
+
+const CAMPOS_VISIBLES = [
+  "N°",
+  "ENTREGADO",
+  "FECHA",
+  "PARROQUIA",
+  "COMUNA",
+  "CONSEJO COMUNAL",
+  "UBCH",
+  "NOMBRES",
+  "APELLIDOS",
+  "CEDULA",
+  "TELEFONO",
+  "GENERO",
+  "EDAD",
+  "EMBARAZADA",
+  "TIEMPO DE GESTACIÓN",
+  "DISCAPACIDAD",
+  "TIPO DE DISCAPACIDAD",
+  "PATOLOGIAS",
+  "CITOLOGIAS",
+  "ECOGRAFIAS GENERAL",
+  "ECOGRAFIA GINECOLOGICO",
+  "ECOGRAFIA OBSTETRICA",
+  "LABORATORIOS",
+  "TOMOGRAFIAS",
+  "RESONANCIAS",
+  "ATENCION GINECOLOGICA",
+  "ATENCION OBSTETRICA",
+  "COLOCACION DE IMPLANTES",
+  "INTRA DERMICO",
+  "INTRA UTERINO"
+];
 
 function cargarGoogle() {
   const script = document.createElement("script");
-
   script.src = "https://accounts.google.com/gsi/client";
   script.async = true;
   script.defer = true;
@@ -425,8 +508,7 @@ function cargarGoogle() {
   };
 
   script.onerror = () => {
-    estado.textContent =
-      "No se pudo cargar el inicio de sesión de Google.";
+    estado.textContent = "No se pudo cargar el inicio de sesión de Google.";
   };
 
   document.head.appendChild(script);
@@ -434,9 +516,7 @@ function cargarGoogle() {
 
 function respuestaGoogle(respuesta) {
   idToken = respuesta.credential;
-
-  estado.textContent =
-    "Sesión de Google iniciada. Ya puedes consultar el consolidado.";
+  estado.textContent = "Sesión de Google iniciada. Ya puedes consultar el consolidado.";
 }
 
 function prepararConsulta() {
@@ -444,63 +524,76 @@ function prepararConsulta() {
   const hasta = document.getElementById("hasta").value;
 
   if (!idToken) {
-    estado.textContent =
-      "Primero debes iniciar sesión con Google.";
+    estado.textContent = "Primero debes iniciar sesión con Google.";
     return;
   }
-
   if (!desde || !hasta) {
-    estado.textContent =
-      "Debe seleccionar ambas fechas.";
+    estado.textContent = "Debe seleccionar ambas fechas.";
     return;
   }
-
   if (desde > hasta) {
-    estado.textContent =
-      "La fecha inicial no puede ser posterior a la final.";
+    estado.textContent = "La fecha inicial no puede ser posterior a la final.";
     return;
   }
 
-  estado.textContent =
-    "Consultando registros. Por favor espera...";
+  fechasConsulta = { desde, hasta };
+  consultarConsolidado();
+}
 
-  fetch(WORKER_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      idToken: idToken,
-      fechaInicio: desde,
-      fechaFin: hasta
-    })
-  })
-  .then(async respuesta => {
+async function consultarConsolidado() {
+  botonConfirmar.disabled = true;
+  estado.textContent = "Consultando registros. Por favor espera...";
+
+  try {
+    const respuesta = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idToken: idToken,
+        action: "consultar",
+        fechaInicio: fechasConsulta.desde,
+        fechaFin: fechasConsulta.hasta
+      })
+    });
+
     const resultado = await respuesta.json();
-
     if (!respuesta.ok || !resultado.ok) {
-      throw new Error(
-        "No fue posible consultar los registros."
-      );
+      throw new Error(resultado.error || "No fue posible consultar los registros.");
     }
 
-    return resultado.data;
-  })
-  .then(datos => {
-    mostrarRegistros(datos.registros || []);
+    const datos = resultado.data || {};
+    registrosActuales = datos.registros || [];
+    mostrarRegistros(registrosActuales);
+    mostrarResumen(datos);
+
+    botonConfirmar.disabled = Number(datos.pendientes || 0) === 0;
 
     estado.textContent =
-      "Consulta exitosa: " + datos.total +
-      " registros encontrados, desde " +
-      datos.fechaInicio + " hasta " +
-      datos.fechaFin + ".";
-  })
-  .catch(error => {
+      "Consulta exitosa: " + (datos.total || 0) +
+      " registros encontrados, desde " + datos.fechaInicio +
+      " hasta " + datos.fechaFin + ".";
+    return true;
+  } catch (error) {
     console.error(error);
-
+    registrosActuales = [];
+    mostrarRegistros([]);
+    resumen.hidden = true;
+    botonConfirmar.disabled = true;
     estado.textContent =
-      "Error de conexión o autorización. Verifica tu acceso e inténtalo nuevamente.";
-  });
+      error.message || "Error de conexión o autorización. Verifica tu acceso e inténtalo nuevamente.";
+    return false;
+  }
+}
+
+function mostrarResumen(datos) {
+  document.getElementById("totalRegistros").textContent = datos.total || 0;
+  document.getElementById("totalPendientes").textContent = datos.pendientes || 0;
+  document.getElementById("totalEntregados").textContent = datos.entregados || 0;
+  resumen.hidden = false;
+}
+
+function estaEntregado(valor) {
+  return valor === true || String(valor).trim().toUpperCase() === "TRUE";
 }
 
 function mostrarRegistros(registros) {
@@ -509,12 +602,9 @@ function mostrarRegistros(registros) {
   if (!registros.length) {
     const fila = document.createElement("tr");
     const celda = document.createElement("td");
-
     celda.colSpan = 30;
-    celda.textContent =
-      "No hay registros para el período seleccionado.";
+    celda.textContent = "No hay registros para el período seleccionado.";
     celda.style.padding = "20px";
-
     fila.appendChild(celda);
     cuerpo.appendChild(fila);
     return;
@@ -523,21 +613,18 @@ function mostrarRegistros(registros) {
   registros.forEach(registro => {
     const fila = document.createElement("tr");
 
-    const campos = Object.keys(registro)
-      .filter(campo => campo !== "NOTA");
-
-    campos.forEach((campo, indice) => {
+    CAMPOS_VISIBLES.forEach((campo, indice) => {
       const celda = document.createElement("td");
 
-      if (indice === 1 && campo === "ENTREGADO") {
+      if (indice === 1) {
         const check = document.createElement("input");
-
         check.type = "checkbox";
         check.className = "entregado";
+        check.checked = estaEntregado(registro.ENTREGADO);
+        check.disabled = true;
         check.style.width = "14px";
         check.style.height = "14px";
         check.style.padding = "0";
-
         celda.appendChild(check);
       } else {
         celda.textContent = registro[campo] ?? "";
@@ -548,6 +635,79 @@ function mostrarRegistros(registros) {
 
     cuerpo.appendChild(fila);
   });
+}
+
+async function confirmarEntrega() {
+  if (!idToken) {
+    estado.textContent = "La sesión de Google no está activa. Inicia sesión nuevamente.";
+    return;
+  }
+
+  const pendientes = registrosActuales.filter(registro => !estaEntregado(registro.ENTREGADO));
+  const identificadores = pendientes
+    .map(registro => String(registro.ConsolidadoId ?? "").trim());
+
+  if (!identificadores.length) {
+    estado.textContent = "No hay registros pendientes de entrega en este período.";
+    botonConfirmar.disabled = true;
+    return;
+  }
+
+  if (identificadores.some(id => !id)) {
+    estado.textContent =
+      "No se puede confirmar: uno o más registros no tienen ConsolidadoId. No se modificó la hoja.";
+    return;
+  }
+
+  const confirmar = window.confirm(
+    "¿Confirmas la entrega de " + identificadores.length +
+    " registros pendientes del período " + fechasConsulta.desde +
+    " al " + fechasConsulta.hasta + "?\n\n" +
+    "Esta acción marcará como ENTREGADO únicamente esos registros en Google Sheets."
+  );
+
+  if (!confirmar) return;
+
+  botonConfirmar.disabled = true;
+  estado.textContent = "Registrando la entrega. Por favor espera...";
+
+  try {
+    const respuesta = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idToken: idToken,
+        action: "confirmar_entrega",
+        fechaInicio: fechasConsulta.desde,
+        fechaFin: fechasConsulta.hasta,
+        identificadores: identificadores
+      })
+    });
+
+    const resultado = await respuesta.json();
+    if (!respuesta.ok || !resultado.ok) {
+      throw new Error(resultado.error || "No fue posible confirmar la entrega.");
+    }
+
+    const entrega = resultado.data || {};
+    const actualizados = Number(entrega.actualizados || 0);
+    const yaEntregados = Number(entrega.yaEntregados || 0);
+
+    // Volver a consultar para comprobar el estado real guardado en la hoja.
+    const consultaCorrecta = await consultarConsolidado();
+
+    if (consultaCorrecta) {
+      estado.textContent =
+        "Entrega procesada. Registros actualizados: " + actualizados +
+        ". Ya estaban entregados: " + yaEntregados +
+        ". Se actualizó la consulta para verificar los estados.";
+    }
+  } catch (error) {
+    console.error(error);
+    estado.textContent =
+      error.message || "Ocurrió un error al confirmar la entrega. Consulta nuevamente antes de repetir la acción.";
+    botonConfirmar.disabled = false;
+  }
 }
 
 /* GENERAR E IMPRIMIR FORMATO EN BLANCO */
