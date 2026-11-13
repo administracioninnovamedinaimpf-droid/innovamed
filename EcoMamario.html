@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informe Ecográfico Mamario</title>
+<style>
+:root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
+body{background:#edf1f4;padding:15px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.4in .5in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between}
+
+/* MEMBRETE SUPERIOR */
+.membrete-superior{width:100%;text-align:center;margin-bottom:10px}
+.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 6px}
+.logo{width:75px;height:60px;object-fit:contain}
+.nombre-institucion{color:var(--azul);font-size:12px;font-weight:bold;line-height:1.3;text-align:center;margin:2px 0 1px}
+.siglas{font-size:11.5px;font-weight:bold;color:var(--azul);margin:0 0 6px}
+.regla{border-top:2px solid #526575;margin:4px 0 12px}
+.titulo{font-size:11px;font-weight:bold;text-align:center;margin:10px 0 12px;color:#202830;letter-spacing:.3px}
+
+/* DATOS DEL PACIENTE */
+.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:8px 12px;margin-bottom:12px;font-size:11px}
+.dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
+.valor{flex:1;min-width:15px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
+.intro{font-size:11px;margin:10px 0 8px}
+
+/* SECCIONES CLÍNICAS CON INTERLINEADO 1.5 */
+.cuerpo-informe{flex:1}
+.seccion{margin-bottom:8px;break-inside:avoid;page-break-inside:avoid}
+.seccion-titulo{color:var(--azul2);font-size:11px;font-weight:bold;text-transform:uppercase;margin:6px 0 4px;padding:2px 4px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.3}
+
+.item{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px;margin:3px 0;font-size:10.5px;line-height:1.4;break-inside:avoid;page-break-inside:avoid}
+.item-label{font-weight:bold;white-space:nowrap}
+.opciones{display:inline-flex;flex-wrap:wrap;gap:0 6px;align-items:baseline}
+.opcion{white-space:nowrap}
+.opcion .mark{font-weight:bold;display:inline-block;min-width:7px;text-align:center}
+
+.linea-explicacion{display:inline;font-size:10px;font-style:italic;color:#354957;overflow-wrap:anywhere}
+.espacio-seccion{margin-bottom:10px}
+
+/* CONCLUSIONES */
+.etiqueta-conclusion{font-weight:bold;font-size:11px;margin:8px 0 4px}
+.conclusiones{min-height:40px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 17px,#9aa7b0 17px,#9aa7b0 18px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:10.5px;line-height:18px;padding:0 2px}
+
+/* MÉDICO Y FIRMA (BLOQUE INFERIOR) */
+.bloque-inferior{margin-top:auto;padding-top:12px;break-inside:avoid;page-break-inside:avoid}
+.medico{display:flex;align-items:baseline;gap:6px;margin-bottom:10px;font-size:11px;line-height:1.5}
+.medico span{flex:1;min-height:16px;border-bottom:1px solid var(--linea)}
+.firma{width:170px;margin:0 0 0 auto;padding-top:15px;border-top:1px solid #333;text-align:center;font-size:10.5px;font-weight:bold}
+
+.botones{display:flex;justify-content:center;margin:18px auto 25px}
+button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
+
+@page{size:letter portrait;margin:8mm}
+@media print{
+  html,body{background:#fff!important;margin:0!important;padding:0!important}
+  .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;height:100vh}
+  .botones{display:none!important}
+  .seccion,.item,.bloque-inferior{break-inside:avoid!important;page-break-inside:avoid!important}
+}
+@media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+
+<body>
+<div class="estado" id="estado" style="text-align:center;font:12px Arial,sans-serif;margin:10px auto;color:#8a2d2d;">Cargando informe...</div>
+<div class="page" id="informe-content" style="display:none;">
+
+<div>
+  <!-- MEMBRETE SUPERIOR -->
+  <div class="membrete-superior">
+    <div class="logos">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional izquierdo">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ" alt="Logo institucional central">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional derecho">
+    </div>
+    <div class="nombre-institucion">CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</div>
+    <div class="siglas">(INAIMPF)</div>
+    <div class="regla"></div>
+    <h1 class="titulo">INFORME ECOGRÁFICO MAMARIO</h1>
+  </div>
+
+  <!-- IDENTIFICACIÓN DEL PACIENTE -->
+  <div class="datos">
+    <div class="dato"><b>PACIENTE:</b><span class="valor" id="Paciente"></span></div>
+    <div class="dato"><b>EDAD:</b><span class="valor" id="Edad"></span></div>
+    <div class="dato"><b>CÉDULA:</b><span class="valor" id="Cedula"></span></div>
+    <div class="dato"><b>FECHA:</b><span class="valor" id="Fecha"></span></div>
+  </div>
+
+  <p class="intro">El estudio ultrasonográfico evidencia:</p>
+
+  <!-- CUERPO DEL INFORME -->
+  <div class="cuerpo-informe">
+    
+    <!-- 1. PATRÓN -->
+    <div class="seccion">
+      <div class="seccion-titulo">1. PATRÓN</div>
+      <div class="item">
+        <strong class="item-label">Tipo de patrón:</strong>
+        <span class="opciones" id="Patron"></span>
+        <span class="linea-explicacion" id="PatronDescripcion"></span>
+      </div>
+    </div>
+
+    <!-- 2. MAMA DERECHA -->
+    <div class="seccion">
+      <div class="seccion-titulo">2. MAMA DERECHA</div>
+      <div class="item"><strong class="item-label">Aspecto:</strong><span class="opciones" id="MamaDerechaAspecto"></span><span class="linea-explicacion" id="MamaDerechaAspectoDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Imagen quística:</strong><span class="opciones" id="MamaDerechaImagenQuistica"></span><span class="linea-explicacion" id="MamaDerechaImagenQuisticaDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Distribución / Cantidad:</strong><span class="opciones" id="MamaDerechaUnicaOMultiples"></span></div>
+      <div class="item"><strong class="item-label">Ubicación:</strong><span class="opciones" id="MamaDerechaUbicacion"></span></div>
+      <div class="item"><strong class="item-label">Nódulo:</strong><span class="opciones" id="MamaDerechaNodulo"></span><span class="linea-explicacion" id="MamaDerechaNoduloDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Calcificación:</strong><span class="opciones" id="MamaDerechaCalcificacion"></span><span class="linea-explicacion" id="MamaDerechaCalcificacionDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Ectasia lobulillar:</strong><span class="opciones" id="MamaDerechaEctasiaLobulillar"></span><span class="linea-explicacion" id="MamaDerechaEctasiaLobulillarDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Pezón:</strong><span class="opciones" id="MamaDerechaPezon"></span><span class="linea-explicacion" id="MamaDerechaPezonDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Otras alteraciones:</strong><span class="opciones" id="MamaDerechaOtrasAlteraciones"></span><span class="linea-explicacion" id="MamaDerechaOtrasAlteracionesDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Axila:</strong><span class="opciones" id="MamaDerechaAxila"></span><span class="linea-explicacion" id="MamaDerechaAxilaDescripcion"></span></div>
+    </div>
+
+    <!-- 3. MAMA IZQUIERDA -->
+    <div class="seccion">
+      <div class="seccion-titulo">3. MAMA IZQUIERDA</div>
+      <div class="item"><strong class="item-label">Aspecto:</strong><span class="opciones" id="MamaIzquierdaAspecto"></span><span class="linea-explicacion" id="MamaIzquierdaAspectoDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Imagen quística:</strong><span class="opciones" id="MamaIzquierdaImagenQuistica"></span><span class="linea-explicacion" id="MamaIzquierdaImagenQuisticaDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Distribución / Cantidad:</strong><span class="opciones" id="MamaIzquierdaUnicaOMultiples"></span></div>
+      <div class="item"><strong class="item-label">Ubicación:</strong><span class="opciones" id="MamaIzquierdaUbicacion"></span></div>
+      <div class="item"><strong class="item-label">Nódulo:</strong><span class="opciones" id="MamaIzquierdaNodulo"></span><span class="linea-explicacion" id="MamaIzquierdaNoduloDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Calcificación:</strong><span class="opciones" id="MamaIzquierdaCalcificacion"></span><span class="linea-explicacion" id="MamaIzquierdaCalcificacionDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Ectasia lobulillar:</strong><span class="opciones" id="MamaIzquierdaEctasiaLobulillar"></span><span class="linea-explicacion" id="MamaIzquierdaEctasiaLobulillarDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Pezón:</strong><span class="opciones" id="MamaIzquierdaPezon"></span><span class="linea-explicacion" id="MamaIzquierdaPezonDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Otras alteraciones:</strong><span class="opciones" id="MamaIzquierdaOtrasAlteraciones"></span><span class="linea-explicacion" id="MamaIzquierdaOtrasAlteracionesDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Axila:</strong><span class="opciones" id="MamaIzquierdaAxila"></span><span class="linea-explicacion" id="MamaIzquierdaAxilaDescripcion"></span></div>
+    </div>
+
+    <!-- CONCLUSIONES -->
+    <div class="etiqueta-conclusion">CONCLUSIONES:</div>
+    <div class="conclusiones" id="Conclusiones"></div>
+  </div>
+</div>
+
+<!-- BLOQUE INFERIOR (MÉDICO Y FIRMA) -->
+<div class="bloque-inferior">
+  <div class="medico">
+    <b>Nombre del médico que realiza el estudio:</b>
+    <span id="Medico"></span>
+  </div>
+  <div class="firma">FIRMA Y SELLO</div>
+</div>
+
+</div>
+
+<div class="botones">
+  <button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const API_URL='https://script.google.com/macros/s/AKfycbxhvk0cYM-00HQ49FkhprbfIJoaGEebXNcRLMVbGBaFH70mwzjCTwmeea8vZegoA_er/exec';
+const q=new URLSearchParams(window.location.search), id=q.get('id'), estado=document.getElementById('estado'), contenido=document.getElementById('informe-content');
+
+const opcionesListas={
+  'Patron':['Graso','Fibroglandular','Mixto'],
+  'MamaDerechaAspecto':['Homogéneo','Heterogéneo'],
+  'MamaDerechaImagenQuistica':['Sí','No'],
+  'MamaDerechaUnicaOMultiples':['Única','Múltiples'],
+  'MamaDerechaUbicacion':['CSE','CSI','CIE','CII','Próximo a la areola'],
+  'MamaDerechaNodulo':['Sí','No'],
+  'MamaDerechaCalcificacion':['Sí','No'],
+  'MamaDerechaEctasiaLobulillar':['Sí','No'],
+  'MamaDerechaPezon':['No alterado','Alterado'],
+  'MamaDerechaOtrasAlteraciones':['Sí','No'],
+  'MamaDerechaAxila':['Normal','Presencia de adenopatías'],
+  'MamaIzquierdaAspecto':['Homogéneo','Heterogéneo'],
+  'MamaIzquierdaImagenQuistica':['Sí','No'],
+  'MamaIzquierdaUnicaOMultiples':['Única','Múltiples'],
+  'MamaIzquierdaUbicacion':['CSE','CSI','CIE','CII','Próximo a la areola'],
+  'MamaIzquierdaNodulo':['Sí','No'],
+  'MamaIzquierdaCalcificacion':['Sí','No'],
+  'MamaIzquierdaEctasiaLobulillar':['Sí','No'],
+  'MamaIzquierdaPezon':['No alterado','Alterado'],
+  'MamaIzquierdaOtrasAlteraciones':['Sí','No'],
+  'MamaIzquierdaAxila':['Normal','Presencia de adenopatías']
+};
+
+function norm(s){
+  return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+}
+function unwrap(x){
+  for(let i=0;i<5&&x&&typeof x==='object';i++){
+    if(x.registro&&typeof x.registro==='object')return x.registro;
+    if(x.datos&&typeof x.datos==='object')return x.datos;
+    if(x.data&&typeof x.data==='object')return x.data;
+    if(x.resultado&&typeof x.resultado==='object')return x.resultado;
+  }
+  return x;
+}
+function indexar(d){
+  const m=new Map();
+  Object.keys(d||{}).forEach(k=>m.set(norm(k.replace(/^\uFEFF/,'')),d[k]));
+  return m;
+}
+function get(m,...keys){
+  for(const k of keys){
+    const v=m.get(norm(k));
+    if(v!==undefined&&v!==null&&String(v).trim()!==''&&String(v).trim().toLowerCase()!=='null') return String(v).trim();
+  }
+  return '';
+}
+function fecha(f){
+  if(!f)return "";
+  const m=String(f).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  return m?m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1]:f;
+}
+function renderOpciones(idElemento, valorCelda, lista){
+  const el=document.getElementById(idElemento);
+  if(!el)return;
+  const elegido=norm(valorCelda);
+  el.replaceChildren();
+  lista.forEach(function(op){
+    const s=document.createElement("span");
+    s.className="opcion";
+    const marca=(elegido===norm(op) || elegido.includes(norm(op)))?"X":"";
+    s.innerHTML = op + " (<b>" + marca + "</b>)";
+    el.appendChild(s);
+  });
+}
+
+function render(raw){
+  if(!raw||raw.ok===false){estado.textContent='No se pudo cargar el informe: '+(raw?.error||'respuesta no válida');return;}
+  const d=unwrap(raw);
+  if(!d||typeof d!=='object'||Array.isArray(d)){estado.textContent='El servicio respondió, pero no entregó un registro válido.';return;}
+  const m=indexar(d);
+
+  document.getElementById('Paciente').textContent = get(m,'Nombre y Apellido','Paciente','Nombre del Paciente');
+  document.getElementById('Edad').textContent = get(m,'Edad');
+  document.getElementById('Cedula').textContent = get(m,'Cedula','Cédula');
+  document.getElementById('Fecha').textContent = fecha(get(m,'Fecha'));
+  document.getElementById('Medico').textContent = get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico');
+  document.getElementById('Conclusiones').textContent = get(m,'Conclusiones');
+
+  // Renderizar opciones estructuradas
+  Object.keys(opcionesListas).forEach(function(keyId){
+    const val=get(m, keyId);
+    renderOpciones(keyId, val, opcionesListas[keyId]);
+  });
+
+  // Renderizar descripciones adicionales en línea si existen
+  [
+    'PatronDescripcion',
+    'MamaDerechaAspectoDescripcion', 'MamaDerechaImagenQuisticaDescripcion', 'MamaDerechaNoduloDescripcion', 
+    'MamaDerechaCalcificacionDescripcion', 'MamaDerechaEctasiaLobulillarDescripcion', 'MamaDerechaPezonDescripcion', 
+    'MamaDerechaOtrasAlteracionesDescripcion', 'MamaDerechaAxilaDescripcion',
+    'MamaIzquierdaAspectoDescripcion', 'MamaIzquierdaImagenQuisticaDescripcion', 'MamaIzquierdaNoduloDescripcion', 
+    'MamaIzquierdaCalcificacionDescripcion', 'MamaIzquierdaEctasiaLobulillarDescripcion', 'MamaIzquierdaPezonDescripcion', 
+    'MamaIzquierdaOtrasAlteracionesDescripcion', 'MamaIzquierdaAxilaDescripcion'
+  ].forEach(function(idDesc){
+    const el=document.getElementById(idDesc);
+    if(el){
+      const valDesc = get(m, idDesc);
+      if(valDesc) el.textContent = " — " + valDesc;
+    }
+  });
+
+  estado.style.display='none';
+  contenido.style.display='flex';
+}
+
+window.ecoMamarioCallback=render;
+if(!id){estado.textContent='No se recibió el identificador del informe (id).';return;}
+const s=document.createElement('script');
+s.onerror=()=>{estado.textContent='No fue posible conectar con Apps Script. Verifica la implementación y el acceso de la aplicación web.';};
+s.src=API_URL+'?id='+encodeURIComponent(id)+'&callback=ecoMamarioCallback';
+document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
