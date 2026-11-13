@@ -16,10 +16,10 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 .siglas{font-size:12px;font-weight:bold;color:var(--azul);margin:0 0 6px}
 .regla{border-top:2px solid #526575;margin:4px 0 10px}
 
-/* TÍTULO PRINCIPAL BAJADO */
+/* TÍTULO PRINCIPAL */
 .titulo{font-size:13px;font-weight:bold;text-align:center;margin:16px 0 14px;color:#202830;letter-spacing:.3px}
 
-/* DATOS DEL PACIENTE CON BUENA SEPARACIÓN DEL CONTENIDO */
+/* DATOS DEL PACIENTE */
 .datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:8px 12px;margin-bottom:24px;font-size:12px}
 .dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
 .valor{flex:1;min-width:15px;min-height:18px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
@@ -35,6 +35,10 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 .opciones{display:inline-flex;flex-wrap:wrap;gap:0 6px;align-items:baseline}
 .opcion{white-space:nowrap}
 
+/* LÍNEA DE DOS COLUMNAS EXCLUSIVA PARA LITIASIS Y ECTASIAS */
+.fila-doble{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:4px 0;font-size:11.5px;line-height:1.45;break-inside:avoid;page-break-inside:avoid}
+.sub-item{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 5px}
+
 .linea-explicacion{display:inline;font-size:11px;font-style:italic;color:#354957;overflow-wrap:anywhere}
 
 /* CONCLUSIONES */
@@ -42,7 +46,7 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 .etiqueta-conclusion{font-weight:bold;font-size:12px;margin:0 0 4px}
 .conclusiones{min-height:45px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 18px,#9aa7b0 18px,#9aa7b0 19px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:11.5px;line-height:18px;padding:0 2px}
 
-/* MÉDICO Y FIRMA (BLOQUE INFERIOR) */
+/* MÉDICO Y FIRMA */
 .bloque-inferior{margin-top:auto;padding-top:12px;break-inside:avoid;page-break-inside:avoid}
 .medico{display:flex;align-items:baseline;gap:6px;margin-bottom:10px;font-size:12px;line-height:1.5}
 .medico span{flex:1;min-height:18px;border-bottom:1px solid var(--linea)}
@@ -56,9 +60,9 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
   html,body{background:#fff!important;margin:0!important;padding:0!important}
   .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;height:100vh}
   .botones{display:none!important}
-  .seccion,.item,.bloque-inferior,.bloque-conclusiones{break-inside:avoid!important;page-break-inside:avoid!important}
+  .seccion,.item,.fila-doble,.bloque-inferior,.bloque-conclusiones{break-inside:avoid!important;page-break-inside:avoid!important}
 }
-@media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
+@media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}.fila-doble{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -104,10 +108,19 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
       <div class="item"><strong class="item-label">Ecogenicidad:</strong><span class="opciones" id="RinonDerechoEcogenicidad"></span><span class="linea-explicacion" id="RinonDerechoEcogenicidadDescripcion"></span></div>
       <div class="item"><strong class="item-label">Imágenes expansivas:</strong><span class="opciones" id="RinonDerechoImagenesExpansiva"></span><span class="linea-explicacion" id="RinonDerechoImagenesExpansivaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Relación córtico-medular:</strong><span class="opciones" id="RinonDerechoRelacionCorticomedular"></span><span class="linea-explicacion" id="RinonDerechoRelacionCorticomedularDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonDerechoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeLitiasisDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo Calicial (Litiasis):</strong><span class="opciones" id="RinonDerechoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial1Descripcion"></span></div>
-      <div class="item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonDerechoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeEctasiasDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo Calicial (Ectasias):</strong><span class="opciones" id="RinonDerechoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial2Descripcion"></span></div>
+      
+      <!-- LITIASIS + GRUPO CALICIAL 1 EN LA MISMA LÍNEA (DOS COLUMNAS) -->
+      <div class="fila-doble">
+        <div class="sub-item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonDerechoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeLitiasisDescripcion"></span></div>
+        <div class="sub-item"><strong class="item-label">Grupo Calicial:</strong><span class="opciones" id="RinonDerechoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial1Descripcion"></span></div>
+      </div>
+
+      <!-- ECTASIAS + GRUPO CALICIAL 2 EN LA MISMA LÍNEA (DOS COLUMNAS) -->
+      <div class="fila-doble">
+        <div class="sub-item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonDerechoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeEctasiasDescripcion"></span></div>
+        <div class="sub-item"><strong class="item-label">Grupo Calicial:</strong><span class="opciones" id="RinonDerechoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial2Descripcion"></span></div>
+      </div>
+
       <div class="item"><strong class="item-label">Vasculatura:</strong><span class="opciones" id="RinonDerechoVasculatura"></span><span class="linea-explicacion" id="RinonDerechoVasculaturaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Uréter derecho:</strong><span class="opciones" id="UreterDerecho"></span><span class="linea-explicacion" id="UreterDerechoDescripcion"></span></div>
     </div>
@@ -123,10 +136,19 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
       <div class="item"><strong class="item-label">Ecogenicidad:</strong><span class="opciones" id="RinonIzquierdoEcogenicidad"></span><span class="linea-explicacion" id="RinonIzquierdoEcogenicidadDescripcion"></span></div>
       <div class="item"><strong class="item-label">Imágenes expansivas:</strong><span class="opciones" id="RinonIzquierdoImagenesExpansiva"></span><span class="linea-explicacion" id="RinonIzquierdoImagenesExpansivaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Relación córtico-medular:</strong><span class="opciones" id="RinonIzquierdoRelacionCorticomedular"></span><span class="linea-explicacion" id="RinonIzquierdoRelacionCorticomedularDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonIzquierdoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeLitiasisDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo Calicial (Litiasis):</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial1Descripcion"></span></div>
-      <div class="item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonIzquierdoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeEctasiasDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo Calicial (Ectasias):</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial2Descripcion"></span></div>
+      
+      <!-- LITIASIS + GRUPO CALICIAL 1 EN LA MISMA LÍNEA (DOS COLUMNAS) -->
+      <div class="fila-doble">
+        <div class="sub-item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonIzquierdoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeLitiasisDescripcion"></span></div>
+        <div class="sub-item"><strong class="item-label">Grupo Calicial:</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial1Descripcion"></span></div>
+      </div>
+
+      <!-- ECTASIAS + GRUPO CALICIAL 2 EN LA MISMA LÍNEA (DOS COLUMNAS) -->
+      <div class="fila-doble">
+        <div class="sub-item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonIzquierdoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeEctasiasDescripcion"></span></div>
+        <div class="sub-item"><strong class="item-label">Grupo Calicial:</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial2Descripcion"></span></div>
+      </div>
+
       <div class="item"><strong class="item-label">Vasculatura:</strong><span class="opciones" id="RinonIzquierdoVasculatura"></span><span class="linea-explicacion" id="RinonIzquierdoVasculaturaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Uréter izquierdo:</strong><span class="opciones" id="UreterIzquierdo"></span><span class="linea-explicacion" id="UreterIzquierdoDescripcion"></span></div>
     </div>
