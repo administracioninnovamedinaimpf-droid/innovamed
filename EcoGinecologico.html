@@ -6,28 +6,29 @@
 <style>
 :root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
-body{background:#edf1f4;padding:15px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.35in .5in;background:#fff;box-shadow:0 2px 14px #142d3c24}
+body{background:#edf1f4;padding:15px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.4in .5in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between}
 
 /* MEMBRETE SUPERIOR */
-.membrete-superior{width:100%;text-align:center;margin-bottom:6px}
-.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 4px}
+.membrete-superior{width:100%;text-align:center;margin-bottom:12px}
+.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 6px}
 .logo{width:75px;height:60px;object-fit:contain}
 .nombre-institucion{color:var(--azul);font-size:12px;font-weight:bold;line-height:1.3;text-align:center;margin:2px 0 1px}
-.siglas{font-size:11.5px;font-weight:bold;color:var(--azul);margin:0 0 5px}
-.titulo{font-size:10.5px;font-weight:bold;text-align:center;margin:0 0 8px;color:#202830;letter-spacing:.3px}
-.regla{border-top:2px solid #526575;margin:4px 0 8px}
+.siglas{font-size:11.5px;font-weight:bold;color:var(--azul);margin:0 0 6px}
+.regla{border-top:2px solid #526575;margin:4px 0 14px}
+.titulo{font-size:11px;font-weight:bold;text-align:center;margin:12px 0 16px;color:#202830;letter-spacing:.3px}
 
 /* DATOS DEL PACIENTE */
-.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:8px 12px;margin-bottom:10px;font-size:11px}
+.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:8px 12px;margin-bottom:14px;font-size:11px}
 .dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
 .valor{flex:1;min-width:15px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
-.intro{font-size:11px;margin:6px 0}
+.intro{font-size:11px;margin:12px 0 10px}
 
 /* SECCIONES CLÍNICAS CON INTERLINEADO 1.5 */
-.seccion{margin-bottom:8px;break-inside:avoid;page-break-inside:avoid}
-.seccion-titulo{color:var(--azul2);font-size:11px;font-weight:bold;text-transform:uppercase;margin:8px 0 4px;padding:2px 4px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.3}
+.cuerpo-informe{flex:1}
+.seccion{margin-bottom:12px;break-inside:avoid;page-break-inside:avoid}
+.seccion-titulo{color:var(--azul2);font-size:11px;font-weight:bold;text-transform:uppercase;margin:10px 0 6px;padding:2px 4px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.3}
 
-.item{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px;margin:4px 0;font-size:11px;line-height:1.5;break-inside:avoid;page-break-inside:avoid}
+.item{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px;margin:5px 0;font-size:11px;line-height:1.5;break-inside:avoid;page-break-inside:avoid}
 .item-label{font-weight:bold;white-space:nowrap}
 .opciones{display:inline-flex;flex-wrap:wrap;gap:0 6px;align-items:baseline}
 .opcion{white-space:nowrap}
@@ -35,11 +36,13 @@ body{background:#edf1f4;padding:15px}.page{width:8.5in;min-height:11in;margin:0 
 
 .linea-explicacion{display:inline;font-size:10.5px;font-style:italic;color:#354957;overflow-wrap:anywhere}
 .linea-simple{flex:1 1 150px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 2px 2px;overflow-wrap:anywhere;font-size:11px}
+.espacio-seccion{margin-bottom:18px}
 
-/* MÉDICO Y FIRMA */
-.medico{display:flex;align-items:baseline;gap:6px;margin-top:16px;font-size:11px;line-height:1.5}
+/* MÉDICO Y FIRMA (BLOQUE INFERIOR) */
+.bloque-inferior{margin-top:auto;padding-top:20px;break-inside:avoid;page-break-inside:avoid}
+.medico{display:flex;align-items:baseline;gap:6px;margin-bottom:15px;font-size:11px;line-height:1.5}
 .medico span{flex:1;min-height:16px;border-bottom:1px solid var(--linea)}
-.firma{width:170px;margin:18px 0 0 auto;padding-top:20px;border-top:1px solid #333;text-align:center;font-size:10.5px;font-weight:bold}
+.firma{width:170px;margin:0 0 0 auto;padding-top:20px;border-top:1px solid #333;text-align:center;font-size:10.5px;font-weight:bold}
 
 .botones{display:flex;justify-content:center;margin:18px auto 25px}
 button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
@@ -47,9 +50,9 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
 @page{size:letter portrait;margin:9mm}
 @media print{
   html,body{background:#fff!important;margin:0!important;padding:0!important}
-  .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
+  .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;height:100vh}
   .botones{display:none!important}
-  .seccion,.item,.medico,.firma{break-inside:avoid!important;page-break-inside:avoid!important}
+  .seccion,.item,.bloque-inferior{break-inside:avoid!important;page-break-inside:avoid!important}
 }
 @media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
 </style>
@@ -59,60 +62,70 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
 
 <div class="page" id="informe-content">
 
-<!-- MEMBRETE SUPERIOR -->
-<div class="membrete-superior">
-  <div class="logos">
-    <img class="logo" src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional izquierdo">
-    <img class="logo" src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ" alt="Logo institucional central">
-    <img class="logo" src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional derecho">
+<div>
+  <!-- MEMBRETE SUPERIOR -->
+  <div class="membrete-superior">
+    <div class="logos">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional izquierdo">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ" alt="Logo institucional central">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional derecho">
+    </div>
+    <div class="nombre-institucion">CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</div>
+    <div class="siglas">(INAIMPF)</div>
+    <div class="regla"></div>
+    <h1 class="titulo">INFORME ECOGRÁFICO GINECOLÓGICO</h1>
   </div>
-  <div class="nombre-institucion">CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</div>
-  <div class="siglas">(INAIMPF)</div>
-  <div class="regla"></div>
-  <h1 class="titulo">INFORME ECOGRÁFICO GINECOLÓGICO</h1>
+
+  <!-- IDENTIFICACIÓN DEL PACIENTE -->
+  <div class="datos">
+    <div class="dato"><b>PACIENTE:</b><span class="valor" id="Paciente"></span></div>
+    <div class="dato"><b>EDAD:</b><span class="valor" id="Edad"></span></div>
+    <div class="dato"><b>CÉDULA:</b><span class="valor" id="Cedula"></span></div>
+    <div class="dato"><b>FECHA:</b><span class="valor" id="Fecha"></span></div>
+  </div>
+
+  <p class="intro">El estudio ultrasonográfico evidencia:</p>
+
+  <!-- CUERPO DEL INFORME -->
+  <div class="cuerpo-informe">
+    <!-- VEJIGA -->
+    <div class="seccion">
+      <div class="seccion-titulo">1. VEJIGA</div>
+      <div class="item"><strong class="item-label">Contenido:</strong><span class="opciones" id="VejigaContenido"></span></div>
+      <div class="item"><strong class="item-label">Paredes:</strong><span class="opciones" id="VejigaParedes"></span><span class="linea-explicacion" id="VejigaParedesExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="VejigaLitiasis"></span><span class="linea-explicacion" id="VejigaLitiasisExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Pólipos:</strong><span class="opciones" id="VejigaPolipos"></span><span class="linea-explicacion" id="VejigaPoliposExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Divertículos:</strong><span class="opciones" id="VejigaDiverticulos"></span><span class="linea-explicacion" id="VejigaDiverticulosExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Tumores:</strong><span class="opciones" id="VejigaTumores"></span><span class="linea-explicacion" id="VejigaTumoresExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Infiltración:</strong><span class="opciones" id="VejigaInfiltracion"></span><span class="linea-explicacion" id="VejigaInfiltracionExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Otros:</strong><div class="linea-simple" id="VejigaOtros"></div></div>
+    </div>
+
+    <div class="espacio-seccion"></div>
+
+    <!-- ÚTERO -->
+    <div class="seccion">
+      <div class="seccion-titulo">2. ÚTERO</div>
+      <div class="item"><strong class="item-label">Posición:</strong><span class="opciones" id="UteroPosicion"></span><span class="linea-explicacion" id="UteroPosicionExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Aspecto:</strong><span class="opciones" id="UteroAspecto"></span><span class="linea-explicacion" id="UteroAspectoExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Dimensiones:</strong><span class="opciones" id="UteroDimensiones"></span><span class="linea-explicacion" id="UteroDimensionesExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Tamaño:</strong><span class="opciones" id="UteroTamano"></span><span class="linea-explicacion" id="UteroTamanoExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Endometrio:</strong><span class="opciones" id="Endometrio"></span><span class="linea-explicacion" id="EndometrioExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Anexos:</strong><span class="opciones" id="Anexos"></span><span class="linea-explicacion" id="AnexosExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Líquido en FSD:</strong><span class="opciones" id="LiquidoEnFSD"></span><span class="linea-explicacion" id="LiquidoEnFSDExplicacion"></span></div>
+      <div class="item"><strong class="item-label">Otros:</strong><div class="linea-simple" id="UteroOtros"></div></div>
+    </div>
+  </div>
 </div>
 
-<!-- IDENTIFICACIÓN DEL PACIENTE -->
-<div class="datos">
-  <div class="dato"><b>PACIENTE:</b><span class="valor" id="Paciente"></span></div>
-  <div class="dato"><b>EDAD:</b><span class="valor" id="Edad"></span></div>
-  <div class="dato"><b>CÉDULA:</b><span class="valor" id="Cedula"></span></div>
-  <div class="dato"><b>FECHA:</b><span class="valor" id="Fecha"></span></div>
+<!-- BLOQUE INFERIOR (MÉDICO Y FIRMA) -->
+<div class="bloque-inferior">
+  <div class="medico">
+    <b>Nombre del médico que realiza el estudio:</b>
+    <span id="Medico"></span>
+  </div>
+  <div class="firma">FIRMA Y SELLO</div>
 </div>
-
-<p class="intro">El estudio ultrasonográfico evidencia:</p>
-
-<!-- VEJIGA -->
-<div class="seccion">
-  <div class="seccion-titulo">1. VEJIGA</div>
-  <div class="item"><strong class="item-label">Contenido:</strong><span class="opciones" id="VejigaContenido"></span></div>
-  <div class="item"><strong class="item-label">Paredes:</strong><span class="opciones" id="VejigaParedes"></span><span class="linea-explicacion" id="VejigaParedesExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="VejigaLitiasis"></span><span class="linea-explicacion" id="VejigaLitiasisExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Pólipos:</strong><span class="opciones" id="VejigaPolipos"></span><span class="linea-explicacion" id="VejigaPoliposExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Divertículos:</strong><span class="opciones" id="VejigaDiverticulos"></span><span class="linea-explicacion" id="VejigaDiverticulosExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Tumores:</strong><span class="opciones" id="VejigaTumores"></span><span class="linea-explicacion" id="VejigaTumoresExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Infiltración:</strong><span class="opciones" id="VejigaInfiltracion"></span><span class="linea-explicacion" id="VejigaInfiltracionExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Otros:</strong><div class="linea-simple" id="VejigaOtros"></div></div>
-</div>
-
-<!-- ÚTERO -->
-<div class="seccion">
-  <div class="seccion-titulo">2. ÚTERO</div>
-  <div class="item"><strong class="item-label">Posición:</strong><span class="opciones" id="UteroPosicion"></span><span class="linea-explicacion" id="UteroPosicionExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Aspecto:</strong><span class="opciones" id="UteroAspecto"></span><span class="linea-explicacion" id="UteroAspectoExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Dimensiones:</strong><span class="opciones" id="UteroDimensiones"></span><span class="linea-explicacion" id="UteroDimensionesExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Tamaño:</strong><span class="opciones" id="UteroTamano"></span><span class="linea-explicacion" id="UteroTamanoExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Endometrio:</strong><span class="opciones" id="Endometrio"></span><span class="linea-explicacion" id="EndometrioExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Anexos:</strong><span class="opciones" id="Anexos"></span><span class="linea-explicacion" id="AnexosExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Líquido en FSD:</strong><span class="opciones" id="LiquidoEnFSD"></span><span class="linea-explicacion" id="LiquidoEnFSDExplicacion"></span></div>
-  <div class="item"><strong class="item-label">Otros:</strong><div class="linea-simple" id="UteroOtros"></div></div>
-</div>
-
-<div class="medico">
-  <b>Nombre del médico que realiza el estudio:</b>
-  <span id="Medico"></span>
-</div>
-<div class="firma">FIRMA Y SELLO</div>
 
 </div>
 
