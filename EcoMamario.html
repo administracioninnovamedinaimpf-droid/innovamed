@@ -156,10 +156,21 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
 <script>
 (function(){
 "use strict";
-const API_URL='https://script.google.com/macros/s/AKfycbxhvk0cYM-00HQ49FkhprbfIJoaGEebXNcRLMVbGBaFH70mwzjCTwmeea8vZegoA_er/exec';
-const q=new URLSearchParams(window.location.search), id=q.get('id'), estado=document.getElementById('estado'), contenido=document.getElementById('informe-content');
+const params = new URLSearchParams(window.location.search);
+const estado = document.getElementById('estado');
+const contenido = document.getElementById('informe-content');
 
-const opcionesListas={
+function norm(s){
+  return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+}
+
+function fecha(f){
+  if(!f) return "";
+  const m = String(f).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  return m ? m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1] : f;
+}
+
+const opcionesListas = {
   'Patron':['Graso','Fibroglandular','Mixto'],
   'MamaDerechaAspecto':['Homogéneo','Heterogéneo'],
   'MamaDerechaImagenQuistica':['Sí','No'],
@@ -183,95 +194,55 @@ const opcionesListas={
   'MamaIzquierdaAxila':['Normal','Presencia de adenopatías']
 };
 
-function norm(s){
-  return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
-}
-function unwrap(x){
-  for(let i=0;i<5&&x&&typeof x==='object';i++){
-    if(x.registro&&typeof x.registro==='object')return x.registro;
-    if(x.datos&&typeof x.datos==='object')return x.datos;
-    if(x.data&&typeof x.data==='object')return x.data;
-    if(x.resultado&&typeof x.resultado==='object')return x.resultado;
-  }
-  return x;
-}
-function indexar(d){
-  const m=new Map();
-  Object.keys(d||{}).forEach(k=>m.set(norm(k.replace(/^\uFEFF/,'')),d[k]));
-  return m;
-}
-function get(m,...keys){
-  for(const k of keys){
-    const v=m.get(norm(k));
-    if(v!==undefined&&v!==null&&String(v).trim()!==''&&String(v).trim().toLowerCase()!=='null') return String(v).trim();
-  }
-  return '';
-}
-function fecha(f){
-  if(!f)return "";
-  const m=String(f).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-  return m?m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1]:f;
-}
-function renderOpciones(idElemento, valorCelda, lista){
-  const el=document.getElementById(idElemento);
-  if(!el)return;
-  const elegido=norm(valorCelda);
+function renderOpciones(idElemento, lista){
+  const el = document.getElementById(idElemento);
+  if(!el) return;
+  const valorCelda = params.get(idElemento) || "";
+  const elegido = norm(valorCelda);
   el.replaceChildren();
+
   lista.forEach(function(op){
-    const s=document.createElement("span");
-    s.className="opcion";
-    const marca=(elegido===norm(op) || elegido.includes(norm(op)))?"X":"";
+    const s = document.createElement("span");
+    s.className = "opcion";
+    const marca = (elegido === norm(op) || elegido.includes(norm(op))) ? "X" : "";
     s.innerHTML = op + " (<b>" + marca + "</b>)";
     el.appendChild(s);
   });
 }
 
-function render(raw){
-  if(!raw||raw.ok===false){estado.textContent='No se pudo cargar el informe: '+(raw?.error||'respuesta no válida');return;}
-  const d=unwrap(raw);
-  if(!d||typeof d!=='object'||Array.isArray(d)){estado.textContent='El servicio respondió, pero no entregó un registro válido.';return;}
-  const m=indexar(d);
+// Cargar datos de identificación
+document.getElementById('Paciente').textContent = params.get('Paciente') || "";
+document.getElementById('Edad').textContent = params.get('Edad') || "";
+document.getElementById('Cedula').textContent = params.get('Cedula') || "";
+document.getElementById('Fecha').textContent = fecha(params.get('Fecha') || "");
+document.getElementById('Medico').textContent = params.get('Medico') || "";
+document.getElementById('Conclusiones').textContent = params.get('Conclusiones') || "";
 
-  document.getElementById('Paciente').textContent = get(m,'Nombre y Apellido','Paciente','Nombre del Paciente');
-  document.getElementById('Edad').textContent = get(m,'Edad');
-  document.getElementById('Cedula').textContent = get(m,'Cedula','Cédula');
-  document.getElementById('Fecha').textContent = fecha(get(m,'Fecha'));
-  document.getElementById('Medico').textContent = get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico');
-  document.getElementById('Conclusiones').textContent = get(m,'Conclusiones');
+// Renderizar opciones estructuradas
+Object.keys(opcionesListas).forEach(function(keyId){
+  renderOpciones(keyId, opcionesListas[keyId]);
+});
 
-  // Renderizar opciones estructuradas
-  Object.keys(opcionesListas).forEach(function(keyId){
-    const val=get(m, keyId);
-    renderOpciones(keyId, val, opcionesListas[keyId]);
-  });
+// Renderizar descripciones adicionales en línea
+[
+  'PatronDescripcion',
+  'MamaDerechaAspectoDescripcion', 'MamaDerechaImagenQuisticaDescripcion', 'MamaDerechaNoduloDescripcion', 
+  'MamaDerechaCalcificacionDescripcion', 'MamaDerechaEctasiaLobulillarDescripcion', 'MamaDerechaPezonDescripcion', 
+  'MamaDerechaOtrasAlteracionesDescripcion', 'MamaDerechaAxilaDescripcion',
+  'MamaIzquierdaAspectoDescripcion', 'MamaIzquierdaImagenQuisticaDescripcion', 'MamaIzquierdaNoduloDescripcion', 
+  'MamaIzquierdaCalcificacionDescripcion', 'MamaIzquierdaEctasiaLobulillarDescripcion', 'MamaIzquierdaPezonDescripcion', 
+  'MamaIzquierdaOtrasAlteracionesDescripcion', 'MamaIzquierdaAxilaDescripcion'
+].forEach(function(idDesc){
+  const el = document.getElementById(idDesc);
+  if(el){
+    const valDesc = params.get(idDesc);
+    if(valDesc) el.textContent = " — " + valDesc;
+  }
+});
 
-  // Renderizar descripciones adicionales en línea si existen
-  [
-    'PatronDescripcion',
-    'MamaDerechaAspectoDescripcion', 'MamaDerechaImagenQuisticaDescripcion', 'MamaDerechaNoduloDescripcion', 
-    'MamaDerechaCalcificacionDescripcion', 'MamaDerechaEctasiaLobulillarDescripcion', 'MamaDerechaPezonDescripcion', 
-    'MamaDerechaOtrasAlteracionesDescripcion', 'MamaDerechaAxilaDescripcion',
-    'MamaIzquierdaAspectoDescripcion', 'MamaIzquierdaImagenQuisticaDescripcion', 'MamaIzquierdaNoduloDescripcion', 
-    'MamaIzquierdaCalcificacionDescripcion', 'MamaIzquierdaEctasiaLobulillarDescripcion', 'MamaIzquierdaPezonDescripcion', 
-    'MamaIzquierdaOtrasAlteracionesDescripcion', 'MamaIzquierdaAxilaDescripcion'
-  ].forEach(function(idDesc){
-    const el=document.getElementById(idDesc);
-    if(el){
-      const valDesc = get(m, idDesc);
-      if(valDesc) el.textContent = " — " + valDesc;
-    }
-  });
+estado.style.display = 'none';
+contenido.style.display = 'flex';
 
-  estado.style.display='none';
-  contenido.style.display='flex';
-}
-
-window.ecoMamarioCallback=render;
-if(!id){estado.textContent='No se recibió el identificador del informe (id).';return;}
-const s=document.createElement('script');
-s.onerror=()=>{estado.textContent='No fue posible conectar con Apps Script. Verifica la implementación y el acceso de la aplicación web.';};
-s.src=API_URL+'?id='+encodeURIComponent(id)+'&callback=ecoMamarioCallback';
-document.head.appendChild(s);
 })();
 </script>
 </body>
