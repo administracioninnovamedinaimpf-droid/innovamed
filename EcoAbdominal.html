@@ -1,53 +1,187 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Informe Ecográfico Abdominal</title>
+
 <style>
-:root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
+:root{
+--azul:#174d70;
+--azul2:#123b57;
+--linea:#687782;
+--texto:#202830;
+--claro:#eaf1f6;
+}
 *{box-sizing:border-box}
-body{margin:0;padding:16px;background:#edf1f4;color:var(--texto);font-family:Arial,Helvetica,sans-serif}
-.page{width:8.5in;min-height:11in;margin:auto;padding:.34in .48in .48in;background:#fff;box-shadow:0 2px 14px rgba(20,45,60,.14)}
+body{
+margin:0;padding:16px;background:#edf1f4;
+color:var(--texto);font-family:Arial,Helvetica,sans-serif
+}
+.page{
+width:8.5in;min-height:11in;margin:auto;
+padding:.34in .48in .48in;background:#fff;
+box-shadow:0 2px 14px rgba(20,45,60,.14)
+}
 .membrete{text-align:center;margin-bottom:6px}
-.logos{display:flex;justify-content:space-between;align-items:center;margin:0 auto 3px}
+.logos{
+display:flex;justify-content:space-between;
+align-items:center;margin:0 auto 3px
+}
 .logos img{width:75px;height:55px;object-fit:contain}
-.institucion{color:var(--azul);font-size:11px;font-weight:bold;line-height:1.25;margin:2px 0}
-.siglas{font-size:10px;font-weight:bold;color:var(--azul);margin-bottom:4px}
+.institucion{
+color:var(--azul);font-size:11px;font-weight:bold;
+line-height:1.25;margin:2px 0
+}
+.siglas{
+font-size:10px;font-weight:bold;color:var(--azul);
+margin-bottom:4px
+}
 .rule{border-top:2px solid #526575;margin:4px 0 6px}
-h1{font-size:11px;color:#202830;text-align:center;margin:0 0 7px;letter-spacing:.25px}
-.datos{display:grid;grid-template-columns:2fr .65fr 1fr .8fr .8fr;gap:6px 10px;margin:7px 0 8px;font-size:9px}
+h1{
+font-size:11px;color:#202830;text-align:center;
+margin:0 0 7px;letter-spacing:.25px
+}
+.datos{
+display:grid;grid-template-columns:2fr .65fr 1fr .8fr .8fr;
+gap:6px 10px;margin:7px 0 8px;font-size:9px
+}
 .dato{display:flex;align-items:baseline;gap:3px;min-width:0}
 .dato b{white-space:nowrap}
-.valor{flex:1;min-width:8px;min-height:13px;border-bottom:1px solid var(--linea);padding:0 2px;overflow-wrap:anywhere}
+.valor{
+flex:1;min-width:8px;min-height:13px;
+border-bottom:1px solid var(--linea);
+padding:0 2px;overflow-wrap:anywhere
+}
 .intro{font-size:9px;margin:5px 0 7px}
-.columnas{display:grid;grid-template-columns:1fr 1fr;gap:0 13px;align-items:start}
+.columnas{
+display:grid;grid-template-columns:1fr 1fr;
+gap:0 13px;align-items:start
+}
 .sec{margin:0 0 6px;break-inside:avoid;page-break-inside:avoid}
-.sec h2{font-size:9px;color:var(--azul2);margin:5px 0 3px;padding:3px 5px;background:var(--claro);border-left:3px solid var(--azul);letter-spacing:.1px}
-.row{display:flex;align-items:baseline;gap:3px;font-size:8px;line-height:1.32;margin:2px 0;min-height:13px;break-inside:avoid}
+.sec h2{
+font-size:9px;color:var(--azul2);
+margin:5px 0 3px;padding:3px 5px;
+background:var(--claro);
+border-left:3px solid var(--azul);
+letter-spacing:.1px
+}
+.row{
+display:flex;align-items:baseline;flex-wrap:wrap;
+gap:2px 4px;font-size:8px;line-height:1.32;
+margin:2px 0;min-height:13px;
+break-inside:avoid
+}
 .row strong{font-weight:bold;white-space:nowrap}
-.opts{display:inline-flex;flex-wrap:wrap;gap:0 4px;align-items:baseline}
+.opts{
+display:inline-flex;flex-wrap:wrap;
+gap:0 4px;align-items:baseline
+}
 .opt{white-space:nowrap}
-.opt .mark{font-weight:bold;display:inline-block;min-width:8px;text-align:center}
-.blank{flex:1;min-width:12px;border-bottom:1px solid #aab4bc;height:10px}
-.row.free .value{flex:1;min-width:20px;border-bottom:1px solid var(--linea);min-height:12px}
-.conclusion-label{font-size:9px;font-weight:bold;margin:8px 0 3px}
-.conclusion{min-height:42px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 18px,#9aa7b0 18px,#9aa7b0 19px);white-space:pre-wrap;font-size:9px;line-height:19px;padding:0 2px}
-.medico{display:flex;gap:5px;align-items:baseline;font-size:8.5px;margin-top:9px}
-.medico span{flex:1;min-height:14px;border-bottom:1px solid var(--linea)}
-.firma{width:160px;margin:17px 0 0 auto;padding-top:19px;border-top:1px solid #333;text-align:center;font-size:8.5px;font-weight:bold}
-.membrete-inferior{width:100%;border-collapse:collapse;table-layout:fixed;margin-top:13px;font-size:7px;color:#202830}
-.membrete-inferior td{border:1px solid #53616c;padding:3px 2px;vertical-align:middle;text-align:center;overflow-wrap:anywhere}
+.opt .mark{
+font-weight:bold;display:inline-block;
+min-width:8px;text-align:center
+}
+.blank{
+flex:1;min-width:12px;
+border-bottom:1px solid #aab4bc;height:10px
+}
+.desc{
+display:inline;font-size:7.7px;color:#26343e;
+font-style:italic;overflow-wrap:anywhere
+}
+.desc:empty{display:none}
+.desc:not(:empty)::before{content:" ";white-space:pre}
+.measurements{
+display:flex;flex-wrap:wrap;gap:3px 7px;
+align-items:baseline;font-size:8px;margin:3px 0
+}
+.measure{
+display:inline-flex;gap:2px;
+align-items:baseline;white-space:nowrap
+}
+.measure b{font-weight:bold}
+.measure input{
+width:42px;border:0;border-bottom:1px solid var(--linea);
+border-radius:0;font:inherit;text-align:center;
+padding:0 1px;background:transparent;outline:none
+}
+.conclusion-label{
+font-size:9px;font-weight:bold;margin:8px 0 3px
+}
+.conclusion{
+min-height:42px;border-bottom:1px solid var(--linea);
+background:repeating-linear-gradient(
+to bottom,transparent 0,transparent 18px,
+#9aa7b0 18px,#9aa7b0 19px
+);
+white-space:pre-wrap;font-size:9px;
+line-height:19px;padding:0 2px
+}
+.medico{
+display:flex;gap:5px;align-items:baseline;
+font-size:8.5px;margin-top:9px
+}
+.medico span{
+flex:1;min-height:14px;border-bottom:1px solid var(--linea)
+}
+.firma{
+width:160px;margin:17px 0 0 auto;
+padding-top:19px;border-top:1px solid #333;
+text-align:center;font-size:8.5px;font-weight:bold
+}
+.membrete-inferior{
+width:100%;border-collapse:collapse;table-layout:fixed;
+margin-top:13px;font-size:7px;color:#202830
+}
+.membrete-inferior td{
+border:1px solid #53616c;padding:3px 2px;
+vertical-align:middle;text-align:center;overflow-wrap:anywhere
+}
 .direccion{font-weight:bold;line-height:1.2}
 .botones{display:flex;justify-content:center;margin:15px auto 20px}
-button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
-@media print{html,body{margin:0!important;padding:0!important;background:#fff!important}.page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important}.botones{display:none!important}.sec,.row,.firma{break-inside:avoid!important;page-break-inside:avoid!important}@page{size:letter portrait;margin:9mm 11mm 17mm}}
-</style></head><body>
+button{
+border:0;border-radius:5px;padding:10px 18px;
+background:var(--azul);color:#fff;
+font-size:12px;font-weight:bold;cursor:pointer
+}
+@media print{
+html,body{
+margin:0!important;padding:0!important;background:#fff!important
+}
+.page{
+width:auto!important;min-height:0!important;
+margin:0!important;padding:0!important;box-shadow:none!important
+}
+.botones{display:none!important}
+.sec,.row,.firma{
+break-inside:avoid!important;page-break-inside:avoid!important
+}
+@page{size:letter portrait;margin:9mm 11mm 17mm}
+}
+</style>
+</head>
+
+<body>
+
 <div class="page" id="informe-content">
-<header class="membrete"><div class="logos"><img src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional">
+
+<header class="membrete">
+<div class="logos">
+<img src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional">
 <img src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ" alt="Logo institucional">
-<img src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional"></div>
-<div class="institucion">CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</div><div class="siglas">(INAIMPF)</div>
-<div class="rule"></div><h1>INFORME ECOGRÁFICO ABDOMINAL</h1></header>
+<img src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional">
+</div>
+
+<div class="institucion">
+CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA
+</div>
+<div class="siglas">(INAIMPF)</div>
+<div class="rule"></div>
+<h1>INFORME ECOGRÁFICO ABDOMINAL</h1>
+</header>
+
 <div class="datos">
 <div class="dato"><b>PACIENTE:</b><span class="valor" id="Paciente"></span></div>
 <div class="dato"><b>EDAD:</b><span class="valor" id="Edad"></span></div>
@@ -55,79 +189,293 @@ button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color
 <div class="dato"><b>FECHA:</b><span class="valor" id="Fecha"></span></div>
 <div class="dato"><b>GÉNERO:</b><span class="valor" id="Genero"></span></div>
 </div>
+
 <p class="intro">El estudio ultrasonográfico evidencia:</p>
-<div class="columnas"><div><section class="sec"><h2>1. HÍGADO</h2>
-<div class="row"><strong>Morfología y movilidad:</strong><span class="opts" id="o_Higado Morfologia y Movilidad" data-key="Higado Morfologia y Movilidad"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Bordes:</strong><span class="opts" id="o_Higado Bordes" data-key="Higado Bordes"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Dimensiones LHD:</strong><span class="opts" id="o_Higado Dimensiones LHD" data-key="Higado Dimensiones LHD"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Dimensiones LHI:</strong><span class="opts" id="o_Higado Dimensiones LHI" data-key="Higado Dimensiones LHI"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Parénquima:</strong><span class="opts" id="o_Higado Parenquima" data-key="Higado Parenquima"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Ecogenicidad:</strong><span class="opts" id="o_Higado Ecogenicidad" data-key="Higado Ecogenicidad"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Imagen expansiva:</strong><span class="opts" id="o_Higado Imagen Expansiva" data-key="Higado Imagen Expansiva"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>2. VÍAS BILIARES</h2>
-<div class="row"><strong>Intrahepáticas:</strong><span class="opts" id="o_Vias Biliares Intrahepaticas" data-key="Vias Biliares Intrahepaticas"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Extrahepáticas:</strong><span class="opts" id="o_Vias Biliares Extrahepaticas" data-key="Vias Biliares Extrahepaticas"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Lesiones focales:</strong><span class="opts" id="o_Vias Biliares Lesiones Focales" data-key="Vias Biliares Lesiones Focales"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>3. VESÍCULA BILIAR</h2>
-<div class="row"><strong>Forma:</strong><span class="opts" id="o_Vesicula Biliar Forma" data-key="Vesicula Biliar Forma"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Tamaño:</strong><span class="opts" id="o_Vesicula Biliar Tamano" data-key="Vesicula Biliar Tamano"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Paredes:</strong><span class="opts" id="o_Vesicula Biliar Paredes" data-key="Vesicula Biliar Paredes"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Contenido:</strong><span class="opts" id="o_Vesicula Biliar Contenido" data-key="Vesicula Biliar Contenido"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Tumores:</strong><span class="opts" id="o_Vesicula Biliar Tumores" data-key="Vesicula Biliar Tumores"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Metástasis:</strong><span class="opts" id="o_Vesicula Biliar Metastasis" data-key="Vesicula Biliar Metastasis"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>4. PÁNCREAS</h2>
-<div class="row"><strong>Morfología y ecogenicidad:</strong><span class="opts" id="o_Pancreas Morfologia y Ecogenicidad" data-key="Pancreas Morfologia y Ecogenicidad"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Medidas:</strong><span class="opts" id="o_Pancreas Medidas" data-key="Pancreas Medidas"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>5. BAZO</h2>
-<div class="row"><strong>Morfología, ecogenicidad y movilidad:</strong><span class="opts" id="o_Bazo Morfologia Ecogenicidad y Movilidad" data-key="Bazo Morfologia Ecogenicidad y Movilidad"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Tamaño:</strong><span class="opts" id="o_Bazo Tamano" data-key="Bazo Tamano"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Lesiones focales:</strong><span class="opts" id="o_Bazo Lesiones Focales" data-key="Bazo Lesiones Focales"></span><span class="blank" aria-hidden="true"></span></div>
-</section></div><div><section class="sec"><h2>6. RIÑÓN DERECHO (RD)</h2>
-<div class="row"><strong>Tamaño:</strong><span class="opts" id="o_RD Rinon Derecho Tamano" data-key="RD Rinon Derecho Tamano"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Relación cortico-medular:</strong><span class="opts" id="o_RD Rinon Derecho Relacion Cortico Medular" data-key="RD Rinon Derecho Relacion Cortico Medular"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Ectasias:</strong><span class="opts" id="o_RD Rinon Derecho Ectasias" data-key="RD Rinon Derecho Ectasias"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Litiasis:</strong><span class="opts" id="o_RD Rinon Derecho Litiasis" data-key="RD Rinon Derecho Litiasis"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Grupo calicial:</strong><span class="opts" id="o_RD Rinon Derecho Grupo Calicial" data-key="RD Rinon Derecho Grupo Calicial"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Imagen quística:</strong><span class="opts" id="o_RD Rinon Derecho Imagen Quistica" data-key="RD Rinon Derecho Imagen Quistica"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row free"><strong>Dimensiones L / AP / Trans / Vol:</strong><span class="value" id="v_RD Rinon Derecho Dimensiones L AP Trans Vol"></span></div>
-</section>
-<section class="sec"><h2>7. RIÑÓN IZQUIERDO (RI)</h2>
-<div class="row"><strong>Tamaño:</strong><span class="opts" id="o_RI Rinon Izquierdo Tamano" data-key="RI Rinon Izquierdo Tamano"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Relación cortico-medular:</strong><span class="opts" id="o_RI Rinon Izquierdo Relacion Cortico Medular" data-key="RI Rinon Izquierdo Relacion Cortico Medular"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Ectasias:</strong><span class="opts" id="o_RI Rinon Izquierdo Ectasias" data-key="RI Rinon Izquierdo Ectasias"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Litiasis:</strong><span class="opts" id="o_RI Rinon Izquierdo Litiasis" data-key="RI Rinon Izquierdo Litiasis"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Grupo calicial:</strong><span class="opts" id="o_RI Rinon Izquierdo Grupo Calicial" data-key="RI Rinon Izquierdo Grupo Calicial"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row"><strong>Imagen quística:</strong><span class="opts" id="o_RI Rinon Izquierdo Imagen Quistica" data-key="RI Rinon Izquierdo Imagen Quistica"></span><span class="blank" aria-hidden="true"></span></div>
-<div class="row free"><strong>Dimensiones L / AP / Trans / Vol:</strong><span class="value" id="v_RI Rinon Izquierdo Dimensiones L AP Trans Vol"></span></div>
-</section>
-<section class="sec"><h2>8. AORTA, CAVA Y PORTA</h2>
-<div class="row"><strong>Calibre:</strong><span class="opts" id="o_Aorta Cava y Porta Calibre" data-key="Aorta Cava y Porta Calibre"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>9. LÍQUIDO LIBRE ABDOMINAL</h2>
-<div class="row"><strong>Presencia:</strong><span class="opts" id="o_9 Liquido Libre Abdominal" data-key="9 Liquido Libre Abdominal"></span><span class="blank" aria-hidden="true"></span></div>
-</section>
-<section class="sec"><h2>10. ADENOPATÍAS INTRAABDOMINALES</h2>
-<div class="row"><strong>Presencia:</strong><span class="opts" id="o_10 Adenopatias Intra Abdominales" data-key="10 Adenopatias Intra Abdominales"></span><span class="blank" aria-hidden="true"></span></div>
-</section></div></div>
-<div class="conclusion-label">CONCLUSIONES:</div><div class="conclusion" id="Conclusiones"></div>
-<div class="medico"><b>Nombre del médico que realiza el estudio:</b><span id="Medico"></span></div>
+
+<div class="columnas">
+<div id="columna-izquierda"></div>
+<div id="columna-derecha"></div>
+</div>
+
+<div class="conclusion-label">CONCLUSIONES:</div>
+<div class="conclusion" id="Conclusiones"></div>
+
+<div class="medico">
+<b>Nombre del médico que realiza el estudio:</b>
+<span id="Medico"></span>
+</div>
+
 <div class="firma">FIRMA Y SELLO</div>
-<table class="membrete-inferior"><colgroup><col style="width:15%"><col style="width:23%"><col style="width:38%"><col style="width:24%"></colgroup>
-<tr><td colspan="4" class="direccion">CENTRO DE ATENCION INTEGRAL DE SALUD ARGELIA LAYA, EDIFICIO FESTIVA 16, PISO 1, MUNICIPIO SUCRE, ESTADO BOLIVARIANO DE MIRANDA</td></tr>
-<tr><td><b>FORMATO 002</b></td><td>ESCRITORIO/FORMATO</td><td>ELABORADO POR: HERIBERTO MOSQUEDA</td><td>FECHA: 26/10/2026</td></tr></table>
-</div><div class="botones"><button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button></div>
+
+<table class="membrete-inferior">
+<colgroup>
+<col style="width:15%">
+<col style="width:23%">
+<col style="width:38%">
+<col style="width:24%">
+</colgroup>
+<tr>
+<td colspan="4" class="direccion">
+CENTRO DE ATENCION INTEGRAL DE SALUD ARGELIA LAYA,
+EDIFICIO FESTIVA 16, PISO 1, MUNICIPIO SUCRE,
+ESTADO BOLIVARIANO DE MIRANDA
+</td>
+</tr>
+<tr>
+<td><b>FORMATO 002</b></td>
+<td>ESCRITORIO/FORMATO</td>
+<td>ELABORADO POR: HERIBERTO MOSQUEDA</td>
+<td>FECHA: 26/10/2026</td>
+</tr>
+</table>
+
+</div>
+
+<div class="botones">
+<button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
+</div>
+
 <script>
-(function(){'use strict';const q=new URLSearchParams(location.search);const V=k=>(q.get(k)||'').trim();
-function norm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
-function put(id,k){const e=document.getElementById(id);if(e)e.textContent=V(k||id)}
-function date(s){if(!s)return '';const m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?m[3].padStart(2,'0')+'/'+m[2].padStart(2,'0')+'/'+m[1]:s}
-put('Paciente','Paciente');put('Edad','Edad');put('Cedula','Cedula');put('Genero','Genero');const fe=document.getElementById('Fecha');if(fe)fe.textContent=date(V('Fecha'));
-put('Conclusiones','Conclusiones');put('Medico','Medico');
-document.querySelectorAll('.opts').forEach(el=>{const key=el.dataset.key,chosen=norm(V(key));const opts={"Higado Morfologia y Movilidad": ["Normal", "Anormal"], "Higado Bordes": ["Regulares", "Irregulares"], "Higado Dimensiones LHD": ["Normal", "Anormal"], "Higado Dimensiones LHI": ["Normal", "Anormal"], "Higado Parenquima": ["Homogéneo", "Heterogéneo"], "Higado Ecogenicidad": ["Normal", "Aumentada", "Disminuida"], "Higado Imagen Expansiva": ["Sí", "No"], "Vias Biliares Intrahepaticas": ["Normales", "Dilatadas"], "Vias Biliares Extrahepaticas": ["Normales", "Dilatadas"], "Vias Biliares Lesiones Focales": ["Sí", "No"], "Vesicula Biliar Forma": ["Piriforme", "Alargada", "En gorro frigio", "Contraída"], "Vesicula Biliar Tamano": ["Normal", "Pequeña", "Grande", "Esclerotrófica"], "Vesicula Biliar Paredes": ["Normales", "Finas", "Engrosadas", "Regulares", "Irregulares"], "Vesicula Biliar Contenido": ["Anecoico", "Barro biliar", "Litiasis", "Pólipos"], "Vesicula Biliar Tumores": ["Sí", "No"], "Vesicula Biliar Metastasis": ["Sí", "No"], "Pancreas Morfologia y Ecogenicidad": ["Normal", "Anormal"], "Pancreas Medidas": ["Normales", "Anormales"], "Bazo Morfologia Ecogenicidad y Movilidad": ["Normal", "Anormal"], "Bazo Tamano": ["Normal", "Esplenomegalia"], "Bazo Lesiones Focales": ["Sí", "No"], "RD Rinon Derecho Tamano": ["Normal", "Aumentado", "Disminuido"], "RD Rinon Derecho Relacion Cortico Medular": ["Adecuada", "No adecuada"], "RD Rinon Derecho Ectasias": ["Sí", "No"], "RD Rinon Derecho Litiasis": ["Sí", "No"], "RD Rinon Derecho Grupo Calicial": ["Superior", "Medio", "Inferior"], "RD Rinon Derecho Imagen Quistica": ["Sí", "No"], "RI Rinon Izquierdo Tamano": ["Normal", "Aumentado", "Disminuido"], "RI Rinon Izquierdo Relacion Cortico Medular": ["Adecuada", "No adecuada"], "RI Rinon Izquierdo Ectasias": ["Sí", "No"], "RI Rinon Izquierdo Litiasis": ["Sí", "No"], "RI Rinon Izquierdo Grupo Calicial": ["Superior", "Medio", "Inferior"], "RI Rinon Izquierdo Imagen Quistica": ["Sí", "No"], "Aorta Cava y Porta Calibre": ["Normal", "Anormal"], "9 Liquido Libre Abdominal": ["Sí", "No"], "10 Adenopatias Intra Abdominales": ["Sí", "No"]}[key]||[];opts.forEach(op=>{const s=document.createElement('span');s.className='opt';const mark=norm(op)===chosen&&chosen?'X':'';s.innerHTML='';s.appendChild(document.createTextNode(op+' ('));const b=document.createElement('b');b.className='mark';b.textContent=mark;s.appendChild(b);s.appendChild(document.createTextNode(')'));el.appendChild(s)})});
-document.querySelectorAll('.row.free .value').forEach(el=>{const key=el.id.slice(2);el.textContent=V(key)});
+(function(){
+'use strict';
+
+const q=new URLSearchParams(location.search);
+const V=k=>(q.get(k)||'').trim();
+
+function norm(s){
+return String(s||'')
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g,'')
+.toLowerCase().trim();
+}
+
+function put(id,k){
+const e=document.getElementById(id);
+if(e)e.textContent=V(k||id);
+}
+
+function date(s){
+if(!s)return '';
+const m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+return m?
+m[3].padStart(2,'0')+'/'+m[2].padStart(2,'0')+'/'+m[1]:s;
+}
+
+put('Paciente','Nombre y Apellido');
+put('Edad','Edad');
+put('Cedula','Cedula');
+put('Genero','Genero');
+
+const fe=document.getElementById('Fecha');
+if(fe)fe.textContent=date(V('Fecha'));
+
+put('Conclusiones','Conclusiones');
+put('Medico','Medico');
+
+const sections=[
+
+{
+t:'1. HÍGADO',c:0,
+i:[
+['Morfología y movilidad','Higado Morfologia y Movilidad',['Normal','Anormal']],
+['Bordes','Higado Bordes',['Regulares','Irregulares']],
+['Dimensiones LHD','Higado Dimensiones LHD',['Normal','Anormal']],
+['Dimensiones LHI','Higado Dimensiones LHI',['Normal','Anormal']],
+['Parénquima','Higado Parenquima',['Homogéneo','Heterogéneo']],
+['Ecogenicidad','Higado Ecogenicidad',['Normal','Aumentada','Disminuida']],
+['Imagen expansiva','Higado Imagen Expansiva',['Sí','No']]
+]
+},
+
+{
+t:'2. VÍAS BILIARES',c:0,
+i:[
+['Intrahepáticas','Vias Biliares Intrahepaticas',['Normales','Dilatadas']],
+['Extrahepáticas','Vias Biliares Extrahepaticas',['Normales','Dilatadas']],
+['Lesiones focales','Vias Biliares Lesiones Focales',['Sí','No']]
+]
+},
+
+{
+t:'3. VESÍCULA BILIAR',c:0,
+i:[
+['Forma','Vesicula Biliar Forma',['Piriforme','Alargada','En gorro frigio','Contraída']],
+['Tamaño','Vesicula Biliar Tamano',['Normal','Pequeña','Grande','Esclerotrófica']],
+['Paredes','Vesicula Biliar Paredes',['Normales','Finas','Engrosadas','Regulares','Irregulares']],
+['Contenido','Vesicula Biliar Contenido',['Anecoico','Barro biliar','Litiasis','Pólipos']],
+['Tumores','Vesicula Biliar Tumores',['Sí','No']],
+['Metástasis','Vesicula Biliar Metastasis',['Sí','No']]
+]
+},
+
+{
+t:'4. PÁNCREAS',c:0,
+i:[
+['Morfología y ecogenicidad','Pancreas Morfologia y Ecogenicidad',['Normal','Anormal']],
+['Medidas','Pancreas Medidas',['Normales','Anormales']]
+]
+},
+
+{
+t:'5. BAZO',c:0,
+i:[
+['Morfología, ecogenicidad y movilidad','Bazo Morfologia Ecogenicidad y Movilidad',['Normal','Anormal']],
+['Tamaño','Bazo Tamano',['Normal','Esplenomegalia']],
+['Lesiones focales','Bazo Lesiones Focales',['Sí','No']]
+]
+},
+
+{
+t:'6. RIÑÓN DERECHO (RD)',c:1,
+i:[
+['Tamaño','RD Rinon Derecho Tamano',['Normal','Aumentado','Disminuido']],
+['Relación cortico-medular','RD Rinon Derecho Relacion Cortico Medular',['Adecuada','No adecuada']],
+['Ectasias','RD Rinon Derecho Ectasias',['Sí','No']],
+['Litiasis','RD Rinon Derecho Litiasis',['Sí','No']],
+['Grupo calicial','RD Rinon Derecho Grupo Calicial',['Superior','Medio','Inferior']],
+['Imagen quística','RD Rinon Derecho Imagen Quistica',['Sí','No']]
+],
+m:['RD Dimension L','RD Dimension AP','RD Dimension Trans','RD Dimension Vol']
+},
+
+{
+t:'7. RIÑÓN IZQUIERDO (RI)',c:1,
+i:[
+['Tamaño','RI Rinon Izquierdo Tamano',['Normal','Aumentado','Disminuido']],
+['Relación cortico-medular','RI Rinon Izquierdo Relacion Cortico Medular',['Adecuada','No adecuada']],
+['Ectasias','RI Rinon Izquierdo Ectasias',['Sí','No']],
+['Litiasis','RI Rinon Izquierdo Litiasis',['Sí','No']],
+['Grupo calicial','RI Rinon Izquierdo Grupo Calicial',['Superior','Medio','Inferior']],
+['Imagen quística','RI Rinon Izquierdo Imagen Quistica',['Sí','No']]
+],
+m:['RI Dimension L','RI Dimension AP','RI Dimension Trans','RI Dimension Vol']
+},
+
+{
+t:'8. AORTA, CAVA Y PORTA',c:1,
+i:[
+['Calibre','Aorta Cava y Porta Calibre',['Normal','Anormal']]
+]
+},
+
+{
+t:'9. LÍQUIDO LIBRE ABDOMINAL',c:1,
+i:[
+['Presencia','9 Liquido Libre Abdominal',['Sí','No']]
+],
+descKey:'Liquido Libre Abdominal Descripcion'
+},
+
+{
+t:'10. ADENOPATÍAS INTRAABDOMINALES',c:1,
+i:[
+['Presencia','10 Adenopatias Intra Abdominales',['Sí','No']]
+],
+descKey:'Adenopatias Intra Abdominales Descripcion'
+}
+
+];
+
+function addDesc(row,key,customKey){
+const value=V(customKey||key+' Descripcion');
+if(value){
+const d=document.createElement('span');
+d.className='desc';
+d.textContent=value;
+row.appendChild(d);
+}
+}
+
+function itemRow(label,key,choices,customDesc){
+const row=document.createElement('div');
+row.className='row';
+
+const b=document.createElement('strong');
+b.textContent=label+':';
+row.appendChild(b);
+
+if(choices.length){
+const box=document.createElement('span');
+box.className='opts';
+const selected=norm(V(key));
+
+choices.forEach(op=>{
+const s=document.createElement('span');
+s.className='opt';
+s.appendChild(document.createTextNode(op+' ('));
+
+const mark=document.createElement('b');
+mark.className='mark';
+mark.textContent=
+selected&&selected===norm(op)?'X':'';
+
+s.appendChild(mark);
+s.appendChild(document.createTextNode(')'));
+box.appendChild(s);
+});
+
+row.appendChild(box);
+}
+
+addDesc(row,key,customDesc);
+return row;
+}
+
+sections.forEach(sec=>{
+
+const s=document.createElement('section');
+s.className='sec';
+
+const h=document.createElement('h2');
+h.textContent=sec.t;
+s.appendChild(h);
+
+sec.i.forEach(x=>{
+s.appendChild(itemRow(x[0],x[1],x[2]));
+});
+
+if(sec.m){
+
+const m=document.createElement('div');
+m.className='measurements';
+
+['L','AP','Trans','Vol'].forEach((lab,n)=>{
+
+const unit=document.createElement('label');
+unit.className='measure';
+
+const b=document.createElement('b');
+b.textContent=lab+':';
+
+const inp=document.createElement('input');
+inp.type='text';
+inp.value=V(sec.m[n]);
+inp.readOnly=true;
+inp.setAttribute('aria-label',lab);
+
+unit.appendChild(b);
+unit.appendChild(inp);
+m.appendChild(unit);
+
+});
+
+s.appendChild(m);
+}
+
+if(sec.descKey){
+const row=sec.i[0];
+const target=s.lastElementChild;
+addDesc(target,row[1],sec.descKey);
+}
+
+document.getElementById(
+sec.c?'columna-derecha':'columna-izquierda'
+).appendChild(s);
+
+});
+
 })();
-</script></body></html>
+</script>
+
+</body>
+</html>
