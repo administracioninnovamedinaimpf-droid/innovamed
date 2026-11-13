@@ -6,60 +6,51 @@
 <style>
 :root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
-body{background:#edf1f4;padding:20px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.42in .58in .65in;background:#fff;box-shadow:0 2px 14px #142d3c24}
+body{background:#edf1f4;padding:10px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.3in .45in;background:#fff;box-shadow:0 2px 14px #142d3c24}
 
 /* MEMBRETE SUPERIOR */
-.membrete-superior{width:100%;text-align:center;margin-bottom:8px}
-.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 5px}
-.logo{width:75px;height:65px;object-fit:contain}
-.nombre-institucion{color:var(--azul);font-size:12px;font-weight:bold;line-height:1.3;text-align:center;margin:3px 0 1px}
-.siglas{font-size:12px;font-weight:bold;color:var(--azul);margin:0 0 7px}
-.titulo{font-size:10px;font-weight:bold;text-align:center;margin:0 0 9px;color:#202830;letter-spacing:.3px}
-.regla{border-top:2px solid #526575;margin:5px 0 10px}
+.membrete-superior{width:100%;text-align:center;margin-bottom:4px}
+.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 3px}
+.logo{width:70px;height:55px;object-fit:contain}
+.nombre-institucion{color:var(--azul);font-size:11.5px;font-weight:bold;line-height:1.1;text-align:center;margin:2px 0 1px}
+.siglas{font-size:11px;font-weight:bold;color:var(--azul);margin:0 0 4px}
+.titulo{font-size:10px;font-weight:bold;text-align:center;margin:0 0 6px;color:#202830;letter-spacing:.3px}
+.regla{border-top:2px solid #526575;margin:3px 0 6px}
 
 /* DATOS DEL PACIENTE */
-.datos{display:grid;grid-template-columns:2fr .55fr 1fr .85fr .7fr;gap:9px 13px;margin-bottom:12px;font-size:10.5px}
+.datos{display:grid;grid-template-columns:2fr .55fr 1fr .85fr .7fr;gap:6px 10px;margin-bottom:8px;font-size:10px}
 .dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
-.valor{flex:1;min-width:15px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
-.intro{font-size:10.5px;margin:8px 0}
+.valor{flex:1;min-width:15px;min-height:14px;border-bottom:1px solid var(--linea);padding:0 2px;overflow-wrap:anywhere}
+.intro{font-size:10px;margin:4px 0}
 
-/* UNA SOLA COLUMNA CLÍNICA */
-.seccion{margin-bottom:9px;break-inside:avoid;page-break-inside:avoid}
-.seccion-titulo{color:var(--azul2);font-size:11px;font-weight:bold;text-transform:uppercase;margin:9px 0 5px;padding-bottom:3px;border-bottom:1px solid #9aabb7}
+/* UNA SOLA COLUMNA CON INTERLINEADO MÍNIMO */
+.seccion{margin-bottom:4px;break-inside:avoid;page-break-inside:avoid}
+.seccion-titulo{color:var(--azul2);font-size:10.5px;font-weight:bold;text-transform:uppercase;margin:4px 0 2px;padding:1px 3px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.1}
 
-.row{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 5px;margin:5px 0;font-size:10px;line-height:1.4;break-inside:avoid;page-break-inside:avoid}
+.row{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 4px;margin:1px 0;font-size:10px;line-height:1.1;break-inside:avoid;page-break-inside:avoid}
 .row strong{font-weight:bold;white-space:nowrap}
-.opts{display:inline;line-height:1.5}
-.opt{white-space:nowrap;margin-right:5px}
-.opt .mark{font-weight:bold;display:inline-block;min-width:8px;text-align:center}
+.opts{display:inline;line-height:1.1}
+.opt{white-space:nowrap;margin-right:4px}
+.opt .mark{font-weight:bold;display:inline-block;min-width:7px;text-align:center}
 .desc{font-size:9.5px;font-style:italic;color:#354957;overflow-wrap:anywhere;white-space:normal}
 .row.has-desc .desc{margin-left:2px}
-.row.free .value{flex:1 1 150px;min-height:18px;border-bottom:1px solid var(--linea);padding:0 2px 2px;overflow-wrap:anywhere;font-size:10px}
+.row.free .value{flex:1 1 150px;min-height:14px;border-bottom:1px solid var(--linea);padding:0 2px;overflow-wrap:anywhere;font-size:10px}
 
-.conclusion-label{font-weight:bold;font-size:10.5px;margin:12px 0 4px}
-.conclusion{min-height:75px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,var(--linea) 19px,var(--linea) 20px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:10.5px;line-height:20px;padding:0 2px}
+/* MÉDICO Y FIRMA */
+.medico{display:flex;align-items:baseline;gap:5px;margin-top:10px;font-size:10px}
+.medico span{flex:1;min-height:14px;border-bottom:1px solid var(--linea)}
+.firma{width:160px;margin:12px 0 0 auto;padding-top:15px;border-top:1px solid #333;text-align:center;font-size:9.5px;font-weight:bold}
 
-.medico{display:flex;align-items:baseline;gap:5px;margin-top:18px;font-size:10px}
-.medico span{flex:1;min-height:18px;border-bottom:1px solid var(--linea)}
-.firma{width:190px;margin:25px 0 0 auto;padding-top:27px;border-top:1px solid #333;text-align:center;font-size:10px;font-weight:bold}
-
-/* MEMBRETE INFERIOR */
-.membrete-inferior{width:100%;border-collapse:collapse;table-layout:fixed;font-family:Arial,Helvetica,sans-serif;font-size:8px;color:#202830;margin-top:20px}
-.membrete-inferior td{border:1px solid #53616c;padding:4px 3px;vertical-align:middle}
-.membrete-inferior .direccion{text-align:center;font-weight:bold;line-height:1.3}
-.membrete-inferior .campo{text-align:center;font-size:8px;line-height:1.25;overflow-wrap:anywhere}
-
-.botones{display:flex;justify-content:center;margin:18px auto 25px}
+.botones{display:flex;justify-content:center;margin:15px auto 20px}
 .estado{text-align:center;font:12px Arial,sans-serif;margin:10px auto;color:#8a2d2d;max-width:8.5in}
-button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color:#fff;font-size:13px;font-weight:bold;cursor:pointer}
+button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
 
-@page{size:letter portrait;margin:11mm 14mm 25mm 14mm}
+@page{size:letter portrait;margin:8mm}
 @media print{
   html,body{background:#fff!important;margin:0!important;padding:0!important}
   .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
   .botones,.estado{display:none!important}
   .seccion,.row,.medico,.firma{break-inside:avoid!important;page-break-inside:avoid!important}
-  .membrete-inferior{display:table;margin-top:20px}
 }
 @media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
 </style></head>
@@ -86,7 +77,6 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
 </div>
 <p class="intro">El estudio ultrasonográfico evidencia:</p>
 
-<!-- SECCIONES CLÍNICAS EN UNA SOLA COLUMNA -->
 <div id="columnas">
 <section class="seccion"><div class="seccion-titulo">1. HÍGADO</div>
 <div class="row" data-key="Higado Morfologia y Movilidad"><strong>Morfología y movilidad:</strong></div>
@@ -147,16 +137,8 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
 <div class="row" data-key="10 Adenopatias Intra Abdominales"><strong>Presencia:</strong></div></section>
 </div>
 
-<div class="conclusion-label">CONCLUSIONES:</div>
-<div class="conclusion" id="Conclusiones"></div>
 <div class="medico"><b>Nombre del médico que realiza el estudio:</b><span id="Medico"></span></div>
 <div class="firma">FIRMA Y SELLO</div>
-
-<table class="membrete-inferior">
-  <colgroup><col style="width:15%"><col style="width:23%"><col style="width:38%"><col style="width:24%"></colgroup>
-  <tr><td colspan="4" class="direccion">CENTRO DE ATENCION INTEGRAL DE SALUD ARGELIA LAYA, EDIFICIO FESTIVA 16, PISO 1, MUNICIPIO SUCRE, ESTADO BOLIVARIANO DE MIRANDA</td></tr>
-  <tr><td class="campo"><b>FORMATO 002</b></td><td class="campo">ESCRITORIO/FORMATO</td><td class="campo">ELABORADO POR: HERIBERTO MOSQUEDA</td><td class="campo">FECHA: 26/10/2026</td></tr>
-</table>
 </div>
 
 <div class="botones"><button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button></div>
@@ -180,7 +162,7 @@ function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v||'';
 function fmtDate(v){if(!v)return '';const s=String(v);const a=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return a?`${a[3].padStart(2,'0')}/${a[2].padStart(2,'0')}/${a[1]}`:s;}
 function selected(value,op){const a=norm(value),b=norm(op);if(a===b)return true;const parts=a.split(/[|;,\n]+/).map(norm);return parts.includes(b)||parts.some(p=>p===`x ${b}`||p===`${b} x`||p===`☒ ${b}`);}
 function render(raw){if(!raw||raw.ok===false){estado.textContent='No se pudo cargar el informe: '+(raw?.error||'respuesta no válida');return;}const d=unwrap(raw);if(!d||typeof d!=='object'||Array.isArray(d)){estado.textContent='El servicio respondió, pero no entregó un registro válido.';return;}const m=indexar(d);
-set('Paciente',get(m,'Nombre y Apellido','Paciente','Nombre del Paciente'));set('Edad',get(m,'Edad'));set('Cedula',get(m,'Cedula','Cédula'));set('Genero',get(m,'Genero','Género'));set('Fecha',fmtDate(get(m,'Fecha')));set('Conclusiones',get(m,'Conclusiones'));set('Medico',get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico'));
+set('Paciente',get(m,'Nombre y Apellido','Paciente','Nombre del Paciente'));set('Edad',get(m,'Edad'));set('Cedula',get(m,'Cedula','Cédula'));set('Genero',get(m,'Genero','Género'));set('Fecha',fmtDate(get(m,'Fecha')));set('Medico',get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico'));
 document.querySelectorAll('.row[data-key]').forEach(row=>{const key=row.dataset.key,val=get(m,key),opts=opciones[key]||[];const holder=document.createElement('span');holder.className='opts';opts.forEach(op=>{const s=document.createElement('span');s.className='opt';s.append(document.createTextNode(op+' ('));const b=document.createElement('b');b.className='mark';b.textContent=selected(val,op)?'X':'';s.append(b,document.createTextNode(')'));holder.append(s);});row.append(holder);const desc=get(m,key+' Descripcion',key+' Descripción');if(desc){const span=document.createElement('span');span.className='desc';span.textContent=' — '+desc;row.append(span);row.classList.add('has-desc');}});
 const dims=(prefix)=>['L','AP','Trans','Vol'].map((t,i)=>{const v=get(m,prefix+' Dimension '+t);return t+': '+(v||'_____');}).join('   ');set('rd-dimensiones',dims('RD'));set('ri-dimensiones',dims('RI'));
 estado.textContent='';}
