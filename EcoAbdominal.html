@@ -17,8 +17,8 @@ body{background:#edf1f4;padding:10px}.page{width:8.5in;min-height:11in;margin:0 
 .titulo{font-size:11px;font-weight:bold;text-align:center;margin:0 0 6px;color:#202830;letter-spacing:.3px}
 .regla{border-top:2px solid #526575;margin:3px 0 6px}
 
-/* DATOS DEL PACIENTE */
-.datos{display:grid;grid-template-columns:2fr .55fr 1fr .85fr .7fr;gap:6px 10px;margin-bottom:8px;font-size:11px}
+/* DATOS DEL PACIENTE (4 columnas al quitar género) */
+.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:6px 10px;margin-bottom:8px;font-size:11px}
 .dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
 .valor{flex:1;min-width:15px;min-height:15px;border-bottom:1px solid var(--linea);padding:0 2px;overflow-wrap:anywhere}
 .intro{font-size:11px;margin:4px 0}
@@ -73,7 +73,6 @@ button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color
   <div class="dato"><b>EDAD:</b><span class="valor" id="Edad"></span></div>
   <div class="dato"><b>CÉDULA:</b><span class="valor" id="Cedula"></span></div>
   <div class="dato"><b>FECHA:</b><span class="valor" id="Fecha"></span></div>
-  <div class="dato"><b>GÉNERO:</b><span class="valor" id="Genero"></span></div>
 </div>
 <p class="intro">El estudio ultrasonográfico evidencia:</p>
 
@@ -162,7 +161,7 @@ function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v||'';
 function fmtDate(v){if(!v)return '';const s=String(v);const a=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return a?`${a[3].padStart(2,'0')}/${a[2].padStart(2,'0')}/${a[1]}`:s;}
 function selected(value,op){const a=norm(value),b=norm(op);if(a===b)return true;const parts=a.split(/[|;,\n]+/).map(norm);return parts.includes(b)||parts.some(p=>p===`x ${b}`||p===`${b} x`||p===`☒ ${b}`);}
 function render(raw){if(!raw||raw.ok===false){estado.textContent='No se pudo cargar el informe: '+(raw?.error||'respuesta no válida');return;}const d=unwrap(raw);if(!d||typeof d!=='object'||Array.isArray(d)){estado.textContent='El servicio respondió, pero no entregó un registro válido.';return;}const m=indexar(d);
-set('Paciente',get(m,'Nombre y Apellido','Paciente','Nombre del Paciente'));set('Edad',get(m,'Edad'));set('Cedula',get(m,'Cedula','Cédula'));set('Genero',get(m,'Genero','Género'));set('Fecha',fmtDate(get(m,'Fecha')));set('Medico',get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico'));
+set('Paciente',get(m,'Nombre y Apellido','Paciente','Nombre del Paciente'));set('Edad',get(m,'Edad'));set('Cedula',get(m,'Cedula','Cédula'));set('Fecha',fmtDate(get(m,'Fecha')));set('Medico',get(m,'Nombre del médico que realiza el estudio','Nombre del medico que realiza el estudio','Medico','Médico'));
 document.querySelectorAll('.row[data-key]').forEach(row=>{const key=row.dataset.key,val=get(m,key),opts=opciones[key]||[];const holder=document.createElement('span');holder.className='opts';opts.forEach(op=>{const s=document.createElement('span');s.className='opt';s.append(document.createTextNode(op+' ('));const b=document.createElement('b');b.className='mark';b.textContent=selected(val,op)?'X':'';s.append(b,document.createTextNode(')'));holder.append(s);});row.append(holder);const desc=get(m,key+' Descripcion',key+' Descripción');if(desc){const span=document.createElement('span');span.className='desc';span.textContent=' — '+desc;row.append(span);row.classList.add('has-desc');}});
 const dims=(prefix)=>['L','AP','Trans','Vol'].map((t,i)=>{const v=get(m,prefix+' Dimension '+t);return t+': '+(v||'_____');}).join('   ');set('rd-dimensiones',dims('RD'));set('ri-dimensiones',dims('RI'));
 estado.textContent='';}
