@@ -6,48 +6,50 @@
 <style>
 :root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
-body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.35in .45in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between}
+body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.4in .5in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between;font-size:12px}
 
 /* MEMBRETE SUPERIOR */
-.membrete-superior{width:100%;text-align:center;margin-bottom:6px}
-.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 4px}
-.logo{width:70px;height:55px;object-fit:contain}
-.nombre-institucion{color:var(--azul);font-size:11.5px;font-weight:bold;line-height:1.3;text-align:center;margin:2px 0 1px}
-.siglas{font-size:11px;font-weight:bold;color:var(--azul);margin:0 0 4px}
-.regla{border-top:2px solid #526575;margin:3px 0 8px}
-.titulo{font-size:11px;font-weight:bold;text-align:center;margin:6px 0 8px;color:#202830;letter-spacing:.3px}
+.membrete-superior{width:100%;text-align:center;margin-bottom:8px}
+.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 6px}
+.logo{width:75px;height:60px;object-fit:contain}
+.nombre-institucion{color:var(--azul);font-size:12.5px;font-weight:bold;line-height:1.3;text-align:center;margin:2px 0 1px}
+.siglas{font-size:12px;font-weight:bold;color:var(--azul);margin:0 0 6px}
+.regla{border-top:2px solid #526575;margin:4px 0 10px}
 
-/* DATOS DEL PACIENTE */
-.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:6px 10px;margin-bottom:8px;font-size:10.5px}
+/* TÍTULO PRINCIPAL BAJADO */
+.titulo{font-size:13px;font-weight:bold;text-align:center;margin:16px 0 14px;color:#202830;letter-spacing:.3px}
+
+/* DATOS DEL PACIENTE CON BUENA SEPARACIÓN DEL CONTENIDO */
+.datos{display:grid;grid-template-columns:2fr .6fr 1fr .9fr;gap:8px 12px;margin-bottom:24px;font-size:12px}
 .dato{display:flex;align-items:baseline;gap:4px;min-width:0}.dato b{white-space:nowrap}
-.valor{flex:1;min-width:15px;min-height:15px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
-.intro{font-size:10.5px;margin:6px 0 6px}
+.valor{flex:1;min-width:15px;min-height:18px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
+.intro{font-size:12px;margin:12px 0 10px}
 
-/* SECCIONES CLÍNICAS COMPACTAS */
+/* SECCIONES CLÍNICAS */
 .cuerpo-informe{flex:1}
-.seccion{margin-bottom:6px;break-inside:avoid;page-break-inside:avoid}
-.seccion-titulo{color:var(--azul2);font-size:10.5px;font-weight:bold;text-transform:uppercase;margin:4px 0 3px;padding:2px 4px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.2}
+.seccion{margin-bottom:10px;break-inside:avoid;page-break-inside:avoid}
+.seccion-titulo{color:var(--azul2);font-size:12px;font-weight:bold;text-transform:uppercase;margin:8px 0 5px;padding:3px 6px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.3}
 
-.item{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 5px;margin:2px 0;font-size:10px;line-height:1.35;break-inside:avoid;page-break-inside:avoid}
+.item{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px;margin:4px 0;font-size:11.5px;line-height:1.45;break-inside:avoid;page-break-inside:avoid}
 .item-label{font-weight:bold;white-space:nowrap}
-.opciones{display:inline-flex;flex-wrap:wrap;gap:0 5px;align-items:baseline}
+.opciones{display:inline-flex;flex-wrap:wrap;gap:0 6px;align-items:baseline}
 .opcion{white-space:nowrap}
 
-.linea-explicacion{display:inline;font-size:9.5px;font-style:italic;color:#354957;overflow-wrap:anywhere}
+.linea-explicacion{display:inline;font-size:11px;font-style:italic;color:#354957;overflow-wrap:anywhere}
 
 /* CONCLUSIONES */
-.bloque-conclusiones{margin-top:8px}
-.etiqueta-conclusion{font-weight:bold;font-size:10.5px;margin:0 0 3px}
-.conclusiones{min-height:35px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 16px,#9aa7b0 16px,#9aa7b0 17px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px;line-height:16px;padding:0 2px}
+.bloque-conclusiones{margin-top:14px}
+.etiqueta-conclusion{font-weight:bold;font-size:12px;margin:0 0 4px}
+.conclusiones{min-height:45px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 18px,#9aa7b0 18px,#9aa7b0 19px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:11.5px;line-height:18px;padding:0 2px}
 
 /* MÉDICO Y FIRMA (BLOQUE INFERIOR) */
-.bloque-inferior{margin-top:auto;padding-top:8px;break-inside:avoid;page-break-inside:avoid}
-.medico{display:flex;align-items:baseline;gap:6px;margin-bottom:8px;font-size:10.5px;line-height:1.4}
-.medico span{flex:1;min-height:15px;border-bottom:1px solid var(--linea)}
-.firma{width:160px;margin:0 0 0 auto;padding-top:12px;border-top:1px solid #333;text-align:center;font-size:10px;font-weight:bold}
+.bloque-inferior{margin-top:auto;padding-top:12px;break-inside:avoid;page-break-inside:avoid}
+.medico{display:flex;align-items:baseline;gap:6px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.medico span{flex:1;min-height:18px;border-bottom:1px solid var(--linea)}
+.firma{width:170px;margin:0 0 0 auto;padding-top:15px;border-top:1px solid #333;text-align:center;font-size:11px;font-weight:bold}
 
-.botones{display:flex;justify-content:center;margin:12px auto 20px}
-button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color:#fff;font-size:11px;font-weight:bold;cursor:pointer}
+.botones{display:flex;justify-content:center;margin:15px auto 22px}
+button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
 
 @page{size:letter portrait;margin:6mm}
 @media print{
@@ -56,12 +58,12 @@ button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color
   .botones{display:none!important}
   .seccion,.item,.bloque-inferior,.bloque-conclusiones{break-inside:avoid!important;page-break-inside:avoid!important}
 }
-@media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:10px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
+@media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 
 <body>
-<div class="estado" id="estado" style="text-align:center;font:12px Arial,sans-serif;margin:10px auto;color:#8a2d2d;">Cargando informe...</div>
+<div class="estado" id="estado" style="text-align:center;font:13px Arial,sans-serif;margin:10px auto;color:#8a2d2d;">Cargando informe...</div>
 <div class="page" id="informe-content" style="display:none;">
 
 <div>
