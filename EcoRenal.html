@@ -23,7 +23,7 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 .valor{flex:1;min-width:15px;min-height:15px;border-bottom:1px solid var(--linea);padding:0 2px 1px;overflow-wrap:anywhere}
 .intro{font-size:10.5px;margin:6px 0 6px}
 
-/* SECCIONES CLÍNICAS COMPompactas */
+/* SECCIONES CLÍNICAS COMPACTAS */
 .cuerpo-informe{flex:1}
 .seccion{margin-bottom:6px;break-inside:avoid;page-break-inside:avoid}
 .seccion-titulo{color:var(--azul2);font-size:10.5px;font-weight:bold;text-transform:uppercase;margin:4px 0 3px;padding:2px 4px;background:var(--claro);border-left:2px solid var(--azul);line-height:1.2}
@@ -103,10 +103,10 @@ button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color
       <div class="item"><strong class="item-label">Imágenes expansivas:</strong><span class="opciones" id="RinonDerechoImagenesExpansiva"></span><span class="linea-explicacion" id="RinonDerechoImagenesExpansivaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Relación córtico-medular:</strong><span class="opciones" id="RinonDerechoRelacionCorticomedular"></span><span class="linea-explicacion" id="RinonDerechoRelacionCorticomedularDescripcion"></span></div>
       <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonDerechoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeLitiasisDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Grupo Calicial (Litiasis):</strong><span class="opciones" id="RinonDerechoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial1Descripcion"></span></div>
       <div class="item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonDerechoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonDerechoPresenciadeEctasiasDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Grupo Calicial (Ectasias):</strong><span class="opciones" id="RinonDerechoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial2Descripcion"></span></div>
       <div class="item"><strong class="item-label">Vasculatura:</strong><span class="opciones" id="RinonDerechoVasculatura"></span><span class="linea-explicacion" id="RinonDerechoVasculaturaDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo calicial 1:</strong><span class="opciones" id="RinonDerechoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial1Descripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo calicial 2:</strong><span class="opciones" id="RinonDerechoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonDerechoGrupoCalicial2Descripcion"></span></div>
       <div class="item"><strong class="item-label">Uréter derecho:</strong><span class="opciones" id="UreterDerecho"></span><span class="linea-explicacion" id="UreterDerechoDescripcion"></span></div>
     </div>
 
@@ -122,10 +122,10 @@ button{border:0;border-radius:5px;padding:10px 18px;background:var(--azul);color
       <div class="item"><strong class="item-label">Imágenes expansivas:</strong><span class="opciones" id="RinonIzquierdoImagenesExpansiva"></span><span class="linea-explicacion" id="RinonIzquierdoImagenesExpansivaDescripcion"></span></div>
       <div class="item"><strong class="item-label">Relación córtico-medular:</strong><span class="opciones" id="RinonIzquierdoRelacionCorticomedular"></span><span class="linea-explicacion" id="RinonIzquierdoRelacionCorticomedularDescripcion"></span></div>
       <div class="item"><strong class="item-label">Litiasis:</strong><span class="opciones" id="RinonIzquierdoPresenciadeLitiasis"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeLitiasisDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Grupo Calicial (Litiasis):</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial1Descripcion"></span></div>
       <div class="item"><strong class="item-label">Ectasias:</strong><span class="opciones" id="RinonIzquierdoPresenciadeEctasias"></span><span class="linea-explicacion" id="RinonIzquierdoPresenciadeEctasiasDescripcion"></span></div>
+      <div class="item"><strong class="item-label">Grupo Calicial (Ectasias):</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial2Descripcion"></span></div>
       <div class="item"><strong class="item-label">Vasculatura:</strong><span class="opciones" id="RinonIzquierdoVasculatura"></span><span class="linea-explicacion" id="RinonIzquierdoVasculaturaDescripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo calicial 1:</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial1"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial1Descripcion"></span></div>
-      <div class="item"><strong class="item-label">Grupo calicial 2:</strong><span class="opciones" id="RinonIzquierdoGrupoCalicial2"></span><span class="linea-explicacion" id="RinonIzquierdoGrupoCalicial2Descripcion"></span></div>
       <div class="item"><strong class="item-label">Uréter izquierdo:</strong><span class="opciones" id="UreterIzquierdo"></span><span class="linea-explicacion" id="UreterIzquierdoDescripcion"></span></div>
     </div>
 
@@ -179,10 +179,10 @@ const listasOpciones = {
   'RinonDerechoImagenesExpansiva':['Sí','No'],
   'RinonDerechoRelacionCorticomedular':['Buena','Pobre'],
   'RinonDerechoPresenciadeLitiasis':['Sí','No'],
-  'RinonDerechoPresenciadeEctasias':['Sí','No'],
-  'RinonDerechoVasculatura':['Normal','Anormal'],
   'RinonDerechoGrupoCalicial1':['Superior','Medio','Inferior'],
+  'RinonDerechoPresenciadeEctasias':['Sí','No'],
   'RinonDerechoGrupoCalicial2':['Superior','Medio','Inferior','Pelvis Renal'],
+  'RinonDerechoVasculatura':['Normal','Anormal'],
   'UreterDerecho':['No Visualizado','Dilatado'],
 
   'RinonIzquierdoPosicion':['En la celda renal correspondiente','Ectópico'],
@@ -194,10 +194,10 @@ const listasOpciones = {
   'RinonIzquierdoImagenesExpansiva':['Sí','No'],
   'RinonIzquierdoRelacionCorticomedular':['Buena','Pobre'],
   'RinonIzquierdoPresenciadeLitiasis':['Sí','No'],
-  'RinonIzquierdoPresenciadeEctasias':['Sí','No'],
-  'RinonIzquierdoVasculatura':['Normal','Anormal'],
   'RinonIzquierdoGrupoCalicial1':['Superior','Medio','Inferior'],
+  'RinonIzquierdoPresenciadeEctasias':['Sí','No'],
   'RinonIzquierdoGrupoCalicial2':['Superior','Medio','Inferior','Pelvis Renal'],
+  'RinonIzquierdoVasculatura':['Normal','Anormal'],
   'UreterIzquierdo':['No Visualizado','Dilatado']
 };
 
@@ -261,12 +261,12 @@ if(dimI) {
 const descripciones = [
   'RinonDerechoPosicionDescripcion', 'RinonDerechoMorfologiayMovilidadDescripcion', 'RinonDerechoBordesDescripcion', 
   'RinonDerechoParenquimaDescripcion', 'RinonDerechoEcogenicidadDescripcion', 'RinonDerechoImagenesExpansivaDescripcion', 
-  'RinonDerechoRelacionCorticomedularDescripcion', 'RinonDerechoPresenciadeLitiasisDescripcion', 'RinonDerechoPresenciadeEctasiasDescripcion', 
-  'RinonDerechoVasculaturaDescripcion', 'RinonDerechoGrupoCalicial1Descripcion', 'RinonDerechoGrupoCalicial2Descripcion', 'UreterDerechoDescripcion',
+  'RinonDerechoRelacionCorticomedularDescripcion', 'RinonDerechoPresenciadeLitiasisDescripcion', 'RinonDerechoGrupoCalicial1Descripcion', 
+  'RinonDerechoPresenciadeEctasiasDescripcion', 'RinonDerechoGrupoCalicial2Descripcion', 'RinonDerechoVasculaturaDescripcion', 'UreterDerechoDescripcion',
   'RinonIzquierdoPosicionDescripcion', 'RinonIzquierdoMorfologiayMovilidadDescripcion', 'RinonIzquierdoBordesDescripcion', 
   'RinonIzquierdoParenquimaDescripcion', 'RinonIzquierdoEcogenicidadDescripcion', 'RinonIzquierdoImagenesExpansivaDescripcion', 
-  'RinonIzquierdoRelacionCorticomedularDescripcion', 'RinonIzquierdoPresenciadeLitiasisDescripcion', 'RinonIzquierdoPresenciadeEctasiasDescripcion', 
-  'RinonIzquierdoVasculaturaDescripcion', 'RinonIzquierdoGrupoCalicial1Descripcion', 'RinonIzquierdoGrupoCalicial2Descripcion', 'UreterIzquierdoDescripcion'
+  'RinonIzquierdoRelacionCorticomedularDescripcion', 'RinonIzquierdoPresenciadeLitiasisDescripcion', 'RinonIzquierdoGrupoCalicial1Descripcion', 
+  'RinonIzquierdoPresenciadeEctasiasDescripcion', 'RinonIzquierdoGrupoCalicial2Descripcion', 'RinonIzquierdoVasculaturaDescripcion', 'UreterIzquierdoDescripcion'
 ];
 
 descripciones.forEach(function(idDesc){
