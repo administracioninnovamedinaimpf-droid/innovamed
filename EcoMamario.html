@@ -35,10 +35,10 @@ body{background:#edf1f4;padding:15px}.page{width:8.5in;min-height:11in;margin:0 
 .opcion .mark{font-weight:bold;display:inline-block;min-width:7px;text-align:center}
 
 .linea-explicacion{display:inline;font-size:10px;font-style:italic;color:#354957;overflow-wrap:anywhere}
-.espacio-seccion{margin-bottom:10px}
 
-/* CONCLUSIONES */
-.etiqueta-conclusion{font-weight:bold;font-size:11px;margin:8px 0 4px}
+/* ESPACIO ANTES DE LAS CONCLUSIONES */
+.bloque-conclusiones{margin-top:16px}
+.etiqueta-conclusion{font-weight:bold;font-size:11px;margin:0 0 4px}
 .conclusiones{min-height:40px;border-bottom:1px solid var(--linea);background:repeating-linear-gradient(to bottom,transparent 0,transparent 17px,#9aa7b0 17px,#9aa7b0 18px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:10.5px;line-height:18px;padding:0 2px}
 
 /* MÉDICO Y FIRMA (BLOQUE INFERIOR) */
@@ -55,7 +55,7 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
   html,body{background:#fff!important;margin:0!important;padding:0!important}
   .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;height:100vh}
   .botones{display:none!important}
-  .seccion,.item,.bloque-inferior{break-inside:avoid!important;page-break-inside:avoid!important}
+  .seccion,.item,.bloque-inferior,.bloque-conclusiones{break-inside:avoid!important;page-break-inside:avoid!important}
 }
 @media screen and (max-width:700px){body{padding:0}.page{width:100%;min-height:0;padding:12px;box-shadow:none}.datos{grid-template-columns:1fr 1fr}}
 </style>
@@ -132,9 +132,11 @@ button{border:0;border-radius:5px;padding:11px 20px;background:var(--azul);color
       <div class="item"><strong class="item-label">Axila:</strong><span class="opciones" id="MamaIzquierdaAxila"></span><span class="linea-explicacion" id="MamaIzquierdaAxilaDescripcion"></span></div>
     </div>
 
-    <!-- CONCLUSIONES -->
-    <div class="etiqueta-conclusion">CONCLUSIONES:</div>
-    <div class="conclusiones" id="Conclusiones"></div>
+    <!-- CONCLUSIONES (CON ESPACIO SEPARADOR) -->
+    <div class="bloque-conclusiones">
+      <div class="etiqueta-conclusion">CONCLUSIONES:</div>
+      <div class="conclusiones" id="Conclusiones"></div>
+    </div>
   </div>
 </div>
 
