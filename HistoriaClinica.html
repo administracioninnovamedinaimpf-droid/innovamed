@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Historia Clínica - INAIMPF</title>
+<style>
+:root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
+body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.38in .48in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between;font-size:11.5px}
+
+/* MEMBRETE SUPERIOR */
+.membrete-superior{width:100%;text-align:center;margin-bottom:6px}
+.logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 4px}
+.logo{width:72px;height:56px;object-fit:contain}
+.nombre-institucion{color:var(--azul);font-size:12px;font-weight:bold;line-height:1.25;text-align:center;margin:2px 0 1px}
+.siglas{font-size:11.5px;font-weight:bold;color:var(--azul);margin:0 0 4px}
+.regla{border-top:2px solid #526575;margin:3px 0 8px}
+
+/* TÍTULO Y CABECERA DE CONTROL */
+.cabecera-titulo{display:flex;justify-content:space-between;align-items:center;margin:8px 0 10px}
+.titulo{font-size:13.5px;font-weight:bold;color:#202830;letter-spacing:.4px;margin:0}
+.control-ids{display:flex;gap:14px;font-size:11px}
+.control-ids div{display:flex;align-items:baseline;gap:4px}
+
+/* BLOQUES DE DATOS */
+.seccion-titulo{color:var(--azul2);font-size:11px;font-weight:bold;text-transform:uppercase;margin:8px 0 6px;padding:3px 6px;background:var(--claro);border-left:3px solid var(--azul);line-height:1.2}
+
+.fila-grid{display:grid;gap:6px 10px;margin-bottom:6px}
+.g-2{grid-template-columns:1fr 1fr}
+.g-3{grid-template-columns:1fr 1fr 1fr}
+.g-4{grid-template-columns:1.2fr 1fr 1fr .8fr}
+.g-paciente{grid-template-columns:2.2fr 1fr .8fr .7fr}
+.g-emergencia{grid-template-columns:1.8fr 1fr}
+
+.campo{display:flex;align-items:baseline;gap:4px;min-width:0;font-size:11px}
+.campo b{white-space:nowrap;color:#1b2630}
+.valor{flex:1;min-width:20px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 3px 1px;overflow-wrap:anywhere;font-weight:normal}
+
+/* ÁREAS MÉDICAS CON RENGLONES FÍSICOS PARA ESCRIBIR A MANO O IMPRIMIR */
+.bloque-medico{margin-top:6px;break-inside:avoid;page-break-inside:avoid}
+.etiqueta-linea{font-weight:bold;font-size:11px;color:var(--azul2);margin:0 0 2px;text-transform:uppercase}
+
+.renglones-3{
+  min-height:60px;
+  border-bottom:1px solid var(--linea);
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#8c9aa4 19px,#8c9aa4 20px);
+  line-height:20px;
+  font-size:11px;
+  padding:0 3px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.renglones-4{
+  min-height:80px;
+  border-bottom:1px solid var(--linea);
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#8c9aa4 19px,#8c9aa4 20px);
+  line-height:20px;
+  font-size:11px;
+  padding:0 3px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+/* PIE DE PÁGINA (SOLO FIRMA Y SELLO) */
+.bloque-inferior{margin-top:auto;padding-top:26px;break-inside:avoid;page-break-inside:avoid}
+.firma{width:200px;margin:0 0 0 auto;padding-top:6px;border-top:1px solid #333;text-align:center;font-size:11px;font-weight:bold}
+
+.botones{display:flex;justify-content:center;margin:14px auto 20px}
+button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
+
+@page{size:letter portrait;margin:6mm}
+@media print{
+  html,body{background:#fff!important;margin:0!important;padding:0!important}
+  .page{width:auto!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;height:100vh}
+  .botones{display:none!important}
+}
+@media screen and (max-width:700px){
+  body{padding:0}.page{width:100%;min-height:0;padding:10px;box-shadow:none}
+  .g-2,.g-3,.g-4,.g-paciente,.g-emergencia{grid-template-columns:1fr}
+  .cabecera-titulo{flex-direction:column;align-items:flex-start;gap:6px}
+}
+</style>
+</head>
+
+<body>
+<div class="estado" id="estado" style="text-align:center;font:13px Arial,sans-serif;margin:10px auto;color:#8a2d2d;">Cargando Historia Clínica...</div>
+<div class="page" id="informe-content" style="display:none;">
+
+<div>
+  <!-- MEMBRETE SUPERIOR -->
+  <div class="membrete-superior">
+    <div class="logos">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1-pQg_oK2YT0OnGzKmluIQ3YeSitR-xmb" alt="Logo institucional izquierdo">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1QaAodIhDOuCLPsM3ESguJC1memh26sDQ" alt="Logo institucional central">
+      <img class="logo" src="https://lh3.googleusercontent.com/d/1lGWTCWgx0w8L6GLIOh-JghEnaf6d8juL" alt="Logo institucional derecho">
+    </div>
+    <div class="nombre-institucion">CENTRO DE ATENCIÓN INTEGRAL Y PARTO HUMANIZADO ARGELIA LAYA</div>
+    <div class="siglas">(INAIMPF)</div>
+    <div class="regla"></div>
+  </div>
+
+  <!-- TÍTULO E IDENTIFICADORES DE INGRESO -->
+  <div class="cabecera-titulo">
+    <h1 class="titulo">HISTORIA CLÍNICA DE INGRESO</h1>
+    <div class="control-ids">
+      <div><b>N° HISTORIA / ID:</b><span class="valor" style="min-width:75px" id="PacienteID"></span></div>
+      <div><b>FECHA DE INGRESO:</b><span class="valor" style="min-width:80px" id="FechaIngreso"></span></div>
+    </div>
+  </div>
+
+  <!-- I. DATOS DE UBICACIÓN TERRITORIAL / COMUNITARIA -->
+  <div class="seccion-titulo">I. UBICACIÓN TERRITORIAL Y COMUNITARIA</div>
+  <div class="fila-grid g-3">
+    <div class="campo"><b>Ubicación:</b><span class="valor" id="UbicacionSeleccionada"></span></div>
+    <div class="campo"><b>Municipio:</b><span class="valor" id="Municipio"></span></div>
+    <div class="campo"><b>Parroquia:</b><span class="valor" id="Parroquia"></span></div>
+  </div>
+  <div class="fila-grid g-3">
+    <div class="campo"><b>Comuna:</b><span class="valor" id="Comuna"></span></div>
+    <div class="campo"><b>Consejo Comunal:</b><span class="valor" id="ConsejoComunal"></span></div>
+    <div class="campo"><b>UBCH:</b><span class="valor" id="UBCH"></span></div>
+  </div>
+
+  <!-- II. DATOS DE IDENTIFICACIÓN DEL PACIENTE -->
+  <div class="seccion-titulo">II. DATOS DEL PACIENTE</div>
+  <div class="fila-grid g-paciente">
+    <div class="campo"><b>Nombres y Apellidos:</b><span class="valor" id="NombreCompleto"></span></div>
+    <div class="campo"><b>Cédula:</b><span class="valor" id="Cedula"></span></div>
+    <div class="campo"><b>Edad:</b><span class="valor" id="Edad"></span></div>
+    <div class="campo"><b>Género:</b><span class="valor" id="Genero"></span></div>
+  </div>
+  <div class="fila-grid g-4">
+    <div class="campo"><b>Fecha Nacimiento:</b><span class="valor" id="FechaNacimiento"></span></div>
+    <div class="campo"><b>Lugar Nacimiento:</b><span class="valor" id="LugarNacimiento"></span></div>
+    <div class="campo"><b>Nacionalidad:</b><span class="valor" id="Nacionalidad"></span></div>
+    <div class="campo"><b>Edo. Civil:</b><span class="valor" id="EdoCivil"></span></div>
+  </div>
+  <div class="fila-grid g-2">
+    <div class="campo"><b>Ocupación:</b><span class="valor" id="Ocupacion"></span></div>
+    <div class="campo"><b>Teléfono:</b><span class="valor" id="Telefono"></span></div>
+  </div>
+  <div class="fila-grid" style="grid-template-columns:1fr;">
+    <div class="campo"><b>Dirección de Habitación:</b><span class="valor" id="DireccionHabitacion"></span></div>
+  </div>
+
+  <!-- III. CONTACTO EN CASO DE EMERGENCIA -->
+  <div class="seccion-titulo">III. EN CASO DE EMERGENCIA AVISAR A</div>
+  <div class="fila-grid g-emergencia">
+    <div class="campo"><b>Apellido y Nombre:</b><span class="valor" id="EmergenciaNombre"></span></div>
+    <div class="campo"><b>Parentesco:</b><span class="valor" id="Parentesco"></span></div>
+  </div>
+  <div class="fila-grid" style="grid-template-columns:1fr;">
+    <div class="campo"><b>Dirección de Emergencia:</b><span class="valor" id="DireccionEmergencia"></span></div>
+  </div>
+
+  <!-- IV. DATOS MÉDICOS (ESPACIO FÍSICO CON LÍNEAS PARA LLENADO MANUAL O DIGITAL) -->
+  <div class="seccion-titulo">IV. EVALUACIÓN CLÍNICA Y DATOS MÉDICOS</div>
+  
+  <div class="bloque-medico">
+    <div class="etiqueta-linea">Motivo de Ingreso:</div>
+    <div class="renglones-3" id="MotivoIngreso"></div>
+  </div>
+
+  <div class="bloque-medico">
+    <div class="etiqueta-linea">Enfermedad Actual:</div>
+    <div class="renglones-4" id="EnfermedadActual"></div>
+  </div>
+
+  <div class="bloque-medico">
+    <div class="etiqueta-linea">Diagnóstico Provisional / Presuntivo:</div>
+    <div class="renglones-3" id="DiagnosticoProvisional"></div>
+  </div>
+
+</div>
+
+<!-- BLOQUE INFERIOR (SOLO FIRMA Y SELLO) -->
+<div class="bloque-inferior">
+  <div class="firma">FIRMA Y SELLO</div>
+</div>
+
+</div>
+
+<div class="botones">
+  <button onclick="window.print()">IMPRIMIR / GUARDAR PDF</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+const params = new URLSearchParams(window.location.search);
+const estado = document.getElementById('estado');
+const contenido = document.getElementById('informe-content');
+
+function fecha(f){
+  if(!f) return "";
+  const m = String(f).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  return m ? m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1] : f;
+}
+
+// Control e Ingreso
+document.getElementById('PacienteID').textContent = params.get('PacienteID') || "";
+document.getElementById('FechaIngreso').textContent = fecha(params.get('FechaIngreso') || "");
+
+// Ubicación
+document.getElementById('UbicacionSeleccionada').textContent = params.get('UbicacionSeleccionada') || "";
+document.getElementById('Municipio').textContent = params.get('Municipio') || "";
+document.getElementById('Parroquia').textContent = params.get('Parroquia') || "";
+document.getElementById('Comuna').textContent = params.get('Comuna') || "";
+document.getElementById('ConsejoComunal').textContent = params.get('ConsejoComunal') || "";
+document.getElementById('UBCH').textContent = params.get('UBCH') || "";
+
+// Datos del Paciente (Prioriza NOMBRE Y APELLIDO o une NOMBRES + APELLIDOS)
+const nombreYApellido = params.get('NombreYApellido');
+const nombres = params.get('Nombres') || "";
+const apellidos = params.get('Apellidos') || "";
+document.getElementById('NombreCompleto').textContent = nombreYApellido ? nombreYApellido : (nombres + " " + apellidos).trim();
+
+document.getElementById('Cedula').textContent = params.get('Cedula') || "";
+document.getElementById('Edad').textContent = params.get('Edad') || "";
+document.getElementById('Genero').textContent = params.get('Genero') || "";
+document.getElementById('FechaNacimiento').textContent = fecha(params.get('FechaNacimiento') || "");
+document.getElementById('LugarNacimiento').textContent = params.get('LugarNacimiento') || "";
+document.getElementById('Nacionalidad').textContent = params.get('Nacionalidad') || "";
+document.getElementById('EdoCivil').textContent = params.get('EdoCivil') || "";
+document.getElementById('Ocupacion').textContent = params.get('Ocupacion') || "";
+document.getElementById('Telefono').textContent = params.get('Telefono') || "";
+document.getElementById('DireccionHabitacion').textContent = params.get('DireccionHabitacion') || "";
+
+// Emergencia
+document.getElementById('EmergenciaNombre').textContent = params.get('EmergenciaNombre') || "";
+document.getElementById('Parentesco').textContent = params.get('Parentesco') || "";
+document.getElementById('DireccionEmergencia').textContent = params.get('DireccionEmergencia') || "";
+
+// Datos Médicos (Si vienen vacíos desde AppSheet, quedan las líneas físicas listas para escribir)
+document.getElementById('MotivoIngreso').textContent = params.get('MotivoIngreso') || "";
+document.getElementById('EnfermedadActual').textContent = params.get('EnfermedadActual') || "";
+document.getElementById('DiagnosticoProvisional').textContent = params.get('DiagnosticoProvisional') || "";
+
+estado.style.display = 'none';
+contenido.style.display = 'flex';
+})();
+</script>
+</body>
+</html>
