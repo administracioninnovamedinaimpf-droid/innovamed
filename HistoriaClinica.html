@@ -107,8 +107,7 @@ button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color
   <div class="cabecera-titulo">
     <h1 class="titulo">HISTORIA CLÍNICA DE INGRESO</h1>
     <div class="control-ids">
-      <div><b>N° HISTORIA / ID:</b><span class="valor" style="min-width:75px" id="PacienteID"></span></div>
-      <div><b>FECHA DE INGRESO:</b><span class="valor" style="min-width:80px" id="FechaIngreso"></span></div>
+      <div><b>FECHA DE INGRESO:</b><span class="valor" style="min-width:85px" id="FechaIngreso"></span></div>
     </div>
   </div>
 
@@ -199,8 +198,7 @@ function fecha(f){
   return m ? m[3].padStart(2,"0")+"/"+m[2].padStart(2,"0")+"/"+m[1] : f;
 }
 
-// Control e Ingreso
-document.getElementById('PacienteID').textContent = params.get('PacienteID') || "";
+// Fecha de Ingreso
 document.getElementById('FechaIngreso').textContent = fecha(params.get('FechaIngreso') || "");
 
 // Datos del Paciente
