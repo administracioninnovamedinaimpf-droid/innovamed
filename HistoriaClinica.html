@@ -6,12 +6,12 @@
 <style>
 :root{--azul:#174d70;--azul2:#123b57;--linea:#687782;--texto:#202830;--claro:#eaf1f6}
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto)}
-body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.38in .48in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between;font-size:11.5px}
+body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 auto;padding:.35in .48in;background:#fff;box-shadow:0 2px 14px #142d3c24;display:flex;flex-direction:column;justify-content:space-between;font-size:11.5px}
 
 /* MEMBRETE SUPERIOR */
 .membrete-superior{width:100%;text-align:center;margin-bottom:6px}
 .logos{width:100%;display:flex;justify-content:space-between;align-items:center;margin:0 auto 4px}
-.logo{width:72px;height:56px;object-fit:contain}
+.logo{width:72px;height:55px;object-fit:contain}
 .nombre-institucion{color:var(--azul);font-size:12px;font-weight:bold;line-height:1.25;text-align:center;margin:2px 0 1px}
 .siglas{font-size:11.5px;font-weight:bold;color:var(--azul);margin:0 0 4px}
 .regla{border-top:2px solid #526575;margin:3px 0 8px}
@@ -27,7 +27,6 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 
 .fila-grid{display:grid;gap:6px 10px;margin-bottom:6px}
 .g-2{grid-template-columns:1fr 1fr}
-.g-3{grid-template-columns:1fr 1fr 1fr}
 .g-4{grid-template-columns:1.2fr 1fr 1fr .8fr}
 .g-paciente{grid-template-columns:2.2fr 1fr .8fr .7fr}
 .g-emergencia{grid-template-columns:1.8fr 1fr}
@@ -36,20 +35,9 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
 .campo b{white-space:nowrap;color:#1b2630}
 .valor{flex:1;min-width:20px;min-height:16px;border-bottom:1px solid var(--linea);padding:0 3px 1px;overflow-wrap:anywhere;font-weight:normal}
 
-/* ÁREAS MÉDICAS CON RENGLONES FÍSICOS PARA ESCRIBIR A MANO O IMPRIMIR */
+/* ÁREAS MÉDICAS CON RENGLONES FÍSICOS */
 .bloque-medico{margin-top:6px;break-inside:avoid;page-break-inside:avoid}
 .etiqueta-linea{font-weight:bold;font-size:11px;color:var(--azul2);margin:0 0 2px;text-transform:uppercase}
-
-.renglones-3{
-  min-height:60px;
-  border-bottom:1px solid var(--linea);
-  background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#8c9aa4 19px,#8c9aa4 20px);
-  line-height:20px;
-  font-size:11px;
-  padding:0 3px;
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-}
 
 .renglones-4{
   min-height:80px;
@@ -62,9 +50,24 @@ body{background:#edf1f4;padding:12px}.page{width:8.5in;min-height:11in;margin:0 
   overflow-wrap:anywhere;
 }
 
-/* PIE DE PÁGINA (SOLO FIRMA Y SELLO) */
-.bloque-inferior{margin-top:auto;padding-top:26px;break-inside:avoid;page-break-inside:avoid}
-.firma{width:200px;margin:0 0 0 auto;padding-top:6px;border-top:1px solid #333;text-align:center;font-size:11px;font-weight:bold}
+.renglones-5{
+  min-height:100px;
+  border-bottom:1px solid var(--linea);
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#8c9aa4 19px,#8c9aa4 20px);
+  line-height:20px;
+  font-size:11px;
+  padding:0 3px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+/* PIE DE PÁGINA (FIRMA + TABLA INSTITUCIONAL) */
+.bloque-inferior{margin-top:auto;padding-top:16px;break-inside:avoid;page-break-inside:avoid}
+.firma{width:200px;margin:0 0 12px auto;padding-top:5px;border-top:1px solid #333;text-align:center;font-size:10.5px;font-weight:bold}
+
+.tabla-pie{width:100%;border-collapse:collapse;font-size:9px;color:#2b3640;text-align:center}
+.tabla-pie td{border:1px solid #7d8b96;padding:3px 5px;line-height:1.25}
+.tabla-pie .fila-direccion td{font-weight:bold;background:#f4f7f9}
 
 .botones{display:flex;justify-content:center;margin:14px auto 20px}
 button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color:#fff;font-size:12px;font-weight:bold;cursor:pointer}
@@ -77,7 +80,7 @@ button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color
 }
 @media screen and (max-width:700px){
   body{padding:0}.page{width:100%;min-height:0;padding:10px;box-shadow:none}
-  .g-2,.g-3,.g-4,.g-paciente,.g-emergencia{grid-template-columns:1fr}
+  .g-2,.g-4,.g-paciente,.g-emergencia{grid-template-columns:1fr}
   .cabecera-titulo{flex-direction:column;align-items:flex-start;gap:6px}
 }
 </style>
@@ -109,21 +112,8 @@ button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color
     </div>
   </div>
 
-  <!-- I. DATOS DE UBICACIÓN TERRITORIAL / COMUNITARIA -->
-  <div class="seccion-titulo">I. UBICACIÓN TERRITORIAL Y COMUNITARIA</div>
-  <div class="fila-grid g-3">
-    <div class="campo"><b>Ubicación:</b><span class="valor" id="UbicacionSeleccionada"></span></div>
-    <div class="campo"><b>Municipio:</b><span class="valor" id="Municipio"></span></div>
-    <div class="campo"><b>Parroquia:</b><span class="valor" id="Parroquia"></span></div>
-  </div>
-  <div class="fila-grid g-3">
-    <div class="campo"><b>Comuna:</b><span class="valor" id="Comuna"></span></div>
-    <div class="campo"><b>Consejo Comunal:</b><span class="valor" id="ConsejoComunal"></span></div>
-    <div class="campo"><b>UBCH:</b><span class="valor" id="UBCH"></span></div>
-  </div>
-
-  <!-- II. DATOS DE IDENTIFICACIÓN DEL PACIENTE -->
-  <div class="seccion-titulo">II. DATOS DEL PACIENTE</div>
+  <!-- I. DATOS DE IDENTIFICACIÓN DEL PACIENTE -->
+  <div class="seccion-titulo">I. DATOS DEL PACIENTE</div>
   <div class="fila-grid g-paciente">
     <div class="campo"><b>Nombres y Apellidos:</b><span class="valor" id="NombreCompleto"></span></div>
     <div class="campo"><b>Cédula:</b><span class="valor" id="Cedula"></span></div>
@@ -144,8 +134,8 @@ button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color
     <div class="campo"><b>Dirección de Habitación:</b><span class="valor" id="DireccionHabitacion"></span></div>
   </div>
 
-  <!-- III. CONTACTO EN CASO DE EMERGENCIA -->
-  <div class="seccion-titulo">III. EN CASO DE EMERGENCIA AVISAR A</div>
+  <!-- II. CONTACTO EN CASO DE EMERGENCIA -->
+  <div class="seccion-titulo">II. EN CASO DE EMERGENCIA AVISAR A</div>
   <div class="fila-grid g-emergencia">
     <div class="campo"><b>Apellido y Nombre:</b><span class="valor" id="EmergenciaNombre"></span></div>
     <div class="campo"><b>Parentesco:</b><span class="valor" id="Parentesco"></span></div>
@@ -154,29 +144,40 @@ button{border:0;border-radius:5px;padding:11px 22px;background:var(--azul);color
     <div class="campo"><b>Dirección de Emergencia:</b><span class="valor" id="DireccionEmergencia"></span></div>
   </div>
 
-  <!-- IV. DATOS MÉDICOS (ESPACIO FÍSICO CON LÍNEAS PARA LLENADO MANUAL O DIGITAL) -->
-  <div class="seccion-titulo">IV. EVALUACIÓN CLÍNICA Y DATOS MÉDICOS</div>
+  <!-- III. DATOS MÉDICOS -->
+  <div class="seccion-titulo">III. EVALUACIÓN CLÍNICA Y DATOS MÉDICOS</div>
   
   <div class="bloque-medico">
     <div class="etiqueta-linea">Motivo de Ingreso:</div>
-    <div class="renglones-3" id="MotivoIngreso"></div>
+    <div class="renglones-4" id="MotivoIngreso"></div>
   </div>
 
   <div class="bloque-medico">
     <div class="etiqueta-linea">Enfermedad Actual:</div>
-    <div class="renglones-4" id="EnfermedadActual"></div>
+    <div class="renglones-5" id="EnfermedadActual"></div>
   </div>
 
   <div class="bloque-medico">
     <div class="etiqueta-linea">Diagnóstico Provisional / Presuntivo:</div>
-    <div class="renglones-3" id="DiagnosticoProvisional"></div>
+    <div class="renglones-4" id="DiagnosticoProvisional"></div>
   </div>
 
 </div>
 
-<!-- BLOQUE INFERIOR (SOLO FIRMA Y SELLO) -->
+<!-- BLOQUE INFERIOR (FIRMA Y TABLA DE PIE DE PÁGINA) -->
 <div class="bloque-inferior">
   <div class="firma">FIRMA Y SELLO</div>
+  <table class="tabla-pie">
+    <tr class="fila-direccion">
+      <td colspan="4">CENTRO DE ATENCION INTEGRAL DE SALUD ARGELIA LAYA, EDIFICIO FESTIVA 16, PISO 1, MUNICIPIO SUCRE, ESTADO BOLIVARIANO DE MIRANDA</td>
+    </tr>
+    <tr>
+      <td>FORMATO 001</td>
+      <td>ESCRITORIO/FORMATO</td>
+      <td>ELABORADO POR: HERIBERTO MOSQUEDA</td>
+      <td>FECHA: 26/10/2026</td>
+    </tr>
+  </table>
 </div>
 
 </div>
@@ -202,15 +203,7 @@ function fecha(f){
 document.getElementById('PacienteID').textContent = params.get('PacienteID') || "";
 document.getElementById('FechaIngreso').textContent = fecha(params.get('FechaIngreso') || "");
 
-// Ubicación
-document.getElementById('UbicacionSeleccionada').textContent = params.get('UbicacionSeleccionada') || "";
-document.getElementById('Municipio').textContent = params.get('Municipio') || "";
-document.getElementById('Parroquia').textContent = params.get('Parroquia') || "";
-document.getElementById('Comuna').textContent = params.get('Comuna') || "";
-document.getElementById('ConsejoComunal').textContent = params.get('ConsejoComunal') || "";
-document.getElementById('UBCH').textContent = params.get('UBCH') || "";
-
-// Datos del Paciente (Prioriza NOMBRE Y APELLIDO o une NOMBRES + APELLIDOS)
+// Datos del Paciente
 const nombreYApellido = params.get('NombreYApellido');
 const nombres = params.get('Nombres') || "";
 const apellidos = params.get('Apellidos') || "";
@@ -232,7 +225,7 @@ document.getElementById('EmergenciaNombre').textContent = params.get('Emergencia
 document.getElementById('Parentesco').textContent = params.get('Parentesco') || "";
 document.getElementById('DireccionEmergencia').textContent = params.get('DireccionEmergencia') || "";
 
-// Datos Médicos (Si vienen vacíos desde AppSheet, quedan las líneas físicas listas para escribir)
+// Datos Médicos
 document.getElementById('MotivoIngreso').textContent = params.get('MotivoIngreso') || "";
 document.getElementById('EnfermedadActual').textContent = params.get('EnfermedadActual') || "";
 document.getElementById('DiagnosticoProvisional').textContent = params.get('DiagnosticoProvisional') || "";
